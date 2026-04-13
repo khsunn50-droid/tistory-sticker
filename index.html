@@ -120,82 +120,7 @@ pre { padding:46px 16px 14px; overflow-x:auto; font-size:12px; line-height:1.65;
 
 .site-footer { text-align:center; padding:32px 24px; font-size:12px; color:#9ca3af; border-top:1px solid #e5e7eb; background:#fff; }
 
-/* ════════════════════════════════════════
-   예시 페이지 모달
-════════════════════════════════════════ */
-#demo-modal-overlay {
-  display:none; position:fixed; inset:0; z-index:99999;
-  background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);
-  align-items:center; justify-content:center;
-}
-#demo-modal-overlay.open { display:flex; }
 
-#demo-modal {
-  background:#fff; border-radius:20px;
-  width:min(960px, 96vw); height:90vh;
-  display:flex; flex-direction:column;
-  overflow:hidden;
-  box-shadow:0 24px 80px rgba(0,0,0,0.3);
-  animation: modalIn 0.25s cubic-bezier(.34,1.4,.64,1);
-}
-@keyframes modalIn { from { transform:scale(0.92); opacity:0; } to { transform:scale(1); opacity:1; } }
-
-#demo-modal-top {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 20px; border-bottom:1px solid #e5e7eb;
-  flex-shrink:0; background:#fff;
-}
-#demo-modal-top .dm-title {
-  display:flex; align-items:center; gap:10px;
-  font-size:14px; font-weight:700; color:#111827;
-}
-#demo-modal-top .dm-title svg { width:16px; height:16px; color:#2563eb; }
-
-.dm-badge {
-  font-size:11px; font-weight:500;
-  background:#fef9c3; color:#713f12;
-  padding:3px 10px; border-radius:20px; border:1px solid #fde68a;
-}
-
-#demo-modal-close {
-  background:none; border:none; cursor:pointer; color:#9ca3af;
-  width:32px; height:32px; border-radius:8px;
-  display:flex; align-items:center; justify-content:center; transition:background 0.1s;
-}
-#demo-modal-close:hover { background:#f3f4f6; color:#374151; }
-#demo-modal-close svg { width:16px; height:16px; }
-
-/* iframe 영역 */
-#demo-iframe-wrap {
-  flex:1; position:relative; overflow:hidden;
-  background:#e8e3da;
-}
-#demo-iframe {
-  width:100%; height:100%; border:none;
-  display:block;
-}
-
-/* iframe 로딩 중 */
-#demo-loading {
-  position:absolute; inset:0;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:12px; background:#e8e3da;
-}
-#demo-loading .spin {
-  width:32px; height:32px; border:3px solid #d1d5db;
-  border-top-color:#2563eb; border-radius:50%;
-  animation:spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform:rotate(360deg); } }
-#demo-loading p { font-size:13px; color:#9ca3af; font-weight:400; }
-
-/* 하단 안내 바 */
-#demo-modal-bottom {
-  padding:10px 20px; background:#f8fafc; border-top:1px solid #e5e7eb;
-  font-size:12px; color:#6b7280; display:flex; align-items:center; gap:8px;
-  flex-shrink:0;
-}
-#demo-modal-bottom svg { width:14px; height:14px; color:#f59e0b; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -211,7 +136,7 @@ pre { padding:46px 16px 14px; overflow-x:auto; font-size:12px; line-height:1.65;
   <div class="header-right">
     <button class="header-demo-btn" id="header-demo-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      예시 보기
+      예시 열기
     </button>
     <span class="header-badge">무료 · 관리자 전용</span>
   </div>
@@ -232,7 +157,7 @@ pre { padding:46px 16px 14px; overflow-x:auto; font-size:12px; line-height:1.65;
     </button>
     <button class="hero-demo-btn" id="hero-demo-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      예시 페이지 보기
+      예시 페이지 열기 (새 탭)
     </button>
   </div>
   <p class="copy-hint">아래 가이드를 따라 티스토리에 붙여넣으면 바로 사용할 수 있어요</p>
@@ -522,32 +447,6 @@ z-index: 10;</pre>
   티스토리 이미지 스티커 · 무료로 사용하세요
 </footer>
 
-<!-- ════ 예시 페이지 모달 ════ -->
-<div id="demo-modal-overlay">
-  <div id="demo-modal">
-    <div id="demo-modal-top">
-      <div class="dm-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        스티커 기능 예시
-        <span class="dm-badge">직접 사용해보세요</span>
-      </div>
-      <button id="demo-modal-close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-    <div id="demo-iframe-wrap">
-      <div id="demo-loading">
-        <div class="spin"></div>
-        <p>예시 페이지 불러오는 중…</p>
-      </div>
-      <iframe id="demo-iframe" title="스티커 예시 페이지" style="opacity:0;transition:opacity 0.3s;"></iframe>
-    </div>
-    <div id="demo-modal-bottom">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      오른쪽 아래 스티커 관리 패널에서 이미지를 업로드해 직접 사용해볼 수 있어요. 예시이므로 새로고침하면 초기화돼요.
-    </div>
-  </div>
-</div>
 
 <textarea id="unified-code" style="position:absolute;left:-9999px;" readonly></textarea>
 
@@ -556,95 +455,95 @@ z-index: 10;</pre>
    티스토리 통합 코드 (</body> 바로 앞에 붙여넣기)
 ══════════════════════════════════════════════════════════ */
 const UNIFIED_CODE = `<style>
-#sticker-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#sticker-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}
-.sticker-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}
-.sticker-item.mode-top{cursor:grab}.sticker-item.mode-top.dragging{cursor:grabbing}
-.sticker-item.mode-bg{cursor:pointer}.sticker-item.pinned{cursor:default!important}
-.sticker-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}
-.sticker-item.mode-top:not(.pinned) .sticker-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}
-.pinned-badge{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-.pinned-badge svg{width:11px;height:11px}.sticker-item.pinned .pinned-badge{display:flex}
-.sticker-toolbar{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}
-.sticker-item.mode-top .sticker-toolbar{display:flex}
-.toolbar-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}
-.tb-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}
-.tb-btn:hover{background:#f3f4f6;color:#111827}.tb-btn svg{width:11px;height:11px;flex-shrink:0}
-.tb-btn.btn-sz{color:#7c3aed}.tb-btn.btn-sz:hover{background:#f5f3ff}
-.tb-btn.btn-bg{color:#2563eb}.tb-btn.btn-bg:hover{background:#eff6ff}
-.tb-btn.btn-top{color:#059669}.tb-btn.btn-top:hover{background:#ecfdf5}
-.tb-btn.btn-pin{color:#d97706}.tb-btn.btn-pin:hover{background:#fffbeb}
-.tb-btn.btn-del{color:#dc2626}.tb-btn.btn-del:hover{background:#fef2f2}
-.tb-divider{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}
-#floating-toolbar{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}
-#floating-toolbar.visible{display:flex}
-#sticker-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}
-#sticker-panel.collapsed{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
-#sticker-panel.collapsed #panel-header{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-#sticker-panel.collapsed #panel-title{display:none}
-#sticker-panel.collapsed #panel-toggle{width:100%;height:100%;border-radius:50%;margin:0}
-#sticker-panel.collapsed #panel-body{display:none}
-#panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-#panel-title{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}
-#panel-title svg{width:14px;height:14px;flex-shrink:0}
-#panel-toggle{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
-#panel-toggle:hover{background:#f3f4f6;color:#374151}#panel-toggle svg{width:12px;height:12px}
-#panel-body.hidden{display:none}
-#upload-zone{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
-#upload-zone:hover,#upload-zone.dragover{border-color:#2563eb;background:#eff6ff}
-#upload-zone .up-icon{margin-bottom:6px;color:#9ca3af}#upload-zone .up-icon svg{width:24px;height:24px}
-#upload-zone .up-text{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}
-#upload-zone .up-sub{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}
-#file-input{display:none}
-#thumb-list{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}
-#thumb-list::-webkit-scrollbar{width:3px}#thumb-list::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-#thumb-empty{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}
-.thumb-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}
-.thumb-item:hover{border-color:#2563eb}.thumb-item img{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.thumb-del{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.thumb-item:hover .thumb-del{display:flex}.thumb-del svg{width:8px;height:8px}
-.panel-divider{border:none;border-top:1px solid #f3f4f6;margin:12px 0}
-.panel-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}
-.panel-tip .tip-hl{color:#2563eb;font-weight:500}
-#clear-btn{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}
-#clear-btn:hover{background:#fee2e2}#clear-btn svg{width:12px;height:12px}
+#tis-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#tis-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}
+.tis-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}
+.tis-item.tis-top{cursor:grab}.tis-item.tis-top.tis-drag{cursor:grabbing}
+.tis-item.tis-bg{cursor:pointer}.tis-item.pinned{cursor:default!important}
+.tis-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}
+.tis-item.tis-top:not(.tis-pinned) .tis-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}
+.tis-pnbg{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.tis-pnbg svg{width:11px;height:11px}.tis-item.pinned .tis-pnbg{display:flex}
+.tis-tb{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}
+.tis-item.tis-top .tis-tb{display:flex}
+.tis-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}
+.tis-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}
+.tis-btn:hover{background:#f3f4f6;color:#111827}.tis-btn svg{width:11px;height:11px;flex-shrink:0}
+.tis-btn.tis-sz{color:#7c3aed}.tis-btn.tis-sz:hover{background:#f5f3ff}
+.tis-btn.tis-tbg{color:#2563eb}.tis-btn.tis-tbg:hover{background:#eff6ff}
+.tis-btn.tis-ttop{color:#059669}.tis-btn.tis-ttop:hover{background:#ecfdf5}
+.tis-btn.tis-tpin{color:#d97706}.tis-btn.tis-tpin:hover{background:#fffbeb}
+.tis-btn.tis-tdel{color:#dc2626}.tis-btn.tis-tdel:hover{background:#fef2f2}
+.tis-div{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}
+#tis-float-tb{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}
+#tis-float-tb.tis-vis{display:flex}
+#tis-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}
+#tis-panel.tis-col{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#tis-panel.tis-col #tis-ph{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+#tis-panel.tis-col #tis-pt{display:none}
+#tis-panel.tis-col #tis-ptg{width:100%;height:100%;border-radius:50%;margin:0}
+#tis-panel.tis-col #tis-pb{display:none}
+#tis-ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+#tis-pt{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}
+#tis-pt svg{width:14px;height:14px;flex-shrink:0}
+#tis-ptg{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+#tis-ptg:hover{background:#f3f4f6;color:#374151}#tis-ptg svg{width:12px;height:12px}
+#tis-pb.tis-hid{display:none}
+#tis-uz{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
+#tis-uz:hover,#tis-uz.tis-dov{border-color:#2563eb;background:#eff6ff}
+#tis-uz .tis-ui{margin-bottom:6px;color:#9ca3af}#tis-uz .tis-ui svg{width:24px;height:24px}
+#tis-uz .tis-ut{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}
+#tis-uz .tis-us{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}
+#tis-fi{display:none}
+#tis-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}
+#tis-tl::-webkit-scrollbar{width:3px}#tis-tl::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+#tis-te{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}
+.tis-ti{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}
+.tis-ti:hover{border-color:#2563eb}.tis-ti img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.tis-td{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.tis-ti:hover .tis-td{display:flex}.tis-td svg{width:8px;height:8px}
+.tis-pdiv{border:none;border-top:1px solid #f3f4f6;margin:12px 0}
+.tis-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}
+.tis-tip .tis-hl{color:#2563eb;font-weight:500}
+#tis-clr{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}
+#tis-clr:hover{background:#fee2e2}#tis-clr svg{width:12px;height:12px}
 </style>
 
-<div id="sticker-layer-bg"></div>
-<div id="sticker-layer-top"></div>
-<div id="floating-toolbar">
-  <div class="toolbar-row" id="ft-row1"></div>
-  <div class="toolbar-row" id="ft-row2"></div>
+<div id="tis-layer-bg"></div>
+<div id="tis-layer-top"></div>
+<div id="tis-float-tb">
+  <div class="tis-row" id="tis-ft-r1"></div>
+  <div class="tis-row" id="tis-ft-r2"></div>
 </div>
 
 <s_if_var_by name="by" val="owner">
-<div id="sticker-panel">
-  <div id="panel-header">
-    <span id="panel-title">
+<div id="tis-panel">
+  <div id="tis-ph">
+    <span id="tis-pt">
       <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
       스티커 관리
     </span>
-    <button id="panel-toggle" title="접기">
-      <svg id="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <button id="tis-ptg" title="접기">
+      <svg id="tis-tgi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
   </div>
-  <div id="panel-body">
-    <div id="upload-zone">
-      <div class="up-icon">
+  <div id="tis-pb">
+    <div id="tis-uz">
+      <div class="tis-ui">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
       </div>
-      <div class="up-text">클릭하거나 이미지를 끌어다 놓으세요</div>
-      <div class="up-sub">PNG · JPG · GIF · WebP</div>
+      <div class="tis-ut">클릭하거나 이미지를 끌어다 놓으세요</div>
+      <div class="tis-us">PNG · JPG · GIF · WebP</div>
     </div>
-    <input type="file" id="file-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
-    <div id="thumb-list"><div id="thumb-empty">업로드한 이미지가 여기에 표시됩니다</div></div>
-    <hr class="panel-divider">
-    <p class="panel-tip">
-      썸네일 클릭 → 레이아웃 <span class="tip-hl">위</span>에 추가<br>
-      <span class="tip-hl">뒤로</span> → 배경 이동 | <span class="tip-hl">앞으로</span> → 전경 복귀<br>
+    <input type="file" id="tis-fi" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+    <div id="tis-tl"><div id="tis-te">업로드한 이미지가 여기에 표시됩니다</div></div>
+    <hr class="tis-pdiv">
+    <p class="tis-tip">
+      썸네일 클릭 → 레이아웃 <span class="tis-hl">위</span>에 추가<br>
+      <span class="tis-hl">뒤로</span> → 배경 이동 | <span class="tis-hl">앞으로</span> → 전경 복귀<br>
       배경 스티커 클릭 → 편집 툴바 팝업
     </p>
-    <button id="clear-btn">
+    <button id="tis-clr">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
       배경 스티커 전체 삭제
     </button>
@@ -655,47 +554,47 @@ const UNIFIED_CODE = `<style>
 <script>
 (function(){
 const IC={minus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,plus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,toBack:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><polyline points="7 12 12 17 17 12"/><line x1="5" y1="21" x2="19" y2="21"/></svg>\`,toFront:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="7" x2="12" y2="21"/><polyline points="17 12 12 7 7 12"/><line x1="5" y1="3" x2="19" y2="3"/></svg>\`,pin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>\`,unpin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/><path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12"/><path d="M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47"/></svg>\`,trash:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>\`,x:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>\`};
-const lBg=document.getElementById('sticker-layer-bg'),lTop=document.getElementById('sticker-layer-top'),uz=document.getElementById('upload-zone'),fi=document.getElementById('file-input'),tl=document.getElementById('thumb-list'),te=document.getElementById('thumb-empty'),pEl=document.getElementById('sticker-panel'),pt=document.getElementById('panel-toggle'),ti=document.getElementById('toggle-icon'),cb=document.getElementById('clear-btn'),ft=document.getElementById('floating-toolbar'),fr1=document.getElementById('ft-row1'),fr2=document.getElementById('ft-row2');
+const lBg=document.getElementById('tis-layer-bg'),lTop=document.getElementById('tis-layer-top'),uz=document.getElementById('tis-uz'),fi=document.getElementById('tis-fi'),tl=document.getElementById('tis-tl'),te=document.getElementById('tis-te'),pEl=document.getElementById('tis-panel'),pt=document.getElementById('tis-ptg'),ti=document.getElementById('tis-tgi'),cb=document.getElementById('tis-clr'),ft=document.getElementById('tis-float-tb'),fr1=document.getElementById('tis-ft-r1'),fr2=document.getElementById('tis-ft-r2');
 let st=[],idc=0,po=true,abid=null;
-if(pt)pt.addEventListener('click',()=>{po=!po;pEl.classList.toggle('collapsed',!po);ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');pt.title=po?'접기':'펼치기';});
-if(uz){uz.addEventListener('click',()=>fi.click());uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('dragover');});uz.addEventListener('dragleave',()=>uz.classList.remove('dragover'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('dragover');hf(e.dataTransfer.files);});}
+if(pt)pt.addEventListener('click',()=>{po=!po;pEl.classList.toggle('tis-col',!po);ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');pt.title=po?'접기':'펼치기';});
+if(uz){uz.addEventListener('click',()=>fi.click());uz.addEventListener('tis-dov',e=>{e.preventDefault();uz.classList.add('tis-dov');});uz.addEventListener('dragleave',()=>uz.classList.remove('tis-dov'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('tis-dov');hf(e.dataTransfer.files);});}
 if(fi)fi.addEventListener('change',()=>{hf(fi.files);fi.value='';});
 function hf(fs){Array.from(fs).forEach(f=>{if(!f.type.startsWith('image/'))return;const r=new FileReader();r.onload=e=>atp(e.target.result,f.name);r.readAsDataURL(f);});}
-function atp(url,name){if(te&&te.parentNode)te.remove();const it=document.createElement('div');it.className='thumb-item';const im=document.createElement('img');im.src=url;im.alt=name||'s';const dl=document.createElement('button');dl.className='thumb-del';dl.innerHTML=IC.x;dl.addEventListener('click',e=>{e.stopPropagation();it.remove();});it.append(im,dl);it.addEventListener('click',()=>sp(url));tl.appendChild(it);}
-function hf2(){ft.classList.remove('visible');fr1.innerHTML='';fr2.innerHTML='';abid=null;}
-function sp(url){const id=++idc;const x=cl(innerWidth/2-60+rn(-120,120),20,innerWidth-160),y=cl(innerHeight/2-60+rn(-80,80),80,innerHeight-220);const w=document.createElement('div');w.className='sticker-item mode-top';w.style.left=x+'px';w.style.top=y+'px';
-const bg=document.createElement('div');bg.className='pinned-badge';bg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
-const im=document.createElement('img');im.className='sticker-img';im.src=url;im.alt='s';
-const tb=document.createElement('div');tb.className='sticker-toolbar';
+function atp(url,name){if(te&&te.parentNode)te.remove();const it=document.createElement('div');it.className='tis-ti';const im=document.createElement('img');im.src=url;im.alt=name||'s';const dl=document.createElement('button');dl.className='tis-td';dl.innerHTML=IC.x;dl.addEventListener('click',e=>{e.stopPropagation();it.remove();});it.append(im,dl);it.addEventListener('click',()=>sp(url));tl.appendChild(it);}
+function hf2(){ft.classList.remove('tis-vis');fr1.innerHTML='';fr2.innerHTML='';abid=null;}
+function sp(url){const id=++idc;const x=cl(innerWidth/2-60+rn(-120,120),20,innerWidth-160),y=cl(innerHeight/2-60+rn(-80,80),80,innerHeight-220);const w=document.createElement('div');w.className='tis-item tis-top';w.style.left=x+'px';w.style.top=y+'px';
+const bg=document.createElement('div');bg.className='tis-pnbg';bg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
+const im=document.createElement('img');im.className='tis-img';im.src=url;im.alt='s';
+const tb=document.createElement('div');tb.className='tis-tb';
 let pn=false,sz=120,it=true;
 const dm=e=>{e&&e.stopPropagation();sz=Math.max(sz-20,40);im.style.width=im.style.height=sz+'px';if(abid===id)rf();};
 const dp=e=>{e&&e.stopPropagation();sz=Math.min(sz+20,500);im.style.width=im.style.height=sz+'px';if(abid===id)rf();};
-const db=e=>{e&&e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.replace('mode-top','mode-bg');lBg.appendChild(w);hf2();};
-const df=e=>{e&&e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.replace('mode-bg','mode-top');lTop.appendChild(w);hf2();};
-const dpin=e=>{e&&e.stopPropagation();pn=!pn;w.classList.toggle('pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정');if(abid===id)of();};
+const db=e=>{e&&e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.replace('tis-top','tis-bg');lBg.appendChild(w);hf2();};
+const df=e=>{e&&e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.replace('tis-bg','tis-top');lTop.appendChild(w);hf2();};
+const dpin=e=>{e&&e.stopPropagation();pn=!pn;w.classList.toggle('tis-pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정');if(abid===id)of();};
 const dd=e=>{e&&e.stopPropagation();w.remove();st=st.filter(s=>s.id!==id);if(abid===id)hf2();};
-const ipb=mb(IC.pin+' 고정','btn-pin');
-const r1=mr([mb(IC.minus,'btn-sz'),mb(IC.plus,'btn-sz'),md(),mb(IC.toBack+' 뒤로','btn-bg'),mb(IC.toFront+' 앞으로','btn-top')]);
-const r2=mr([ipb,mb(IC.trash+' 삭제','btn-del')]);
+const ipb=mb(IC.pin+' 고정','tis-tpin');
+const r1=mr([mb(IC.minus,'tis-sz'),mb(IC.plus,'tis-sz'),md(),mb(IC.toBack+' 뒤로','tis-tbg'),mb(IC.toFront+' 앞으로','tis-ttop')]);
+const r2=mr([ipb,mb(IC.trash+' 삭제','tis-tdel')]);
 r1.children[0].addEventListener('click',dm);r1.children[1].addEventListener('click',dp);r1.children[3].addEventListener('click',db);r1.children[4].addEventListener('click',df);ipb.addEventListener('click',dpin);r2.children[1].addEventListener('click',dd);
 tb.append(r1,r2);w.append(bg,im,tb);
-function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';const a=mb(IC.minus,'btn-sz'),b=mb(IC.plus,'btn-sz'),c=mb(IC.toFront+' 앞으로','btn-top'),d2=mb((pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정'),'btn-pin'),e2=mb(IC.trash+' 삭제','btn-del');a.addEventListener('click',dm);b.addEventListener('click',dp);c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);[a,b,md(),c].forEach(n=>fr1.appendChild(n));[d2,e2].forEach(n=>fr2.appendChild(n));rf();ft.classList.add('visible');}
+function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';const a=mb(IC.minus,'tis-sz'),b=mb(IC.plus,'tis-sz'),c=mb(IC.toFront+' 앞으로','tis-ttop'),d2=mb((pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정'),'tis-tpin'),e2=mb(IC.trash+' 삭제','tis-tdel');a.addEventListener('click',dm);b.addEventListener('click',dp);c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);[a,b,md(),c].forEach(n=>fr1.appendChild(n));[d2,e2].forEach(n=>fr2.appendChild(n));rf();ft.classList.add('tis-vis');}
 function rf(){const sw=parseFloat(im.style.width)||120;ft.style.left=(parseInt(w.style.left)+sw/2)+'px';ft.style.top=Math.max(10,parseInt(w.style.top)-95)+'px';}
 function gb(){const lx=parseInt(w.style.left)||0,ly=parseInt(w.style.top)||0,sw=parseFloat(im.style.width)||120,sh=parseFloat(im.style.height)||120;return{left:lx,top:ly,right:lx+sw,bottom:ly+sh};}
 drag(w,()=>pn||!it);lTop.appendChild(w);st.push({id,el:w,getBounds:gb,openFloating:of,isTop:()=>it});
 w.style.transform='scale(0)';w.style.transition='transform 0.22s cubic-bezier(.34,1.56,.64,1)';requestAnimationFrame(()=>{w.style.transform='scale(1)';});}
-document.addEventListener('mousedown',e=>{if(ft.contains(e.target))return;if(e.target.closest('#sticker-panel'))return;if(e.target.closest('.sticker-item.mode-top'))return;const cx=e.clientX,cy=e.clientY;const bl=st.filter(s=>!s.isTop());let hit=null;for(let i=bl.length-1;i>=0;i--){const b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}});
-function drag(el,lk){let ac=false,sx,sy,ex,ey;const s2=(cx,cy)=>{if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('dragging');el.style.transition='none';};const mv=(cx,cy)=>{if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};const sp2=()=>{if(!ac)return;ac=false;el.classList.remove('dragging');};el.addEventListener('mousedown',e=>{if(e.target.closest('.tb-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});el.addEventListener('touchstart',e=>{if(e.target.closest('.tb-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});document.addEventListener('mousemove',e=>mv(e.clientX,e.clientY));document.addEventListener('touchmove',e=>mv(e.touches[0].clientX,e.touches[0].clientY),{passive:true});document.addEventListener('mouseup',sp2);document.addEventListener('touchend',sp2);}
+document.addEventListener('mousedown',e=>{if(ft.contains(e.target))return;if(e.target.closest('#tis-panel'))return;if(e.target.closest('.tis-item.tis-top'))return;const cx=e.clientX,cy=e.clientY;const bl=st.filter(s=>!s.isTop());let hit=null;for(let i=bl.length-1;i>=0;i--){const b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}});
+function drag(el,lk){let ac=false,sx,sy,ex,ey;const s2=(cx,cy)=>{if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('tis-drag');el.style.transition='none';};const mv=(cx,cy)=>{if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};const sp2=()=>{if(!ac)return;ac=false;el.classList.remove('tis-drag');};el.addEventListener('mousedown',e=>{if(e.target.closest('.tis-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});el.addEventListener('touchstart',e=>{if(e.target.closest('.tis-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});document.addEventListener('mousemove',e=>mv(e.clientX,e.clientY));document.addEventListener('touchmove',e=>mv(e.touches[0].clientX,e.touches[0].clientY),{passive:true});document.addEventListener('mouseup',sp2);document.addEventListener('touchend',sp2);}
 if(cb)cb.addEventListener('click',()=>{st.forEach(s=>s.el.remove());st=[];hf2();});
 function cl(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
 function rn(mn,mx){return mn+Math.random()*(mx-mn);}
-function mb(html,cls){const b=document.createElement('button');b.className='tb-btn '+cls;b.innerHTML=html;return b;}
-function mr(ch){const r=document.createElement('div');r.className='toolbar-row';ch.forEach(c=>r.appendChild(c));return r;}
-function md(){const d=document.createElement('div');d.className='tb-divider';return d;}
+function mb(html,cls){const b=document.createElement('button');b.className='tis-btn '+cls;b.innerHTML=html;return b;}
+function mr(ch){const r=document.createElement('div');r.className='tis-row';ch.forEach(c=>r.appendChild(c));return r;}
+function md(){const d=document.createElement('div');d.className='tis-div';return d;}
 })();
 <\/script>`;
 
-/* ══ 예시 페이지 HTML (iframe에 srcdoc으로 주입) ══ */
+/* ══ 예시 페이지 HTML (새 탭에서 Blob URL로 열림) ══ */
 const DEMO_PAGE = `<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -719,9 +618,9 @@ main{pointer-events:all;max-width:720px;margin:40px auto;padding:0 20px;}
 </style>
 </head>
 <body>
-<div id="sticker-layer-bg"></div>
-<div id="sticker-layer-top"></div>
-<div id="floating-toolbar"><div class="toolbar-row" id="ft-row1"></div><div class="toolbar-row" id="ft-row2"></div></div>
+<div id="tis-layer-bg"></div>
+<div id="tis-layer-top"></div>
+<div id="tis-float-tb"><div class="tis-row" id="tis-ft-r1"></div><div class="tis-row" id="tis-ft-r2"></div></div>
 <div id="wrap">
   <header>
     <span class="logo">✏️ 예시 블로그</span>
@@ -745,27 +644,27 @@ main{pointer-events:all;max-width:720px;margin:40px auto;padding:0 20px;}
     </div>
   </main>
 </div>
-<div id="sticker-panel">
-  <div id="panel-header">
-    <span id="panel-title">
+<div id="tis-panel">
+  <div id="tis-ph">
+    <span id="tis-pt">
       <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
       스티커 관리
     </span>
-    <button id="panel-toggle" title="접기">
-      <svg id="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <button id="tis-ptg" title="접기">
+      <svg id="tis-tgi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
   </div>
-  <div id="panel-body">
-    <div id="upload-zone">
-      <div class="up-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg></div>
-      <div class="up-text">클릭하거나 이미지를 끌어다 놓으세요</div>
-      <div class="up-sub">PNG · JPG · GIF · WebP</div>
+  <div id="tis-pb">
+    <div id="tis-uz">
+      <div class="tis-ui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg></div>
+      <div class="tis-ut">클릭하거나 이미지를 끌어다 놓으세요</div>
+      <div class="tis-us">PNG · JPG · GIF · WebP</div>
     </div>
-    <input type="file" id="file-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
-    <div id="thumb-list"><div id="thumb-empty">업로드한 이미지가 여기에 표시됩니다</div></div>
-    <hr class="panel-divider">
-    <p class="panel-tip">썸네일 클릭 → 레이아웃 <span class="tip-hl">위</span>에 추가<br><span class="tip-hl">뒤로</span> → 배경 이동 | <span class="tip-hl">앞으로</span> → 전경 복귀<br>배경 스티커 클릭 → 편집 툴바 팝업</p>
-    <button id="clear-btn">
+    <input type="file" id="tis-fi" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+    <div id="tis-tl"><div id="tis-te">업로드한 이미지가 여기에 표시됩니다</div></div>
+    <hr class="tis-pdiv">
+    <p class="tis-tip">썸네일 클릭 → 레이아웃 <span class="tis-hl">위</span>에 추가<br><span class="tis-hl">뒤로</span> → 배경 이동 | <span class="tis-hl">앞으로</span> → 전경 복귀<br>배경 스티커 클릭 → 편집 툴바 팝업</p>
+    <button id="tis-clr">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
       배경 스티커 전체 삭제
     </button>
@@ -783,95 +682,95 @@ const FB_CODE = `<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"><\/script>
 
 <style>
-#sticker-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#sticker-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}
-.sticker-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}
-.sticker-item.mode-top{cursor:grab}.sticker-item.mode-top.dragging{cursor:grabbing}
-.sticker-item.mode-bg{cursor:pointer}.sticker-item.pinned{cursor:default!important}
-.sticker-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}
-.sticker-item.mode-top:not(.pinned) .sticker-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}
-.pinned-badge{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-.pinned-badge svg{width:11px;height:11px}.sticker-item.pinned .pinned-badge{display:flex}
-.sticker-toolbar{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}
-.sticker-item.mode-top .sticker-toolbar{display:flex}
-.toolbar-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}
-.tb-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}
-.tb-btn:hover{background:#f3f4f6;color:#111827}.tb-btn svg{width:11px;height:11px;flex-shrink:0}
-.tb-btn.btn-sz{color:#7c3aed}.tb-btn.btn-sz:hover{background:#f5f3ff}
-.tb-btn.btn-bg{color:#2563eb}.tb-btn.btn-bg:hover{background:#eff6ff}
-.tb-btn.btn-top{color:#059669}.tb-btn.btn-top:hover{background:#ecfdf5}
-.tb-btn.btn-pin{color:#d97706}.tb-btn.btn-pin:hover{background:#fffbeb}
-.tb-btn.btn-del{color:#dc2626}.tb-btn.btn-del:hover{background:#fef2f2}
-.tb-divider{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}
-#floating-toolbar{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}
-#floating-toolbar.visible{display:flex}
-#sticker-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}
-#sticker-panel.collapsed{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
-#sticker-panel.collapsed #panel-header{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-#sticker-panel.collapsed #panel-title{display:none}
-#sticker-panel.collapsed #panel-toggle{width:100%;height:100%;border-radius:50%;margin:0}
-#sticker-panel.collapsed #panel-body{display:none}
-#panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-#panel-title{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}
-#panel-title svg{width:14px;height:14px;flex-shrink:0}
-#panel-toggle{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
-#panel-toggle:hover{background:#f3f4f6;color:#374151}#panel-toggle svg{width:12px;height:12px}
-#panel-body.hidden{display:none}
-#upload-zone{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
-#upload-zone:hover,#upload-zone.dragover{border-color:#2563eb;background:#eff6ff}
-#upload-zone .up-icon{margin-bottom:6px;color:#9ca3af}#upload-zone .up-icon svg{width:24px;height:24px}
-#upload-zone .up-text{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}
-#upload-zone .up-sub{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}
-#file-input{display:none}
-#thumb-list{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}
-#thumb-list::-webkit-scrollbar{width:3px}#thumb-list::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-#thumb-empty{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}
-.thumb-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}
-.thumb-item:hover{border-color:#2563eb}.thumb-item img{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.thumb-del{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.thumb-item:hover .thumb-del{display:flex}.thumb-del svg{width:8px;height:8px}
-.panel-divider{border:none;border-top:1px solid #f3f4f6;margin:12px 0}
-.panel-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}
-.panel-tip .tip-hl{color:#2563eb;font-weight:500}
-#clear-btn{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}
-#clear-btn:hover{background:#fee2e2}#clear-btn svg{width:12px;height:12px}
+#tis-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#tis-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}
+.tis-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}
+.tis-item.tis-top{cursor:grab}.tis-item.tis-top.tis-drag{cursor:grabbing}
+.tis-item.tis-bg{cursor:pointer}.tis-item.pinned{cursor:default!important}
+.tis-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}
+.tis-item.tis-top:not(.tis-pinned) .tis-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}
+.tis-pnbg{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.tis-pnbg svg{width:11px;height:11px}.tis-item.pinned .tis-pnbg{display:flex}
+.tis-tb{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}
+.tis-item.tis-top .tis-tb{display:flex}
+.tis-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}
+.tis-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}
+.tis-btn:hover{background:#f3f4f6;color:#111827}.tis-btn svg{width:11px;height:11px;flex-shrink:0}
+.tis-btn.tis-sz{color:#7c3aed}.tis-btn.tis-sz:hover{background:#f5f3ff}
+.tis-btn.tis-tbg{color:#2563eb}.tis-btn.tis-tbg:hover{background:#eff6ff}
+.tis-btn.tis-ttop{color:#059669}.tis-btn.tis-ttop:hover{background:#ecfdf5}
+.tis-btn.tis-tpin{color:#d97706}.tis-btn.tis-tpin:hover{background:#fffbeb}
+.tis-btn.tis-tdel{color:#dc2626}.tis-btn.tis-tdel:hover{background:#fef2f2}
+.tis-div{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}
+#tis-float-tb{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}
+#tis-float-tb.tis-vis{display:flex}
+#tis-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}
+#tis-panel.tis-col{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#tis-panel.tis-col #tis-ph{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+#tis-panel.tis-col #tis-pt{display:none}
+#tis-panel.tis-col #tis-ptg{width:100%;height:100%;border-radius:50%;margin:0}
+#tis-panel.tis-col #tis-pb{display:none}
+#tis-ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+#tis-pt{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}
+#tis-pt svg{width:14px;height:14px;flex-shrink:0}
+#tis-ptg{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+#tis-ptg:hover{background:#f3f4f6;color:#374151}#tis-ptg svg{width:12px;height:12px}
+#tis-pb.tis-hid{display:none}
+#tis-uz{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
+#tis-uz:hover,#tis-uz.tis-dov{border-color:#2563eb;background:#eff6ff}
+#tis-uz .tis-ui{margin-bottom:6px;color:#9ca3af}#tis-uz .tis-ui svg{width:24px;height:24px}
+#tis-uz .tis-ut{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}
+#tis-uz .tis-us{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}
+#tis-fi{display:none}
+#tis-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}
+#tis-tl::-webkit-scrollbar{width:3px}#tis-tl::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+#tis-te{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}
+.tis-ti{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}
+.tis-ti:hover{border-color:#2563eb}.tis-ti img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.tis-td{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.tis-ti:hover .tis-td{display:flex}.tis-td svg{width:8px;height:8px}
+.tis-pdiv{border:none;border-top:1px solid #f3f4f6;margin:12px 0}
+.tis-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}
+.tis-tip .tis-hl{color:#2563eb;font-weight:500}
+#tis-clr{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}
+#tis-clr:hover{background:#fee2e2}#tis-clr svg{width:12px;height:12px}
 </style>
 
-<div id="sticker-layer-bg"></div>
-<div id="sticker-layer-top"></div>
-<div id="floating-toolbar">
-  <div class="toolbar-row" id="ft-row1"></div>
-  <div class="toolbar-row" id="ft-row2"></div>
+<div id="tis-layer-bg"></div>
+<div id="tis-layer-top"></div>
+<div id="tis-float-tb">
+  <div class="tis-row" id="tis-ft-r1"></div>
+  <div class="tis-row" id="tis-ft-r2"></div>
 </div>
 
 <s_if_var_by name="by" val="owner">
-<div id="sticker-panel">
-  <div id="panel-header">
-    <span id="panel-title">
+<div id="tis-panel">
+  <div id="tis-ph">
+    <span id="tis-pt">
       <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
       스티커 관리
     </span>
-    <button id="panel-toggle" title="접기">
-      <svg id="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <button id="tis-ptg" title="접기">
+      <svg id="tis-tgi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
   </div>
-  <div id="panel-body">
-    <div id="upload-zone">
-      <div class="up-icon">
+  <div id="tis-pb">
+    <div id="tis-uz">
+      <div class="tis-ui">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
       </div>
-      <div class="up-text">클릭하거나 이미지를 끌어다 놓으세요</div>
-      <div class="up-sub">PNG · JPG · GIF · WebP</div>
+      <div class="tis-ut">클릭하거나 이미지를 끌어다 놓으세요</div>
+      <div class="tis-us">PNG · JPG · GIF · WebP</div>
     </div>
-    <input type="file" id="file-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
-    <div id="thumb-list"><div id="thumb-empty">업로드한 이미지가 여기에 표시됩니다</div></div>
-    <hr class="panel-divider">
-    <p class="panel-tip">
-      썸네일 클릭 → 레이아웃 <span class="tip-hl">위</span>에 추가<br>
-      <span class="tip-hl">뒤로</span> → 배경 이동 | <span class="tip-hl">앞으로</span> → 전경 복귀<br>
+    <input type="file" id="tis-fi" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+    <div id="tis-tl"><div id="tis-te">업로드한 이미지가 여기에 표시됩니다</div></div>
+    <hr class="tis-pdiv">
+    <p class="tis-tip">
+      썸네일 클릭 → 레이아웃 <span class="tis-hl">위</span>에 추가<br>
+      <span class="tis-hl">뒤로</span> → 배경 이동 | <span class="tis-hl">앞으로</span> → 전경 복귀<br>
       배경 스티커 클릭 → 편집 툴바 팝업
     </p>
-    <button id="clear-btn">
+    <button id="tis-clr">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
       배경 스티커 전체 삭제
     </button>
@@ -897,7 +796,7 @@ const db = firebase.database();
 const STICKER_REF = db.ref('stickers');
 
 const IC={minus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,plus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,toBack:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><polyline points="7 12 12 17 17 12"/><line x1="5" y1="21" x2="19" y2="21"/></svg>\`,toFront:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="7" x2="12" y2="21"/><polyline points="17 12 12 7 7 12"/><line x1="5" y1="3" x2="19" y2="3"/></svg>\`,pin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>\`,unpin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/><path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12"/><path d="M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47"/></svg>\`,trash:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>\`,x:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>\`};
-const lBg=document.getElementById('sticker-layer-bg'),lTop=document.getElementById('sticker-layer-top'),uz=document.getElementById('upload-zone'),fi=document.getElementById('file-input'),tl=document.getElementById('thumb-list'),te=document.getElementById('thumb-empty'),pEl=document.getElementById('sticker-panel'),pt=document.getElementById('panel-toggle'),ti=document.getElementById('toggle-icon'),cb=document.getElementById('clear-btn'),ft=document.getElementById('floating-toolbar'),fr1=document.getElementById('ft-row1'),fr2=document.getElementById('ft-row2');
+const lBg=document.getElementById('tis-layer-bg'),lTop=document.getElementById('tis-layer-top'),uz=document.getElementById('tis-uz'),fi=document.getElementById('tis-fi'),tl=document.getElementById('tis-tl'),te=document.getElementById('tis-te'),pEl=document.getElementById('tis-panel'),pt=document.getElementById('tis-ptg'),ti=document.getElementById('tis-tgi'),cb=document.getElementById('tis-clr'),ft=document.getElementById('tis-float-tb'),fr1=document.getElementById('tis-ft-r1'),fr2=document.getElementById('tis-ft-r2');
 let st=[],idc=0,po=true,abid=null;
 
 /* 파이어베이스에서 저장된 스티커 위치 불러오기 */
@@ -905,12 +804,12 @@ function saveToFB(id,data){ STICKER_REF.child(id).set(data); }
 function removeFromFB(id){ STICKER_REF.child(id).remove(); }
 function clearAllFB(){ STICKER_REF.remove(); }
 
-if(pt)pt.addEventListener('click',()=>{po=!po;pEl.classList.toggle('collapsed',!po);ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');pt.title=po?'접기':'펼치기';});
-if(uz){uz.addEventListener('click',()=>fi.click());uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('dragover');});uz.addEventListener('dragleave',()=>uz.classList.remove('dragover'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('dragover');hf(e.dataTransfer.files);});}
+if(pt)pt.addEventListener('click',()=>{po=!po;pEl.classList.toggle('tis-col',!po);ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');pt.title=po?'접기':'펼치기';});
+if(uz){uz.addEventListener('click',()=>fi.click());uz.addEventListener('tis-dov',e=>{e.preventDefault();uz.classList.add('tis-dov');});uz.addEventListener('dragleave',()=>uz.classList.remove('tis-dov'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('tis-dov');hf(e.dataTransfer.files);});}
 if(fi)fi.addEventListener('change',()=>{hf(fi.files);fi.value='';});
 function hf(fs){Array.from(fs).forEach(f=>{if(!f.type.startsWith('image/'))return;const r=new FileReader();r.onload=e=>atp(e.target.result,f.name);r.readAsDataURL(f);});}
-function atp(url,name){if(te&&te.parentNode)te.remove();const it=document.createElement('div');it.className='thumb-item';const im=document.createElement('img');im.src=url;im.alt=name||'s';const dl=document.createElement('button');dl.className='thumb-del';dl.innerHTML=IC.x;dl.addEventListener('click',e=>{e.stopPropagation();it.remove();});it.append(im,dl);it.addEventListener('click',()=>sp(url,null,null));tl.appendChild(it);}
-function hf2(){ft.classList.remove('visible');fr1.innerHTML='';fr2.innerHTML='';abid=null;}
+function atp(url,name){if(te&&te.parentNode)te.remove();const it=document.createElement('div');it.className='tis-ti';const im=document.createElement('img');im.src=url;im.alt=name||'s';const dl=document.createElement('button');dl.className='tis-td';dl.innerHTML=IC.x;dl.addEventListener('click',e=>{e.stopPropagation();it.remove();});it.append(im,dl);it.addEventListener('click',()=>sp(url,null,null));tl.appendChild(it);}
+function hf2(){ft.classList.remove('tis-vis');fr1.innerHTML='';fr2.innerHTML='';abid=null;}
 
 function sp(url,fbKey,savedData){
   const id=++idc;
@@ -921,30 +820,30 @@ function sp(url,fbKey,savedData){
   const key=fbKey||STICKER_REF.push().key;
 
   const w=document.createElement('div');
-  w.className='sticker-item '+(initTop?'mode-top':'mode-bg');
+  w.className='tis-item '+(initTop?'tis-top':'tis-bg');
   w.style.left=x+'px';w.style.top=y+'px';
-  const bg=document.createElement('div');bg.className='pinned-badge';bg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
-  const im=document.createElement('img');im.className='sticker-img';im.src=url;im.alt='s';
+  const bg=document.createElement('div');bg.className='tis-pnbg';bg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
+  const im=document.createElement('img');im.className='tis-img';im.src=url;im.alt='s';
   im.style.width=initSize+'px';im.style.height=initSize+'px';
-  const tb=document.createElement('div');tb.className='sticker-toolbar';
+  const tb=document.createElement('div');tb.className='tis-tb';
   let pn=false,sz=initSize,it=initTop;
 
   function save(){saveToFB(key,{x:parseInt(w.style.left),y:parseInt(w.style.top),size:sz,isTop:it,url:url});}
 
   const dm=e=>{e&&e.stopPropagation();sz=Math.max(sz-20,40);im.style.width=im.style.height=sz+'px';save();if(abid===id)rf();};
   const dp=e=>{e&&e.stopPropagation();sz=Math.min(sz+20,500);im.style.width=im.style.height=sz+'px';save();if(abid===id)rf();};
-  const db2=e=>{e&&e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.replace('mode-top','mode-bg');lBg.appendChild(w);save();hf2();};
-  const df=e=>{e&&e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.replace('mode-bg','mode-top');lTop.appendChild(w);save();hf2();};
-  const dpin=e=>{e&&e.stopPropagation();pn=!pn;w.classList.toggle('pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정');if(abid===id)of();};
+  const db2=e=>{e&&e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.replace('tis-top','tis-bg');lBg.appendChild(w);save();hf2();};
+  const df=e=>{e&&e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.replace('tis-bg','tis-top');lTop.appendChild(w);save();hf2();};
+  const dpin=e=>{e&&e.stopPropagation();pn=!pn;w.classList.toggle('tis-pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정');if(abid===id)of();};
   const dd=e=>{e&&e.stopPropagation();w.remove();st=st.filter(s=>s.id!==id);removeFromFB(key);if(abid===id)hf2();};
 
-  const ipb=mb(IC.pin+' 고정','btn-pin');
-  const r1=mr([mb(IC.minus,'btn-sz'),mb(IC.plus,'btn-sz'),md(),mb(IC.toBack+' 뒤로','btn-bg'),mb(IC.toFront+' 앞으로','btn-top')]);
-  const r2=mr([ipb,mb(IC.trash+' 삭제','btn-del')]);
+  const ipb=mb(IC.pin+' 고정','tis-tpin');
+  const r1=mr([mb(IC.minus,'tis-sz'),mb(IC.plus,'tis-sz'),md(),mb(IC.toBack+' 뒤로','tis-tbg'),mb(IC.toFront+' 앞으로','tis-ttop')]);
+  const r2=mr([ipb,mb(IC.trash+' 삭제','tis-tdel')]);
   r1.children[0].addEventListener('click',dm);r1.children[1].addEventListener('click',dp);r1.children[3].addEventListener('click',db2);r1.children[4].addEventListener('click',df);ipb.addEventListener('click',dpin);r2.children[1].addEventListener('click',dd);
   tb.append(r1,r2);w.append(bg,im,tb);
 
-  function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';const a=mb(IC.minus,'btn-sz'),b=mb(IC.plus,'btn-sz'),c=mb(IC.toFront+' 앞으로','btn-top'),d2=mb((pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정'),'btn-pin'),e2=mb(IC.trash+' 삭제','btn-del');a.addEventListener('click',dm);b.addEventListener('click',dp);c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);[a,b,md(),c].forEach(n=>fr1.appendChild(n));[d2,e2].forEach(n=>fr2.appendChild(n));rf();ft.classList.add('visible');}
+  function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';const a=mb(IC.minus,'tis-sz'),b=mb(IC.plus,'tis-sz'),c=mb(IC.toFront+' 앞으로','tis-ttop'),d2=mb((pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정'),'tis-tpin'),e2=mb(IC.trash+' 삭제','tis-tdel');a.addEventListener('click',dm);b.addEventListener('click',dp);c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);[a,b,md(),c].forEach(n=>fr1.appendChild(n));[d2,e2].forEach(n=>fr2.appendChild(n));rf();ft.classList.add('tis-vis');}
   function rf(){const sw=parseFloat(im.style.width)||120;ft.style.left=(parseInt(w.style.left)+sw/2)+'px';ft.style.top=Math.max(10,parseInt(w.style.top)-95)+'px';}
   function gb(){const lx=parseInt(w.style.left)||0,ly=parseInt(w.style.top)||0,sw=parseFloat(im.style.width)||120,sh=parseFloat(im.style.height)||120;return{left:lx,top:ly,right:lx+sw,bottom:ly+sh};}
 
@@ -966,16 +865,16 @@ STICKER_REF.once('value',snap=>{
   });
 });
 
-document.addEventListener('mousedown',e=>{if(ft.contains(e.target))return;if(e.target.closest('#sticker-panel'))return;if(e.target.closest('.sticker-item.mode-top'))return;const cx=e.clientX,cy=e.clientY;const bl=st.filter(s=>!s.isTop());let hit=null;for(let i=bl.length-1;i>=0;i--){const b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}});
+document.addEventListener('mousedown',e=>{if(ft.contains(e.target))return;if(e.target.closest('#tis-panel'))return;if(e.target.closest('.tis-item.tis-top'))return;const cx=e.clientX,cy=e.clientY;const bl=st.filter(s=>!s.isTop());let hit=null;for(let i=bl.length-1;i>=0;i--){const b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}});
 
-function drag(el,lk,onEnd){let ac=false,sx,sy,ex,ey;const s2=(cx,cy)=>{if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('dragging');el.style.transition='none';};const mv=(cx,cy)=>{if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};const sp2=()=>{if(!ac)return;ac=false;el.classList.remove('dragging');onEnd();};el.addEventListener('mousedown',e=>{if(e.target.closest('.tb-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});el.addEventListener('touchstart',e=>{if(e.target.closest('.tb-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});document.addEventListener('mousemove',e=>mv(e.clientX,e.clientY));document.addEventListener('touchmove',e=>mv(e.touches[0].clientX,e.touches[0].clientY),{passive:true});document.addEventListener('mouseup',sp2);document.addEventListener('touchend',sp2);}
+function drag(el,lk,onEnd){let ac=false,sx,sy,ex,ey;const s2=(cx,cy)=>{if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('tis-drag');el.style.transition='none';};const mv=(cx,cy)=>{if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};const sp2=()=>{if(!ac)return;ac=false;el.classList.remove('tis-drag');onEnd();};el.addEventListener('mousedown',e=>{if(e.target.closest('.tis-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});el.addEventListener('touchstart',e=>{if(e.target.closest('.tis-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});document.addEventListener('mousemove',e=>mv(e.clientX,e.clientY));document.addEventListener('touchmove',e=>mv(e.touches[0].clientX,e.touches[0].clientY),{passive:true});document.addEventListener('mouseup',sp2);document.addEventListener('touchend',sp2);}
 
 if(cb)cb.addEventListener('click',()=>{st.forEach(s=>s.el.remove());st=[];clearAllFB();hf2();});
 function cl(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
 function rn(mn,mx){return mn+Math.random()*(mx-mn);}
-function mb(html,cls){const b=document.createElement('button');b.className='tb-btn '+cls;b.innerHTML=html;return b;}
-function mr(ch){const r=document.createElement('div');r.className='toolbar-row';ch.forEach(c=>r.appendChild(c));return r;}
-function md(){const d=document.createElement('div');d.className='tb-divider';return d;}
+function mb(html,cls){const b=document.createElement('button');b.className='tis-btn '+cls;b.innerHTML=html;return b;}
+function mr(ch){const r=document.createElement('div');r.className='tis-row';ch.forEach(c=>r.appendChild(c));return r;}
+function md(){const d=document.createElement('div');d.className='tis-div';return d;}
 })();
 <\/script>`;
 
@@ -1009,30 +908,19 @@ document.querySelectorAll('.mini-copy-btn').forEach(btn => {
   btn.addEventListener('click', () => copyText(btn.dataset.text.replace(/&#10;/g,'\n'), btn, dh));
 });
 
-/* ══ 예시 모달 ══ */
-const overlay   = document.getElementById('demo-modal-overlay');
-const iframe    = document.getElementById('demo-iframe');
-const loading   = document.getElementById('demo-loading');
-let   iframeReady = false;
-
+/* ══ 예시 페이지 — Blob URL 새 탭 방식 ══
+   srcdoc iframe은 파일 업로드가 보안상 차단되므로
+   Blob URL을 만들어 새 탭에서 여는 방식을 사용해요 */
 function openDemo() {
-  overlay.classList.add('open');
-  if (!iframeReady) {
-    iframeReady = true;
-    iframe.srcdoc = DEMO_PAGE;
-    iframe.onload = () => {
-      loading.style.display = 'none';
-      iframe.style.opacity = '1';
-    };
-  }
+  const blob = new Blob([DEMO_PAGE], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const tab  = window.open(url, '_blank');
+  if (tab) setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
-function closeDemo() { overlay.classList.remove('open'); }
 
 document.getElementById('hero-demo-btn').addEventListener('click', openDemo);
 document.getElementById('header-demo-btn').addEventListener('click', openDemo);
-document.getElementById('demo-modal-close').addEventListener('click', closeDemo);
-overlay.addEventListener('click', e => { if (e.target === overlay) closeDemo(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDemo(); });
+
 </script>
 </body>
 </html>

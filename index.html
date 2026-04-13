@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>티스토리 이미지 스티커 데모</title>
+<style>
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2'); font-weight:100; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2'); font-weight:200; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight:700; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2'); font-weight:800; font-display:swap; }
+@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Pretendard',sans-serif; background:#e8e3da; min-height:100vh; }
+
+/* ── 스티커 레이어 ── */
+#sticker-layer-bg  { position:fixed; inset:0; z-index:0;    pointer-events:none; overflow:hidden; }
+#sticker-layer-top { position:fixed; inset:0; z-index:9990; pointer-events:none; overflow:hidden; }
+
+/* ── 스티커 공통 ── */
+.sticker-item { position:absolute; user-select:none; pointer-events:all; display:flex; flex-direction:column; align-items:center; }
+.sticker-item.mode-top { cursor:grab; }
+.sticker-item.mode-top.dragging { cursor:grabbing; }
+.sticker-item.mode-bg  { cursor:pointer; }
+.sticker-item.pinned   { cursor:default !important; }
+.sticker-img { display:block; width:120px; height:120px; object-fit:contain; pointer-events:none; border-radius:4px; }
+.sticker-item.mode-top:not(.pinned) .sticker-img { outline:2px dashed rgba(80,130,240,0.7); outline-offset:4px; }
+
+.pinned-badge {
+  display:none; position:absolute; top:-10px; right:-10px;
+  width:22px; height:22px; background:#f59e0b; border-radius:50%;
+  align-items:center; justify-content:center; pointer-events:none;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+.pinned-badge svg { width:11px; height:11px; }
+.sticker-item.pinned .pinned-badge { display:flex; }
+
+.sticker-toolbar { display:none; flex-direction:column; align-items:center; gap:5px; margin-top:8px; }
+.sticker-item.mode-top .sticker-toolbar { display:flex; }
+
+.toolbar-row {
+  display:flex; gap:2px; background:#fff; border-radius:24px;
+  padding:5px 8px; border:1px solid #e5e7eb; box-shadow:0 2px 14px rgba(0,0,0,0.10);
+}
+.tb-btn {
+  background:none; border:none; color:#374151; font-size:11px; cursor:pointer;
+  padding:4px 9px; border-radius:14px; white-space:nowrap;
+  transition:background 0.12s, color 0.12s; display:flex; align-items:center; gap:5px;
+  font-family:'Pretendard',sans-serif; font-weight:500; line-height:1;
+}
+.tb-btn:hover { background:#f3f4f6; color:#111827; }
+.tb-btn svg { width:11px; height:11px; flex-shrink:0; }
+.tb-btn.btn-sz  { color:#7c3aed; } .tb-btn.btn-sz:hover  { background:#f5f3ff; }
+.tb-btn.btn-bg  { color:#2563eb; } .tb-btn.btn-bg:hover  { background:#eff6ff; }
+.tb-btn.btn-top { color:#059669; } .tb-btn.btn-top:hover { background:#ecfdf5; }
+.tb-btn.btn-pin { color:#d97706; } .tb-btn.btn-pin:hover { background:#fffbeb; }
+.tb-btn.btn-del { color:#dc2626; } .tb-btn.btn-del:hover { background:#fef2f2; }
+.tb-divider { width:1px; height:16px; background:#e5e7eb; align-self:center; margin:0 2px; flex-shrink:0; }
+
+#floating-toolbar {
+  position:fixed; z-index:99995; display:none;
+  flex-direction:column; align-items:center; gap:5px;
+  pointer-events:all; transform:translateX(-50%);
+}
+#floating-toolbar.visible { display:flex; }
+
+/* ═══════════════════════════════════════
+   관리자 패널
+═══════════════════════════════════════ */
+#sticker-panel {
+  position:fixed; bottom:28px; right:28px; z-index:99999;
+  background:#fff; border-radius:18px; padding:18px;
+  border:1px solid #e5e7eb; box-shadow:0 8px 32px rgba(0,0,0,0.12);
+  width:276px; font-family:'Pretendard',sans-serif;
+  transition: width 0.25s ease, border-radius 0.25s ease, padding 0.25s ease;
+}
+
+/* 접힌 상태: 아이콘만 보이는 미니 버튼 */
+#sticker-panel.collapsed {
+  width:48px; height:48px; padding:0;
+  border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+#sticker-panel.collapsed #panel-header { margin:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+#sticker-panel.collapsed #panel-title  { display:none; }
+#sticker-panel.collapsed #panel-toggle { width:100%; height:100%; border-radius:50%; margin:0; }
+#sticker-panel.collapsed #panel-body   { display:none; }
+
+#panel-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+#panel-title { font-size:13px; font-weight:700; color:#111827; display:flex; align-items:center; gap:7px; white-space:nowrap; }
+#panel-title svg { width:14px; height:14px; flex-shrink:0; }
+#panel-toggle {
+  background:none; border:none; cursor:pointer; color:#9ca3af;
+  width:28px; height:28px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center; transition:background 0.1s; flex-shrink:0;
+}
+#panel-toggle:hover { background:#f3f4f6; color:#374151; }
+#panel-toggle svg { width:12px; height:12px; }
+#panel-body.hidden { display:none; }
+
+#upload-zone {
+  border:1.5px dashed #d1d5db; border-radius:12px; padding:16px 10px;
+  text-align:center; cursor:pointer; transition:border-color 0.2s, background 0.2s; margin-bottom:12px;
+}
+#upload-zone:hover, #upload-zone.dragover { border-color:#2563eb; background:#eff6ff; }
+#upload-zone .up-icon { margin-bottom:6px; color:#9ca3af; }
+#upload-zone .up-icon svg { width:24px; height:24px; }
+#upload-zone .up-text { font-size:12px; color:#6b7280; line-height:1.5; font-weight:400; }
+#upload-zone .up-sub  { font-size:11px; color:#9ca3af; margin-top:3px; font-weight:300; }
+#file-input { display:none; }
+
+#thumb-list {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:12px;
+  min-height:20px; max-height:156px; overflow-y:auto;
+}
+#thumb-list::-webkit-scrollbar { width:3px; }
+#thumb-list::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:3px; }
+#thumb-empty { grid-column:1/-1; text-align:center; font-size:11px; color:#d1d5db; padding:10px 0; font-weight:300; }
+.thumb-item {
+  position:relative; aspect-ratio:1; border-radius:8px; overflow:hidden;
+  cursor:pointer; border:1.5px solid #f3f4f6; background:#f9fafb; transition:border-color 0.15s;
+}
+.thumb-item:hover { border-color:#2563eb; }
+.thumb-item img { width:100%; height:100%; object-fit:cover; pointer-events:none; }
+.thumb-del {
+  position:absolute; top:2px; right:2px; background:rgba(255,255,255,0.9); color:#dc2626;
+  border:none; border-radius:50%; width:16px; height:16px; font-size:8px;
+  cursor:pointer; display:none; align-items:center; justify-content:center;
+  box-shadow:0 1px 3px rgba(0,0,0,0.15);
+}
+.thumb-item:hover .thumb-del { display:flex; }
+.thumb-del svg { width:8px; height:8px; }
+
+.panel-divider { border:none; border-top:1px solid #f3f4f6; margin:12px 0; }
+.panel-tip { font-size:11px; color:#9ca3af; line-height:1.7; margin-bottom:10px; font-weight:300; }
+.panel-tip .tip-hl { color:#2563eb; font-weight:500; }
+
+/* 코드 복사 버튼 */
+#copy-code-btn {
+  width:100%; background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8;
+  border-radius:10px; padding:9px; font-size:12px;
+  font-family:'Pretendard',sans-serif; font-weight:600; cursor:pointer;
+  transition:background 0.1s; display:flex; align-items:center; justify-content:center; gap:6px;
+  margin-bottom:8px;
+}
+#copy-code-btn:hover { background:#dbeafe; }
+#copy-code-btn svg { width:13px; height:13px; }
+#copy-code-btn.copied { background:#ecfdf5; border-color:#6ee7b7; color:#047857; }
+
+#clear-btn {
+  width:100%; background:#fef2f2; border:1px solid #fecaca; color:#dc2626;
+  border-radius:10px; padding:8px; font-size:12px;
+  font-family:'Pretendard',sans-serif; font-weight:500; cursor:pointer;
+  transition:background 0.1s; display:flex; align-items:center; justify-content:center; gap:6px;
+}
+#clear-btn:hover { background:#fee2e2; }
+#clear-btn svg { width:12px; height:12px; }
+
+/* ═══════════════════════════════════════
+   코드 가이드 모달
+═══════════════════════════════════════ */
+#guide-overlay {
+  display:none; position:fixed; inset:0; z-index:999999;
+  background:rgba(0,0,0,0.55); backdrop-filter:blur(3px);
+  align-items:center; justify-content:center; padding:20px;
+}
+#guide-overlay.open { display:flex; }
+
+#guide-modal {
+  background:#fff; border-radius:20px; width:100%; max-width:640px;
+  max-height:88vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.2);
+  font-family:'Pretendard',sans-serif;
+}
+#guide-modal::-webkit-scrollbar { width:4px; }
+#guide-modal::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:4px; }
+
+#guide-top {
+  position:sticky; top:0; background:#fff; border-bottom:1px solid #f3f4f6;
+  padding:18px 22px 14px; display:flex; align-items:center; justify-content:space-between;
+  border-radius:20px 20px 0 0; z-index:1;
+}
+#guide-top h2 { font-size:15px; font-weight:700; color:#111827; display:flex; align-items:center; gap:8px; }
+#guide-top h2 svg { width:16px; height:16px; color:#2563eb; }
+#guide-close {
+  background:none; border:none; cursor:pointer; color:#9ca3af;
+  width:30px; height:30px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center; transition:background 0.1s;
+}
+#guide-close:hover { background:#f3f4f6; color:#374151; }
+#guide-close svg { width:14px; height:14px; }
+
+#guide-body { padding:20px 22px 24px; }
+
+.guide-step {
+  margin-bottom:22px;
+}
+.guide-step:last-child { margin-bottom:0; }
+
+.step-header {
+  display:flex; align-items:center; gap:10px; margin-bottom:10px;
+}
+.step-num {
+  width:26px; height:26px; border-radius:50%; background:#2563eb;
+  color:#fff; font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.step-title { font-size:13px; font-weight:700; color:#111827; }
+.step-desc { font-size:12px; color:#6b7280; line-height:1.7; margin-bottom:10px; font-weight:400; }
+.step-desc strong { color:#111827; font-weight:600; }
+
+.step-path {
+  display:inline-flex; align-items:center; gap:4px;
+  background:#f8fafc; border:1px solid #e2e8f0;
+  border-radius:8px; padding:6px 12px; font-size:11px;
+  color:#475569; font-weight:500; margin-bottom:10px; flex-wrap:wrap;
+}
+.step-path .arrow { color:#94a3b8; }
+
+/* 코드 블록 */
+.code-block {
+  background:#1e293b; border-radius:10px; padding:14px 16px;
+  font-family:monospace; font-size:11.5px; line-height:1.65;
+  color:#e2e8f0; overflow-x:auto; position:relative; margin-top:6px;
+}
+.code-block .cm { color:#64748b; } /* 주석 */
+.code-block .ky { color:#93c5fd; } /* 키워드/태그 */
+.code-block .st { color:#86efac; } /* 문자열 */
+.code-block .at { color:#fde68a; } /* 속성 */
+
+.copy-block-btn {
+  position:absolute; top:10px; right:10px;
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12);
+  color:#94a3b8; border-radius:6px; padding:3px 8px;
+  font-size:10px; cursor:pointer; font-family:'Pretendard',sans-serif;
+  transition:background 0.1s; display:flex; align-items:center; gap:4px;
+}
+.copy-block-btn:hover { background:rgba(255,255,255,0.14); color:#e2e8f0; }
+.copy-block-btn svg { width:10px; height:10px; }
+.copy-block-btn.copied { color:#6ee7b7; }
+
+.note-box {
+  background:#fffbeb; border:1px solid #fde68a; border-radius:8px;
+  padding:10px 14px; font-size:11px; color:#78350f; line-height:1.65;
+  margin-top:8px;
+}
+.note-box strong { font-weight:700; }
+
+/* ── 데모 레이아웃 ── */
+#page-wrapper { position:relative; z-index:10; pointer-events:none; }
+#site-header {
+  pointer-events:all; background:rgba(255,255,255,0.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e7eb; padding:0 28px; height:58px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { font-weight:700; font-size:17px; color:#111827; }
+.nav a { color:#6b7280; text-decoration:none; font-size:14px; margin-left:18px; font-weight:400; }
+#content-area { pointer-events:all; max-width:740px; margin:44px auto; padding:0 20px; }
+.blog-card { background:rgba(255,255,255,0.95); border-radius:14px; padding:26px 30px; margin-bottom:18px; border:1px solid #e5e7eb; }
+.blog-card h2 { font-size:18px; color:#111827; margin-bottom:8px; font-weight:600; }
+.blog-card p  { font-size:14px; color:#6b7280; line-height:1.75; font-weight:400; }
+.tag { display:inline-block; background:#fff7ed; color:#c2410c; font-size:11px; padding:2px 9px; border-radius:10px; margin:0 4px 8px 0; font-weight:500; }
+</style>
+</head>
+<body>
+
+<div id="sticker-layer-bg"></div>
+<div id="sticker-layer-top"></div>
+<div id="floating-toolbar">
+  <div class="toolbar-row" id="ft-row1"></div>
+  <div class="toolbar-row" id="ft-row2"></div>
+</div>
+
+<!-- 데모 블로그 레이아웃 -->
+<div id="page-wrapper">
+  <header id="site-header">
+    <span class="logo">내 블로그</span>
+    <nav class="nav"><a href="#">홈</a><a href="#">카테고리</a><a href="#">방명록</a></nav>
+  </header>
+  <main id="content-area">
+    <div class="blog-card">
+      <span class="tag">데모</span>
+      <h2>티스토리 이미지 스티커</h2>
+      <p>오른쪽 아래 패널에서 이미지를 업로드하고 스티커를 배치해보세요.<br>
+      <b>코드 복사</b> 버튼을 누르면 티스토리에 바로 붙여넣을 수 있는 코드와 적용 방법을 볼 수 있어요.</p>
+    </div>
+    <div class="blog-card">
+      <span class="tag">사용법</span>
+      <h2>조작법</h2>
+      <p>
+        이미지 업로드 → 썸네일 클릭으로 추가 (레이아웃 위 등장)<br>
+        드래그로 이동 · + / − 로 크기 조절<br>
+        뒤로 보내기 → 배경 / 앞으로 → 전경 복귀<br>
+        배경 스티커 클릭 → 편집 툴바 팝업<br>
+        고정 → 위치 잠금
+      </p>
+    </div>
+  </main>
+</div>
+
+<!-- 관리자 패널 (티스토리: s_if_var_by owner 로 감싸기) -->
+<div id="sticker-panel">
+  <div id="panel-header">
+    <span id="panel-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+      </svg>
+      스티커 관리
+    </span>
+    <button id="panel-toggle" title="접기">
+      <svg id="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+  </div>
+  <div id="panel-body">
+    <div id="upload-zone">
+      <div class="up-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+        </svg>
+      </div>
+      <div class="up-text">클릭하거나 이미지를 끌어다 놓으세요</div>
+      <div class="up-sub">PNG · JPG · GIF · WebP</div>
+    </div>
+    <input type="file" id="file-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+    <div id="thumb-list"><div id="thumb-empty">업로드한 이미지가 여기에 표시됩니다</div></div>
+    <hr class="panel-divider">
+    <p class="panel-tip">
+      썸네일 클릭 → 레이아웃 <span class="tip-hl">위</span>에 추가<br>
+      <span class="tip-hl">뒤로</span> → 배경 이동 | <span class="tip-hl">앞으로</span> → 전경 복귀<br>
+      배경 스티커 클릭 → 편집 툴바 팝업
+    </p>
+    <button id="copy-code-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+      코드 복사 &amp; 적용 가이드
+    </button>
+    <button id="clear-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/>
+      </svg>
+      배경 스티커 전체 삭제
+    </button>
+  </div>
+</div>
+
+<!-- 코드 가이드 모달 -->
+<div id="guide-overlay">
+  <div id="guide-modal">
+    <div id="guide-top">
+      <h2>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+        티스토리 적용 가이드
+      </h2>
+      <button id="guide-close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div id="guide-body">
+
+      <!-- STEP 1 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-num">1</div>
+          <div class="step-title">스킨 편집 열기</div>
+        </div>
+        <p class="step-desc">티스토리 관리자 페이지에서 스킨 편집 화면을 열어주세요.</p>
+        <div class="step-path">
+          티스토리 관리자 <span class="arrow">→</span> 꾸미기 <span class="arrow">→</span> 스킨 편집 <span class="arrow">→</span> 우측 상단 <strong>HTML 편집</strong>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-num">2</div>
+          <div class="step-title">CSS 추가 — &lt;style&gt; 태그 안에 붙여넣기</div>
+        </div>
+        <p class="step-desc">
+          HTML 편집 탭에서 <strong>&lt;style&gt; ~ &lt;/style&gt;</strong> 태그를 찾아 <strong>&lt;/style&gt; 바로 앞</strong>에 아래 코드를 붙여넣으세요.
+        </p>
+        <div class="code-block" id="code-css">
+          <button class="copy-block-btn" data-target="code-css">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            복사
+          </button>
+          <span class="cm">/* ── 스티커 레이어 ── */</span>
+#sticker-layer-bg  { position:fixed; inset:0; z-index:0;    pointer-events:none; overflow:hidden; }
+#sticker-layer-top { position:fixed; inset:0; z-index:9990; pointer-events:none; overflow:hidden; }
+.sticker-item { position:absolute; user-select:none; pointer-events:all; display:flex; flex-direction:column; align-items:center; }
+.sticker-item.mode-top { cursor:grab; }
+.sticker-item.mode-top.dragging { cursor:grabbing; }
+.sticker-item.mode-bg { cursor:pointer; }
+.sticker-item.pinned { cursor:default !important; }
+.sticker-img { display:block; width:120px; height:120px; object-fit:contain; pointer-events:none; border-radius:4px; }
+.sticker-item.mode-top:not(.pinned) .sticker-img { outline:2px dashed rgba(80,130,240,0.7); outline-offset:4px; }
+.pinned-badge { display:none; position:absolute; top:-10px; right:-10px; width:22px; height:22px; background:#f59e0b; border-radius:50%; align-items:center; justify-content:center; pointer-events:none; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+.pinned-badge svg { width:11px; height:11px; }
+.sticker-item.pinned .pinned-badge { display:flex; }
+.sticker-toolbar { display:none; flex-direction:column; align-items:center; gap:5px; margin-top:8px; }
+.sticker-item.mode-top .sticker-toolbar { display:flex; }
+.toolbar-row { display:flex; gap:2px; background:#fff; border-radius:24px; padding:5px 8px; border:1px solid #e5e7eb; box-shadow:0 2px 14px rgba(0,0,0,0.10); }
+.tb-btn { background:none; border:none; color:#374151; font-size:11px; cursor:pointer; padding:4px 9px; border-radius:14px; white-space:nowrap; transition:background 0.12s,color 0.12s; display:flex; align-items:center; gap:5px; font-family:'Pretendard',sans-serif; font-weight:500; line-height:1; }
+.tb-btn:hover { background:#f3f4f6; color:#111827; }
+.tb-btn svg { width:11px; height:11px; flex-shrink:0; }
+.tb-btn.btn-sz { color:#7c3aed; } .tb-btn.btn-sz:hover { background:#f5f3ff; }
+.tb-btn.btn-bg { color:#2563eb; } .tb-btn.btn-bg:hover { background:#eff6ff; }
+.tb-btn.btn-top { color:#059669; } .tb-btn.btn-top:hover { background:#ecfdf5; }
+.tb-btn.btn-pin { color:#d97706; } .tb-btn.btn-pin:hover { background:#fffbeb; }
+.tb-btn.btn-del { color:#dc2626; } .tb-btn.btn-del:hover { background:#fef2f2; }
+.tb-divider { width:1px; height:16px; background:#e5e7eb; align-self:center; margin:0 2px; flex-shrink:0; }
+#floating-toolbar { position:fixed; z-index:99995; display:none; flex-direction:column; align-items:center; gap:5px; pointer-events:all; transform:translateX(-50%); }
+#floating-toolbar.visible { display:flex; }
+#sticker-panel { position:fixed; bottom:28px; right:28px; z-index:99999; background:#fff; border-radius:18px; padding:18px; border:1px solid #e5e7eb; box-shadow:0 8px 32px rgba(0,0,0,0.12); width:276px; font-family:'Pretendard',sans-serif; transition:width 0.25s ease,border-radius 0.25s ease,padding 0.25s ease; }
+#sticker-panel.collapsed { width:48px; height:48px; padding:0; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+#sticker-panel.collapsed #panel-header { margin:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+#sticker-panel.collapsed #panel-title { display:none; }
+#sticker-panel.collapsed #panel-toggle { width:100%; height:100%; border-radius:50%; margin:0; }
+#sticker-panel.collapsed #panel-body { display:none; }
+#panel-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+#panel-title { font-size:13px; font-weight:700; color:#111827; display:flex; align-items:center; gap:7px; white-space:nowrap; }
+#panel-title svg { width:14px; height:14px; flex-shrink:0; }
+#panel-toggle { background:none; border:none; cursor:pointer; color:#9ca3af; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:background 0.1s; flex-shrink:0; }
+#panel-toggle:hover { background:#f3f4f6; color:#374151; }
+#panel-toggle svg { width:12px; height:12px; }
+#panel-body.hidden { display:none; }
+#upload-zone { border:1.5px dashed #d1d5db; border-radius:12px; padding:16px 10px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; margin-bottom:12px; }
+#upload-zone:hover,#upload-zone.dragover { border-color:#2563eb; background:#eff6ff; }
+#upload-zone .up-icon { margin-bottom:6px; color:#9ca3af; }
+#upload-zone .up-icon svg { width:24px; height:24px; }
+#upload-zone .up-text { font-size:12px; color:#6b7280; line-height:1.5; font-weight:400; }
+#upload-zone .up-sub { font-size:11px; color:#9ca3af; margin-top:3px; font-weight:300; }
+#file-input { display:none; }
+#thumb-list { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:12px; min-height:20px; max-height:156px; overflow-y:auto; }
+#thumb-list::-webkit-scrollbar { width:3px; }
+#thumb-list::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:3px; }
+#thumb-empty { grid-column:1/-1; text-align:center; font-size:11px; color:#d1d5db; padding:10px 0; font-weight:300; }
+.thumb-item { position:relative; aspect-ratio:1; border-radius:8px; overflow:hidden; cursor:pointer; border:1.5px solid #f3f4f6; background:#f9fafb; transition:border-color 0.15s; }
+.thumb-item:hover { border-color:#2563eb; }
+.thumb-item img { width:100%; height:100%; object-fit:cover; pointer-events:none; }
+.thumb-del { position:absolute; top:2px; right:2px; background:rgba(255,255,255,0.9); color:#dc2626; border:none; border-radius:50%; width:16px; height:16px; font-size:8px; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.15); }
+.thumb-item:hover .thumb-del { display:flex; }
+.thumb-del svg { width:8px; height:8px; }
+.panel-divider { border:none; border-top:1px solid #f3f4f6; margin:12px 0; }
+.panel-tip { font-size:11px; color:#9ca3af; line-height:1.7; margin-bottom:10px; font-weight:300; }
+.panel-tip .tip-hl { color:#2563eb; font-weight:500; }
+#clear-btn { width:100%; background:#fef2f2; border:1px solid #fecaca; color:#dc2626; border-radius:10px; padding:8px; font-size:12px; font-family:'Pretendard',sans-serif; font-weight:500; cursor:pointer; transition:background 0.1s; display:flex; align-items:center; justify-content:center; gap:6px; }
+#clear-btn:hover { background:#fee2e2; }
+#clear-btn svg { width:12px; height:12px; }
+        </div>
+        <div class="note-box">
+          💡 <strong>참고:</strong> 티스토리 기본 레이아웃 wrapper(보통 <code>#wrap</code>)에 반드시 아래를 추가하세요:<br>
+          <code>#wrap { position:relative; z-index:10; }</code>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-num">3</div>
+          <div class="step-title">HTML 추가 — &lt;/body&gt; 바로 위에 붙여넣기</div>
+        </div>
+        <p class="step-desc">
+          HTML 탭에서 <strong>&lt;/body&gt;</strong> 태그를 찾아 그 <strong>바로 위</strong>에 아래 코드를 붙여넣으세요.
+          패널 부분은 <strong>관리자만 보이도록</strong> <code>s_if_var_by</code> 태그로 감쌌습니다.
+        </p>
+        <div class="code-block" id="code-html">
+          <button class="copy-block-btn" data-target="code-html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            복사
+          </button>
+          <span id="html-code-content"></span>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-num">4</div>
+          <div class="step-title">JavaScript 추가 — HTML 코드 바로 아래에 붙여넣기</div>
+        </div>
+        <p class="step-desc">
+          STEP 3에서 붙여넣은 HTML 코드 바로 아래(역시 <strong>&lt;/body&gt; 위</strong>)에 아래 스크립트를 붙여넣으세요.
+        </p>
+        <div class="code-block" id="code-js">
+          <button class="copy-block-btn" data-target="code-js">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            복사
+          </button>
+          <span id="js-code-content"></span>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-num">5</div>
+          <div class="step-title">저장 후 확인</div>
+        </div>
+        <p class="step-desc">
+          우측 상단 <strong>적용</strong> 버튼을 눌러 저장하세요.<br>
+          블로그를 열어보면 관리자 계정으로 로그인했을 때만 오른쪽 아래에 스티커 패널이 나타납니다.
+        </p>
+        <div class="note-box">
+          ⚠️ <strong>주의:</strong> 이미지는 base64로 저장되므로 새로고침하면 초기화됩니다. 스티커 위치를 영구 저장하려면 별도의 서버 저장 로직이 필요해요.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const ICONS = {
+  minus:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+  plus:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+  toBack:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><polyline points="7 12 12 17 17 12"/><line x1="5" y1="21" x2="19" y2="21"/></svg>`,
+  toFront: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="7" x2="12" y2="21"/><polyline points="17 12 12 7 7 12"/><line x1="5" y1="3" x2="19" y2="3"/></svg>`,
+  pin:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>`,
+  unpin:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/><path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12"/><path d="M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47"/></svg>`,
+  trash:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>`,
+  xmark:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  layers:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+};
+
+/* ── 티스토리에 붙여넣을 HTML 코드 ── */
+const TISTORY_HTML = `<div id="sticker-layer-bg"></div>
+<div id="sticker-layer-top"></div>
+<div id="floating-toolbar">
+  <div class="toolbar-row" id="ft-row1"></div>
+  <div class="toolbar-row" id="ft-row2"></div>
+</div>
+
+<s_if_var_by name="by" val="owner">
+<div id="sticker-panel">
+  <div id="panel-header">
+    <span id="panel-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+      </svg>
+      스티커 관리
+    </span>
+    <button id="panel-toggle" title="접기">
+      <svg id="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+  </div>
+  <div id="panel-body">
+    <div id="upload-zone">
+      <div class="up-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+        </svg>
+      </div>
+      <div class="up-text">클릭하거나 이미지를 끌어다 놓으세요</div>
+      <div class="up-sub">PNG · JPG · GIF · WebP</div>
+    </div>
+    <input type="file" id="file-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+    <div id="thumb-list"><div id="thumb-empty">업로드한 이미지가 여기에 표시됩니다</div></div>
+    <hr class="panel-divider">
+    <p class="panel-tip">
+      썸네일 클릭 → 레이아웃 <span class="tip-hl">위</span>에 추가<br>
+      <span class="tip-hl">뒤로</span> → 배경 이동 | <span class="tip-hl">앞으로</span> → 전경 복귀<br>
+      배경 스티커 클릭 → 편집 툴바 팝업
+    </p>
+    <button id="clear-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/>
+      </svg>
+      배경 스티커 전체 삭제
+    </button>
+  </div>
+</div>
+</s_if_var_by>`;
+
+/* ── 티스토리에 붙여넣을 JS 코드 ── */
+const TISTORY_JS = `<script>
+const ICONS={minus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,plus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,toBack:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><polyline points="7 12 12 17 17 12"/><line x1="5" y1="21" x2="19" y2="21"/></svg>\`,toFront:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="7" x2="12" y2="21"/><polyline points="17 12 12 7 7 12"/><line x1="5" y1="3" x2="19" y2="3"/></svg>\`,pin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>\`,unpin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/><path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12"/><path d="M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47"/></svg>\`,trash:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>\`,xmark:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>\`};
+(function(){const layerBg=document.getElementById('sticker-layer-bg'),layerTop=document.getElementById('sticker-layer-top'),uploadZone=document.getElementById('upload-zone'),fileInput=document.getElementById('file-input'),thumbList=document.getElementById('thumb-list'),thumbEmpty=document.getElementById('thumb-empty'),panelEl=document.getElementById('sticker-panel'),panelToggle=document.getElementById('panel-toggle'),toggleIcon=document.getElementById('toggle-icon'),panelBody=document.getElementById('panel-body'),clearBtn=document.getElementById('clear-btn'),floatingTb=document.getElementById('floating-toolbar'),ftRow1=document.getElementById('ft-row1'),ftRow2=document.getElementById('ft-row2');
+let stickers=[],idCnt=0,panelOpen=true,activeBgId=null;
+panelToggle.addEventListener('click',()=>{panelOpen=!panelOpen;panelEl.classList.toggle('collapsed',!panelOpen);toggleIcon.setAttribute('points',panelOpen?'6 9 12 15 18 9':'6 12 12 6 18 12');});
+uploadZone.addEventListener('click',()=>fileInput.click());
+uploadZone.addEventListener('dragover',e=>{e.preventDefault();uploadZone.classList.add('dragover');});
+uploadZone.addEventListener('dragleave',()=>uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop',e=>{e.preventDefault();uploadZone.classList.remove('dragover');handleFiles(e.dataTransfer.files);});
+fileInput.addEventListener('change',()=>{handleFiles(fileInput.files);fileInput.value='';});
+function handleFiles(files){Array.from(files).forEach(file=>{if(!file.type.startsWith('image/'))return;const r=new FileReader();r.onload=e=>addToPanel(e.target.result,file.name);r.readAsDataURL(file);});}
+function addToPanel(dataUrl,name){if(thumbEmpty&&thumbEmpty.parentNode)thumbEmpty.remove();const item=document.createElement('div');item.className='thumb-item';const img=document.createElement('img');img.src=dataUrl;img.alt=name||'스티커';const del=document.createElement('button');del.className='thumb-del';del.innerHTML=ICONS.xmark;del.addEventListener('click',e=>{e.stopPropagation();item.remove();});item.append(img,del);item.addEventListener('click',()=>spawnSticker(dataUrl));thumbList.appendChild(item);}
+function hideFloating(){floatingTb.classList.remove('visible');ftRow1.innerHTML='';ftRow2.innerHTML='';activeBgId=null;}
+function spawnSticker(dataUrl){const id=++idCnt;const x=clamp(window.innerWidth/2-60+rand(-120,120),20,window.innerWidth-160);const y=clamp(window.innerHeight/2-60+rand(-80,80),80,window.innerHeight-220);const wrap=document.createElement('div');wrap.className='sticker-item mode-top';wrap.style.left=x+'px';wrap.style.top=y+'px';const badge=document.createElement('div');badge.className='pinned-badge';badge.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';const img=document.createElement('img');img.className='sticker-img';img.src=dataUrl;img.alt='스티커';const toolbar=document.createElement('div');toolbar.className='sticker-toolbar';let pinned=false,curSize=120,isTop=true;
+const doMinus=e=>{e&&e.stopPropagation();curSize=Math.max(curSize-20,40);img.style.width=img.style.height=curSize+'px';if(activeBgId===id)repositionFloating();};
+const doPlus=e=>{e&&e.stopPropagation();curSize=Math.min(curSize+20,500);img.style.width=img.style.height=curSize+'px';if(activeBgId===id)repositionFloating();};
+const doToBack=e=>{e&&e.stopPropagation();if(!isTop)return;isTop=false;layerTop.removeChild(wrap);wrap.classList.replace('mode-top','mode-bg');layerBg.appendChild(wrap);hideFloating();};
+const doToFront=e=>{e&&e.stopPropagation();if(isTop)return;isTop=true;layerBg.removeChild(wrap);wrap.classList.replace('mode-bg','mode-top');layerTop.appendChild(wrap);hideFloating();};
+const doPin=e=>{e&&e.stopPropagation();pinned=!pinned;wrap.classList.toggle('pinned',pinned);inlinePinBtn.innerHTML=(pinned?ICONS.unpin:ICONS.pin)+(pinned?' 해제':' 고정');if(activeBgId===id)openFloating();};
+const doDel=e=>{e&&e.stopPropagation();wrap.remove();stickers=stickers.filter(s=>s.id!==id);if(activeBgId===id)hideFloating();};
+const inlinePinBtn=makeBtn(ICONS.pin+' 고정','btn-pin');
+const row1=makeRow([makeBtn(ICONS.minus,'btn-sz'),makeBtn(ICONS.plus,'btn-sz'),makeDivider(),makeBtn(ICONS.toBack+' 뒤로','btn-bg'),makeBtn(ICONS.toFront+' 앞으로','btn-top')]);
+const row2=makeRow([inlinePinBtn,makeBtn(ICONS.trash+' 삭제','btn-del')]);
+row1.children[0].addEventListener('click',doMinus);row1.children[1].addEventListener('click',doPlus);row1.children[3].addEventListener('click',doToBack);row1.children[4].addEventListener('click',doToFront);inlinePinBtn.addEventListener('click',doPin);row2.children[1].addEventListener('click',doDel);
+toolbar.append(row1,row2);wrap.append(badge,img,toolbar);
+function openFloating(){activeBgId=id;ftRow1.innerHTML='';ftRow2.innerHTML='';const fMinus=makeBtn(ICONS.minus,'btn-sz');const fPlus=makeBtn(ICONS.plus,'btn-sz');const fToFront=makeBtn(ICONS.toFront+' 앞으로','btn-top');const fPin=makeBtn((pinned?ICONS.unpin:ICONS.pin)+(pinned?' 해제':' 고정'),'btn-pin');const fDel=makeBtn(ICONS.trash+' 삭제','btn-del');fMinus.addEventListener('click',doMinus);fPlus.addEventListener('click',doPlus);fToFront.addEventListener('click',doToFront);fPin.addEventListener('click',doPin);fDel.addEventListener('click',doDel);[fMinus,fPlus,makeDivider(),fToFront].forEach(el=>ftRow1.appendChild(el));[fPin,fDel].forEach(el=>ftRow2.appendChild(el));repositionFloating();floatingTb.classList.add('visible');}
+function repositionFloating(){const w=parseFloat(img.style.width)||120;const lx=parseInt(wrap.style.left)||0;const ly=parseInt(wrap.style.top)||0;floatingTb.style.left=(lx+w/2)+'px';floatingTb.style.top=Math.max(10,ly-95)+'px';}
+function getBounds(){const lx=parseInt(wrap.style.left)||0;const ly=parseInt(wrap.style.top)||0;const w=parseFloat(img.style.width)||120;const h=parseFloat(img.style.height)||120;return{left:lx,top:ly,right:lx+w,bottom:ly+h};}
+makeDraggable(wrap,()=>pinned||!isTop);layerTop.appendChild(wrap);stickers.push({id,el:wrap,getBounds,openFloating,isTop:()=>isTop});wrap.style.transform='scale(0)';wrap.style.transition='transform 0.22s cubic-bezier(.34,1.56,.64,1)';requestAnimationFrame(()=>{wrap.style.transform='scale(1)';});}
+document.addEventListener('mousedown',e=>{if(floatingTb.contains(e.target))return;if(e.target.closest('#sticker-panel'))return;if(e.target.closest('.sticker-item.mode-top'))return;const cx=e.clientX,cy=e.clientY;const bgStickers=stickers.filter(s=>!s.isTop());let hit=null;for(let i=bgStickers.length-1;i>=0;i--){const b=bgStickers[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bgStickers[i];break;}}if(hit){if(activeBgId===hit.id){hideFloating();}else{hit.openFloating();}}else{hideFloating();}});
+function makeDraggable(el,isLockedFn){let active=false,sx,sy,ex,ey;const start=(cx,cy)=>{if(isLockedFn())return;active=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('dragging');el.style.transition='none';};const move=(cx,cy)=>{if(!active)return;el.style.left=clamp(ex+cx-sx,0,window.innerWidth-60)+'px';el.style.top=clamp(ey+cy-sy,0,window.innerHeight-60)+'px';};const stop=()=>{if(!active)return;active=false;el.classList.remove('dragging');};el.addEventListener('mousedown',e=>{if(e.target.closest('.tb-btn'))return;e.preventDefault();start(e.clientX,e.clientY);});el.addEventListener('touchstart',e=>{if(e.target.closest('.tb-btn'))return;start(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});document.addEventListener('mousemove',e=>move(e.clientX,e.clientY));document.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});document.addEventListener('mouseup',stop);document.addEventListener('touchend',stop);}
+if(clearBtn){clearBtn.addEventListener('click',()=>{stickers.forEach(s=>s.el.remove());stickers=[];hideFloating();});}
+function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
+function rand(mn,mx){return mn+Math.random()*(mx-mn);}
+function makeBtn(html,cls){const b=document.createElement('button');b.className='tb-btn '+cls;b.innerHTML=html;return b;}
+function makeRow(ch){const r=document.createElement('div');r.className='toolbar-row';ch.forEach(c=>r.appendChild(c));return r;}
+function makeDivider(){const d=document.createElement('div');d.className='tb-divider';return d;}
+})();
+<\/script>`;
+
+(function () {
+  'use strict';
+
+  /* 코드 블록에 내용 삽입 */
+  document.getElementById('html-code-content').textContent = TISTORY_HTML;
+  document.getElementById('js-code-content').textContent   = TISTORY_JS;
+
+  const layerBg    = document.getElementById('sticker-layer-bg');
+  const layerTop   = document.getElementById('sticker-layer-top');
+  const uploadZone = document.getElementById('upload-zone');
+  const fileInput  = document.getElementById('file-input');
+  const thumbList  = document.getElementById('thumb-list');
+  const thumbEmpty = document.getElementById('thumb-empty');
+  const panelEl    = document.getElementById('sticker-panel');
+  const panelToggle= document.getElementById('panel-toggle');
+  const toggleIcon = document.getElementById('toggle-icon');
+  const panelBody  = document.getElementById('panel-body');
+  const clearBtn   = document.getElementById('clear-btn');
+  const floatingTb = document.getElementById('floating-toolbar');
+  const ftRow1     = document.getElementById('ft-row1');
+  const ftRow2     = document.getElementById('ft-row2');
+  const copyBtn    = document.getElementById('copy-code-btn');
+  const guideOverlay = document.getElementById('guide-overlay');
+  const guideClose   = document.getElementById('guide-close');
+
+  let stickers   = [];
+  let idCnt      = 0;
+  let panelOpen  = true;
+  let activeBgId = null;
+
+  /* ── 패널 접기/펼치기 → collapsed 클래스로 미니화 ── */
+  panelToggle.addEventListener('click', () => {
+    panelOpen = !panelOpen;
+    panelEl.classList.toggle('collapsed', !panelOpen);
+    toggleIcon.setAttribute('points', panelOpen ? '6 9 12 15 18 9' : '6 12 12 6 18 12');
+    panelToggle.title = panelOpen ? '접기' : '펼치기';
+  });
+
+  /* ── 코드 가이드 모달 ── */
+  copyBtn.addEventListener('click', () => {
+    guideOverlay.classList.add('open');
+  });
+  guideClose.addEventListener('click', () => guideOverlay.classList.remove('open'));
+  guideOverlay.addEventListener('click', e => {
+    if (e.target === guideOverlay) guideOverlay.classList.remove('open');
+  });
+
+  /* ── 코드 블록 개별 복사 버튼 ── */
+  document.querySelectorAll('.copy-block-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const targetId = btn.dataset.target;
+      const block = document.getElementById(targetId);
+      /* 버튼 자신을 제외한 텍스트만 */
+      const text = block.innerText.replace(/^복사\n/, '').replace(/^복사/, '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 복사됨`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 복사`;
+        }, 2000);
+      });
+    });
+  });
+
+  /* ── 업로드 ── */
+  uploadZone.addEventListener('click', () => fileInput.click());
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+  fileInput.addEventListener('change', () => { handleFiles(fileInput.files); fileInput.value = ''; });
+
+  function handleFiles(files) {
+    Array.from(files).forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const r = new FileReader();
+      r.onload = e => addToPanel(e.target.result, file.name);
+      r.readAsDataURL(file);
+    });
+  }
+
+  function addToPanel(dataUrl, name) {
+    if (thumbEmpty && thumbEmpty.parentNode) thumbEmpty.remove();
+    const item = document.createElement('div');
+    item.className = 'thumb-item';
+    const img = document.createElement('img');
+    img.src = dataUrl; img.alt = name || '스티커';
+    const del = document.createElement('button');
+    del.className = 'thumb-del'; del.innerHTML = ICONS.xmark;
+    del.addEventListener('click', e => { e.stopPropagation(); item.remove(); });
+    item.append(img, del);
+    item.addEventListener('click', () => spawnSticker(dataUrl));
+    thumbList.appendChild(item);
+  }
+
+  function hideFloating() {
+    floatingTb.classList.remove('visible');
+    ftRow1.innerHTML = ''; ftRow2.innerHTML = '';
+    activeBgId = null;
+  }
+
+  function spawnSticker(dataUrl) {
+    const id = ++idCnt;
+    const x = clamp(window.innerWidth/2-60+rand(-120,120), 20, window.innerWidth-160);
+    const y = clamp(window.innerHeight/2-60+rand(-80,80),  80, window.innerHeight-220);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'sticker-item mode-top';
+    wrap.style.left = x+'px'; wrap.style.top = y+'px';
+
+    const badge = document.createElement('div');
+    badge.className = 'pinned-badge';
+    badge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>`;
+
+    const img = document.createElement('img');
+    img.className = 'sticker-img'; img.src = dataUrl; img.alt = '스티커';
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'sticker-toolbar';
+
+    let pinned = false, curSize = 120, isTop = true;
+
+    const doMinus = e => { e&&e.stopPropagation(); curSize=Math.max(curSize-20,40); img.style.width=img.style.height=curSize+'px'; if(activeBgId===id)repositionFloating(); };
+    const doPlus  = e => { e&&e.stopPropagation(); curSize=Math.min(curSize+20,500); img.style.width=img.style.height=curSize+'px'; if(activeBgId===id)repositionFloating(); };
+    const doToBack = e => { e&&e.stopPropagation(); if(!isTop)return; isTop=false; layerTop.removeChild(wrap); wrap.classList.replace('mode-top','mode-bg'); layerBg.appendChild(wrap); hideFloating(); };
+    const doToFront= e => { e&&e.stopPropagation(); if(isTop)return; isTop=true; layerBg.removeChild(wrap); wrap.classList.replace('mode-bg','mode-top'); layerTop.appendChild(wrap); hideFloating(); };
+    const doPin    = e => { e&&e.stopPropagation(); pinned=!pinned; wrap.classList.toggle('pinned',pinned); inlinePinBtn.innerHTML=(pinned?ICONS.unpin:ICONS.pin)+(pinned?' 해제':' 고정'); if(activeBgId===id)openFloating(); };
+    const doDel    = e => { e&&e.stopPropagation(); wrap.remove(); stickers=stickers.filter(s=>s.id!==id); if(activeBgId===id)hideFloating(); };
+
+    const inlinePinBtn = makeBtn(ICONS.pin+' 고정','btn-pin');
+    const row1 = makeRow([makeBtn(ICONS.minus,'btn-sz'),makeBtn(ICONS.plus,'btn-sz'),makeDivider(),makeBtn(ICONS.toBack+' 뒤로','btn-bg'),makeBtn(ICONS.toFront+' 앞으로','btn-top')]);
+    const row2 = makeRow([inlinePinBtn, makeBtn(ICONS.trash+' 삭제','btn-del')]);
+
+    row1.children[0].addEventListener('click',doMinus);
+    row1.children[1].addEventListener('click',doPlus);
+    row1.children[3].addEventListener('click',doToBack);
+    row1.children[4].addEventListener('click',doToFront);
+    inlinePinBtn.addEventListener('click',doPin);
+    row2.children[1].addEventListener('click',doDel);
+
+    toolbar.append(row1,row2);
+    wrap.append(badge,img,toolbar);
+
+    function openFloating() {
+      activeBgId = id;
+      ftRow1.innerHTML=''; ftRow2.innerHTML='';
+      const fMinus=makeBtn(ICONS.minus,'btn-sz'); const fPlus=makeBtn(ICONS.plus,'btn-sz');
+      const fToFront=makeBtn(ICONS.toFront+' 앞으로','btn-top');
+      const fPin=makeBtn((pinned?ICONS.unpin:ICONS.pin)+(pinned?' 해제':' 고정'),'btn-pin');
+      const fDel=makeBtn(ICONS.trash+' 삭제','btn-del');
+      fMinus.addEventListener('click',doMinus); fPlus.addEventListener('click',doPlus);
+      fToFront.addEventListener('click',doToFront); fPin.addEventListener('click',doPin); fDel.addEventListener('click',doDel);
+      [fMinus,fPlus,makeDivider(),fToFront].forEach(el=>ftRow1.appendChild(el));
+      [fPin,fDel].forEach(el=>ftRow2.appendChild(el));
+      repositionFloating(); floatingTb.classList.add('visible');
+    }
+    function repositionFloating() {
+      const w=parseFloat(img.style.width)||120;
+      floatingTb.style.left=(parseInt(wrap.style.left)+w/2)+'px';
+      floatingTb.style.top=Math.max(10,parseInt(wrap.style.top)-95)+'px';
+    }
+    function getBounds() {
+      const lx=parseInt(wrap.style.left)||0, ly=parseInt(wrap.style.top)||0;
+      const w=parseFloat(img.style.width)||120, h=parseFloat(img.style.height)||120;
+      return {left:lx,top:ly,right:lx+w,bottom:ly+h};
+    }
+
+    makeDraggable(wrap, ()=>pinned||!isTop);
+    layerTop.appendChild(wrap);
+    stickers.push({id,el:wrap,getBounds,openFloating,isTop:()=>isTop});
+    wrap.style.transform='scale(0)'; wrap.style.transition='transform 0.22s cubic-bezier(.34,1.56,.64,1)';
+    requestAnimationFrame(()=>{wrap.style.transform='scale(1)';});
+  }
+
+  document.addEventListener('mousedown', e => {
+    if (floatingTb.contains(e.target)) return;
+    if (e.target.closest('#sticker-panel')) return;
+    if (e.target.closest('#guide-overlay')) return;
+    if (e.target.closest('.sticker-item.mode-top')) return;
+    const cx=e.clientX, cy=e.clientY;
+    const bgList=stickers.filter(s=>!s.isTop()); let hit=null;
+    for(let i=bgList.length-1;i>=0;i--){const b=bgList[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bgList[i];break;}}
+    if(hit){activeBgId===hit.id?hideFloating():hit.openFloating();}else{hideFloating();}
+  });
+
+  function makeDraggable(el, isLockedFn) {
+    let active=false,sx,sy,ex,ey;
+    const start=(cx,cy)=>{if(isLockedFn())return;active=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('dragging');el.style.transition='none';};
+    const move=(cx,cy)=>{if(!active)return;el.style.left=clamp(ex+cx-sx,0,window.innerWidth-60)+'px';el.style.top=clamp(ey+cy-sy,0,window.innerHeight-60)+'px';};
+    const stop=()=>{if(!active)return;active=false;el.classList.remove('dragging');};
+    el.addEventListener('mousedown',e=>{if(e.target.closest('.tb-btn'))return;e.preventDefault();start(e.clientX,e.clientY);});
+    el.addEventListener('touchstart',e=>{if(e.target.closest('.tb-btn'))return;start(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+    document.addEventListener('mousemove',e=>move(e.clientX,e.clientY));
+    document.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+    document.addEventListener('mouseup',stop); document.addEventListener('touchend',stop);
+  }
+
+  clearBtn.addEventListener('click', ()=>{stickers.forEach(s=>s.el.remove());stickers=[];hideFloating();});
+
+  function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
+  function rand(mn,mx){return mn+Math.random()*(mx-mn);}
+  function makeBtn(html,cls){const b=document.createElement('button');b.className='tb-btn '+cls;b.innerHTML=html;return b;}
+  function makeRow(ch){const r=document.createElement('div');r.className='toolbar-row';ch.forEach(c=>r.appendChild(c));return r;}
+  function makeDivider(){const d=document.createElement('div');d.className='tb-divider';return d;}
+
+})();
+</script>
+</body>
+</html>

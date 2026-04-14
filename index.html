@@ -3,134 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>티스토리 이미지 스티커 — 적용 가이드</title>
-<style>
-@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
-@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
-@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
-@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
-@font-face { font-family:'Pretendard'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight:700; font-display:swap; }
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Pretendard',sans-serif; background:#f5f6f8; color:#111827; min-height:100vh; }
-
-/* ── 헤더 ── */
-.site-header {
-  background:#fff; border-bottom:1px solid #e5e7eb;
-  padding:0 32px; height:60px;
-  display:flex; align-items:center; justify-content:space-between;
-  position:sticky; top:0; z-index:100;
-}
-.site-logo { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:700; color:#111827; text-decoration:none; }
-.site-logo svg { width:20px; height:20px; color:#2563eb; }
-.header-right { display:flex; align-items:center; gap:10px; }
-.header-badge { font-size:11px; font-weight:500; background:#eff6ff; color:#2563eb; padding:3px 10px; border-radius:20px; border:1px solid #bfdbfe; }
-.header-demo-btn {
-  display:flex; align-items:center; gap:6px;
-  background:#f3f4f6; border:1px solid #e5e7eb; color:#374151;
-  border-radius:10px; padding:7px 14px; font-size:12px; font-weight:600;
-  cursor:pointer; font-family:'Pretendard',sans-serif; transition:background 0.1s;
-}
-.header-demo-btn:hover { background:#e5e7eb; }
-.header-demo-btn svg { width:13px; height:13px; }
-
-/* ── 히어로 ── */
-.hero {
-  background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);
-  padding:60px 32px 52px; text-align:center; color:#fff;
-}
-.hero-badge {
-  display:inline-flex; align-items:center; gap:6px;
-  background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25);
-  border-radius:20px; padding:5px 14px; font-size:12px; font-weight:500; margin-bottom:20px;
-}
-.hero h1 { font-size:30px; font-weight:700; margin-bottom:12px; line-height:1.3; }
-.hero p  { font-size:15px; font-weight:300; opacity:0.85; line-height:1.7; max-width:480px; margin:0 auto 28px; }
-
-.hero-btns { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
-
-.hero-copy-btn {
-  display:inline-flex; align-items:center; gap:8px;
-  background:#fff; color:#1d4ed8; border:none; border-radius:12px;
-  padding:13px 28px; font-size:14px; font-weight:700;
-  cursor:pointer; font-family:'Pretendard',sans-serif;
-  transition:transform 0.15s, box-shadow 0.15s;
-  box-shadow:0 4px 20px rgba(0,0,0,0.2);
-}
-.hero-copy-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,0.25); }
-.hero-copy-btn svg { width:16px; height:16px; }
-.hero-copy-btn.copied { background:#ecfdf5; color:#047857; }
-
-.hero-demo-btn {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(255,255,255,0.15); color:#fff;
-  border:1.5px solid rgba(255,255,255,0.4); border-radius:12px;
-  padding:12px 24px; font-size:14px; font-weight:600;
-  cursor:pointer; font-family:'Pretendard',sans-serif;
-  transition:background 0.15s;
-}
-.hero-demo-btn:hover { background:rgba(255,255,255,0.25); }
-.hero-demo-btn svg { width:15px; height:15px; }
-
-.copy-hint { font-size:12px; opacity:0.6; margin-top:14px; font-weight:300; }
-
-/* ── 메인 ── */
-.main { max-width:720px; margin:0 auto; padding:48px 24px 80px; }
-.section-title { font-size:11px; font-weight:700; letter-spacing:0.08em; color:#6b7280; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-.section-title::after { content:''; flex:1; height:1px; background:#e5e7eb; }
-
-/* 스텝 카드 */
-.step-card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; margin-bottom:16px; overflow:hidden; }
-.step-head { display:flex; align-items:center; gap:14px; padding:18px 20px; }
-.step-num { width:32px; height:32px; border-radius:50%; background:#2563eb; color:#fff; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.step-info { flex:1; }
-.step-info h3 { font-size:14px; font-weight:600; color:#111827; margin-bottom:2px; }
-.step-info p  { font-size:12px; font-weight:400; color:#6b7280; line-height:1.5; }
-.step-body { padding:0 20px 20px; }
-
-.nav-path { display:flex; align-items:center; flex-wrap:wrap; gap:6px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:10px 14px; margin-bottom:14px; font-size:12px; }
-.nav-path .p-item { color:#374151; font-weight:500; }
-.nav-path .p-arr  { color:#9ca3af; font-size:10px; }
-.nav-path .p-key  { color:#2563eb; font-weight:700; }
-
-code { background:#f3f4f6; border:1px solid #e5e7eb; border-radius:5px; padding:2px 7px; font-size:12px; font-family:monospace; color:#374151; }
-
-.code-wrap { position:relative; background:#1e293b; border-radius:10px; margin-top:12px; overflow:hidden; }
-.code-label { position:absolute; top:0; left:0; right:0; padding:8px 14px; background:rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.07); font-size:11px; color:#64748b; font-family:monospace; display:flex; align-items:center; justify-content:space-between; }
-.mini-copy-btn { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); color:#94a3b8; border-radius:6px; padding:3px 10px; font-size:10px; cursor:pointer; font-family:'Pretendard',sans-serif; font-weight:500; display:flex; align-items:center; gap:4px; transition:background 0.1s; }
-.mini-copy-btn:hover { background:rgba(255,255,255,0.14); color:#e2e8f0; }
-.mini-copy-btn.copied { color:#6ee7b7; }
-.mini-copy-btn svg { width:10px; height:10px; }
-pre { padding:46px 16px 14px; overflow-x:auto; font-size:12px; line-height:1.65; font-family:monospace; color:#e2e8f0; margin:0; }
-
-.note { display:flex; gap:10px; background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:12px 14px; margin-top:12px; font-size:12px; color:#78350f; line-height:1.65; }
-.note svg { width:16px; height:16px; flex-shrink:0; margin-top:1px; color:#d97706; }
-.note-blue { background:#eff6ff; border-color:#bfdbfe; color:#1e40af; }
-.note-blue svg { color:#2563eb; }
-
-.img-step { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid #f3f4f6; font-size:12px; color:#374151; line-height:1.6; }
-.img-step:last-child { border-bottom:none; padding-bottom:0; }
-.img-step .num { width:20px; height:20px; border-radius:50%; background:#e0e7ff; color:#3730a3; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
-.img-step strong { font-weight:600; color:#111827; }
-
-.done-banner { background:linear-gradient(135deg,#ecfdf5,#d1fae5); border:1px solid #6ee7b7; border-radius:16px; padding:24px; text-align:center; margin-top:8px; }
-.done-banner svg { width:36px; height:36px; color:#059669; margin-bottom:10px; }
-.done-banner h3 { font-size:16px; font-weight:700; color:#065f46; margin-bottom:6px; }
-.done-banner p  { font-size:13px; color:#047857; font-weight:400; line-height:1.6; }
-
-.site-footer { text-align:center; padding:32px 24px; font-size:12px; color:#9ca3af; border-top:1px solid #e5e7eb; background:#fff; }
-
-
-</style>
+<title>티스토리 이미지 스티커 &mdash; 적용 가이드</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');font-display:swap;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#f5f6f8;color:#111827;min-height:100vh;}
+.site-header{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.site-logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#111827;text-decoration:none;}
+.site-logo svg{width:20px;height:20px;color:#2563eb;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.header-badge{font-size:11px;font-weight:500;background:#eff6ff;color:#2563eb;padding:3px 10px;border-radius:20px;border:1px solid #bfdbfe;}
+.header-demo-btn{display:flex;align-items:center;gap:6px;background:#f3f4f6;border:1px solid #e5e7eb;color:#374151;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.1s;}
+.header-demo-btn:hover{background:#e5e7eb;}
+.header-demo-btn svg{width:13px;height:13px;}
+.hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);padding:60px 32px 52px;text-align:center;color:#fff;}
+.hero h1{font-size:28px;font-weight:700;margin-bottom:12px;line-height:1.3;}
+.hero p{font-size:14px;opacity:0.85;line-height:1.7;max-width:480px;margin:0 auto 28px;}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.hero-copy-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1d4ed8;border:none;border-radius:12px;padding:13px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.hero-copy-btn svg{width:16px;height:16px;}
+.hero-copy-btn.copied{background:#ecfdf5;color:#047857;}
+.hero-demo-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.4);border-radius:12px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.hero-demo-btn svg{width:15px;height:15px;}
+.copy-hint{font-size:12px;opacity:0.6;margin-top:14px;}
+.main{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+.section-title{font-size:11px;font-weight:700;letter-spacing:0.08em;color:#6b7280;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.section-title::after{content:'';flex:1;height:1px;background:#e5e7eb;}
+.step-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;margin-bottom:16px;overflow:hidden;}
+.step-head{display:flex;align-items:center;gap:14px;padding:18px 20px;}
+.step-num{width:32px;height:32px;border-radius:50%;background:#2563eb;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-info h3{font-size:14px;font-weight:600;color:#111827;margin-bottom:2px;}
+.step-info p{font-size:12px;color:#6b7280;line-height:1.5;}
+.step-body{padding:0 20px 20px;}
+.img-step{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f3f4f6;font-size:12px;color:#374151;line-height:1.6;}
+.img-step:last-child{border-bottom:none;padding-bottom:0;}
+.img-step .num{width:20px;height:20px;border-radius:50%;background:#e0e7ff;color:#3730a3;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.img-step strong{font-weight:600;color:#111827;}
+code{background:#f3f4f6;border:1px solid #e5e7eb;border-radius:5px;padding:2px 7px;font-size:12px;font-family:monospace;color:#374151;}
+.note{display:flex;gap:10px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 14px;margin-top:12px;font-size:12px;color:#78350f;line-height:1.65;}
+.note svg{width:16px;height:16px;flex-shrink:0;margin-top:1px;color:#d97706;}
+.note-blue{background:#eff6ff;border-color:#bfdbfe;color:#1e40af;}
+.note-blue svg{color:#2563eb;}
+.pw-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin-top:12px;}
+.pw-box p{font-size:12px;color:#166534;margin-bottom:8px;font-weight:600;}
+.pw-code{background:#fff;border:1px solid #d1fae5;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:13px;color:#065f46;font-weight:700;}
+.done-banner{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1px solid #6ee7b7;border-radius:16px;padding:24px;text-align:center;margin-top:8px;}
+.done-banner svg{width:36px;height:36px;color:#059669;margin-bottom:10px;}
+.done-banner h3{font-size:16px;font-weight:700;color:#065f46;margin-bottom:6px;}
+.done-banner p{font-size:13px;color:#047857;line-height:1.6;}
+.site-footer{text-align:center;padding:32px 24px;font-size:12px;color:#9ca3af;border-top:1px solid #e5e7eb;background:#fff;}</style>
 </head>
 <body>
-
-<!-- 헤더 -->
 <header class="site-header">
   <a class="site-logo" href="#">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
     티스토리 이미지 스티커
   </a>
   <div class="header-right">
@@ -138,18 +65,13 @@ pre { padding:46px 16px 14px; overflow-x:auto; font-size:12px; line-height:1.65;
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       예시 열기
     </button>
-    <span class="header-badge">무료 · 관리자 전용</span>
+    <span class="header-badge">비밀번호 보호</span>
   </div>
 </header>
 
-<!-- 히어로 -->
 <section class="hero">
-  <div class="hero-badge">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-    통합 코드 1개만 붙여넣으면 끝
-  </div>
   <h1>블로그 배경에 이미지 스티커를<br>자유롭게 붙이세요</h1>
-  <p>내 사진, GIF, PNG 투명 이미지를 배경에 배치하고<br>드래그로 이동, 크기 조절, 위치 고정까지 — 관리자에게만 보여요</p>
+  <p>내 사진, GIF, PNG 이미지를 배경에 배치하고<br>드래그 이동, 크기 조절까지 &mdash; 비밀번호로 보호돼요</p>
   <div class="hero-btns">
     <button class="hero-copy-btn" id="main-copy-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -157,810 +79,132 @@ pre { padding:46px 16px 14px; overflow-x:auto; font-size:12px; line-height:1.65;
     </button>
     <button class="hero-demo-btn" id="hero-demo-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      예시 페이지 열기 (새 탭)
+      예시 페이지 열기
     </button>
   </div>
   <p class="copy-hint">아래 가이드를 따라 티스토리에 붙여넣으면 바로 사용할 수 있어요</p>
 </section>
 
-<!-- 메인 -->
 <main class="main">
-  <p class="section-title">적용 방법 <span style="font-size:10px;text-transform:none;font-weight:400;letter-spacing:0;color:#9ca3af;">총 3단계 · 약 3분</span></p>
-
-  <!-- STEP 1 -->
+  <p class="section-title">적용 방법</p>
   <div class="step-card">
-    <div class="step-head">
-      <div class="step-num">1</div>
-      <div class="step-info">
-        <h3>스킨 편집 화면 열기</h3>
-        <p>티스토리 관리자 → 스킨 편집으로 이동해요</p>
-      </div>
-    </div>
+    <div class="step-head"><div class="step-num">1</div><div class="step-info"><h3>스킨 편집 화면 열기</h3><p>티스토리 관리자 &rarr; 꾸미기 &rarr; 스킨 편집 &rarr; HTML 편집</p></div></div>
+  </div>
+  <div class="step-card">
+    <div class="step-head"><div class="step-num">2</div><div class="step-info"><h3>통합 코드 붙여넣기</h3><p>&lt;/s_t3&gt; 바로 앞에 붙여넣으세요</p></div></div>
     <div class="step-body">
-      <div class="nav-path">
-        <span class="p-item">티스토리 관리자</span><span class="p-arr">▶</span>
-        <span class="p-item">꾸미기</span><span class="p-arr">▶</span>
-        <span class="p-item">스킨 편집</span><span class="p-arr">▶</span>
-        <span class="p-key">우측 상단 "HTML 편집" 클릭</span>
-      </div>
-      <div class="note note-blue">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>HTML 편집을 누르면 코드를 직접 수정할 수 있는 창이 열려요. 겁먹지 않아도 괜찮아요 — 정해진 곳에 붙여넣기만 하면 돼요!</span>
-      </div>
+      <div class="img-step"><div class="num">1</div><div>위의 <strong>통합 코드 복사하기</strong> 버튼을 눌러요</div></div>
+      <div class="img-step"><div class="num">2</div><div>HTML 편집 창에서 <strong>Ctrl+F</strong>로 <code>&lt;/s_t3&gt;</code> 를 검색해요</div></div>
+      <div class="img-step"><div class="num">3</div><div><code>&lt;/s_t3&gt;</code> 바로 <strong>앞</strong>에 커서를 놓고 <strong>Ctrl+V</strong>로 붙여넣어요</div></div>
+      <div class="img-step"><div class="num">4</div><div><strong>적용</strong> 버튼을 눌러 저장해요</div></div>
     </div>
   </div>
-
-  <!-- STEP 2 -->
   <div class="step-card">
-    <div class="step-head">
-      <div class="step-num">2</div>
-      <div class="step-info">
-        <h3>통합 코드 붙여넣기</h3>
-        <p>코드 한 개만 복사해서 정해진 위치에 붙여넣으면 돼요</p>
-      </div>
-    </div>
+    <div class="step-head"><div class="step-num">3</div><div class="step-info"><h3>비밀번호 설정하기</h3><p>코드 안의 비밀번호를 본인만 아는 것으로 바꾸세요</p></div></div>
     <div class="step-body">
-      <div class="img-step"><div class="num">1</div><div>위의 <strong>통합 코드 복사하기</strong> 버튼을 눌러 코드를 복사해요</div></div>
-      <div class="img-step"><div class="num">2</div><div>HTML 편집 창에서 <strong>Ctrl + F</strong> (맥은 <strong>Cmd + F</strong>)를 눌러 검색창을 열고 <code>&lt;/body&gt;</code> 를 검색해요</div></div>
-      <div class="img-step"><div class="num">3</div><div><code>&lt;/body&gt;</code> 바로 <strong>앞에 커서</strong>를 놓고 복사한 코드를 <strong>Ctrl + V</strong>로 붙여넣어요</div></div>
-      <div class="img-step"><div class="num">4</div><div>오른쪽 위 <strong>적용</strong> 버튼을 눌러 저장해요</div></div>
-      <div class="note" style="margin-top:14px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <span><strong>꼭 &lt;/body&gt; 바로 앞에 붙여야 해요.</strong> 다른 위치에 넣으면 작동하지 않을 수 있어요.</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- STEP 3 -->
-  <div class="step-card">
-    <div class="step-head">
-      <div class="step-num">3</div>
-      <div class="step-info">
-        <h3>#wrap 에 CSS 한 줄 추가하기</h3>
-        <p>스티커가 레이아웃 뒤로 제대로 들어가려면 이 작업이 꼭 필요해요</p>
-      </div>
-    </div>
-    <div class="step-body">
-      <div class="img-step"><div class="num">1</div><div>같은 HTML 편집 창에서 <code>#wrap</code> 또는 <code>.wrap</code> 이라는 CSS를 찾아요<br><span style="color:#9ca3af;font-size:11px;">스킨마다 이름이 달라요. 없으면 <code>#container</code> 나 <code>#content</code> 를 찾아보세요</span></div></div>
-      <div class="img-step"><div class="num">2</div><div>그 안에 아래 두 줄을 추가해요</div></div>
-      <div class="code-wrap">
-        <div class="code-label">
-          <span>CSS — #wrap 안에 추가</span>
-          <button class="mini-copy-btn" data-text="position: relative;&#10;z-index: 10;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            복사
-          </button>
-        </div>
-        <pre>position: relative;
-z-index: 10;</pre>
+      <div class="pw-box">
+        <p>코드 안에서 이 부분을 찾아서 원하는 비밀번호로 바꿔주세요</p>
+        <div class="pw-code">var TIS_PASSWORD = '1234';</div>
       </div>
       <div class="note note-blue" style="margin-top:12px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>이 설정이 없으면 스티커를 배경으로 보냈을 때 레이아웃 뒤로 안 들어가고 겹쳐 보여요. 꼭 추가해 주세요!</span>
+        <span>비밀번호는 같은 탭에서는 한 번만 입력하면 돼요. 탭을 닫으면 다시 물어봐요.</span>
       </div>
     </div>
   </div>
-
-  <!-- 완료 -->
   <div class="done-banner">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <h3>이제 끝이에요!</h3>
-    <p>블로그에 접속하면 오른쪽 아래에 스티커 패널이 보여요.<br>관리자 계정으로 로그인했을 때만 패널이 표시되고,<br>방문자에게는 배치된 스티커만 보여요.</p>
+    <p>오른쪽 아래 파란 자물쇠 버튼을 클릭하고<br>비밀번호를 입력하면 스티커 패널이 열려요.<br>방문자에게는 자물쇠 버튼만 보이고 패널은 열리지 않아요.</p>
   </div>
 
-  <!-- 기능 안내 -->
+
+  <p class="section-title" style="margin-top:40px;">파이어베이스 연동 &mdash; 새로고침해도 스티커 위치 유지하기 <span style="font-size:10px;text-transform:none;font-weight:400;letter-spacing:0;color:#9ca3af;">선택 &middot; 약 10분</span></p>
+
+  <div class="note" style="margin-bottom:16px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+    <span>기본 코드만 쓰면 새로고침 시 스티커 위치가 초기화돼요. 파이어베이스를 연동하면 서버에 저장되어 유지됩니다. 완전 무료예요!</span>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head"><div class="step-num" style="background:#f97316;">1</div><div class="step-info"><h3>파이어베이스 프로젝트 만들기</h3></div></div>
+    <div class="step-body">
+      <div class="img-step"><div class="num">1</div><div><a href="https://console.firebase.google.com" target="_blank" style="color:#2563eb;font-weight:600;">console.firebase.google.com</a> 에서 구글 로그인</div></div>
+      <div class="img-step"><div class="num">2</div><div><strong>프로젝트 추가</strong> &rarr; 이름 입력 (예: <code>my-blog-sticker</code>) &rarr; 생성</div></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head"><div class="step-num" style="background:#f97316;">2</div><div class="step-info"><h3>Realtime Database 만들기</h3></div></div>
+    <div class="step-body">
+      <div class="img-step"><div class="num">1</div><div>왼쪽 메뉴 &rarr; <strong>Realtime Database</strong> &rarr; <strong>데이터베이스 만들기</strong></div></div>
+      <div class="img-step"><div class="num">2</div><div>위치 기본값, <strong>테스트 모드에서 시작</strong> &rarr; 실행</div></div>
+      <div class="img-step"><div class="num">3</div><div><strong>규칙</strong> 탭 &rarr; 아래 내용으로 교체 &rarr; <strong>게시</strong></div></div>
+      <div class="pw-box">
+        <p>Firebase Rules</p>
+        <div class="pw-code">{<br>&nbsp;&nbsp;"rules": {<br>&nbsp;&nbsp;&nbsp;&nbsp;".read": true,<br>&nbsp;&nbsp;&nbsp;&nbsp;".write": true<br>&nbsp;&nbsp;}<br>}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head"><div class="step-num" style="background:#f97316;">3</div><div class="step-info"><h3>앱 등록하고 연결 정보 확인하기</h3></div></div>
+    <div class="step-body">
+      <div class="img-step"><div class="num">1</div><div>프로젝트 개요 &rarr; <strong>&lt;/&gt;</strong> (웹) 아이콘 &rarr; 앱 닉네임 입력 &rarr; 등록</div></div>
+      <div class="img-step"><div class="num">2</div><div>아래 4가지 값을 메모장에 복사해두세요<div style="margin-top:8px;"><span style="display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;margin:2px;">apiKey</span><span style="display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;margin:2px;">authDomain</span><span style="display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;margin:2px;">databaseURL</span><span style="display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;margin:2px;">projectId</span></div></div></div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head"><div class="step-num" style="background:#f97316;">4</div><div class="step-info"><h3>코드에 Firebase 정보 입력하기</h3></div></div>
+    <div class="step-body">
+      <div class="img-step"><div class="num">1</div><div>스킨 HTML에 붙여넣은 코드에서 아래 부분을 찾아요</div></div>
+      <div class="pw-box">
+        <p>이 부분을 찾아서 본인 정보로 교체하세요</p>
+        <div class="pw-code" style="font-size:11px;">var TIS_FB_CONFIG = {<br>&nbsp;&nbsp;apiKey: "본인의_API_KEY",<br>&nbsp;&nbsp;authDomain: "본인의_PROJECT_ID.firebaseapp.com",<br>&nbsp;&nbsp;databaseURL: "https://본인의_PROJECT_ID-default-rtdb.firebaseio.com",<br>&nbsp;&nbsp;projectId: "본인의_PROJECT_ID"<br>};</div>
+      </div>
+
+    </div>
+  </div>
   <p class="section-title" style="margin-top:40px;">기능 안내</p>
   <div class="step-card">
     <div class="step-body" style="padding-top:16px;">
-      <div class="img-step"><div class="num">+</div><div><strong>이미지 추가</strong> — 패널에서 이미지 업로드 후 썸네일 클릭 → 레이아웃 위에 등장</div></div>
-      <div class="img-step"><div class="num">↔</div><div><strong>위치 이동</strong> — 스티커를 드래그해서 원하는 곳으로</div></div>
-      <div class="img-step"><div class="num">±</div><div><strong>크기 조절</strong> — 툴바의 + / − 버튼으로 크기 조절</div></div>
-      <div class="img-step"><div class="num">↓</div><div><strong>뒤로 보내기</strong> — "뒤로" 버튼 → 배경 레이어로 이동</div></div>
-      <div class="img-step"><div class="num">↑</div><div><strong>앞으로 꺼내기</strong> — 배경 스티커 클릭 → 툴바에서 "앞으로" 버튼</div></div>
-      <div class="img-step"><div class="num">📌</div><div><strong>고정</strong> — 실수로 움직이지 않도록 위치를 잠글 수 있어요</div></div>
-      <div class="img-step"><div class="num">✕</div><div><strong>삭제</strong> — 개별 삭제 또는 전체 삭제</div></div>
+      <div class="img-step"><div class="num">+</div><div><strong>이미지 추가</strong> &mdash; 패널에서 이미지 업로드 후 썸네일 클릭</div></div>
+      <div class="img-step"><div class="num">&harr;</div><div><strong>위치 이동</strong> &mdash; 스티커를 드래그해서 원하는 곳으로</div></div>
+      <div class="img-step"><div class="num">&plusmn;</div><div><strong>크기 조절</strong> &mdash; 툴바의 + / &minus; 버튼</div></div>
+      <div class="img-step"><div class="num">&darr;</div><div><strong>뒤로 보내기</strong> &mdash; 배경 레이어로 이동, 방문자에게도 보여요</div></div>
+      <div class="img-step"><div class="num">&uarr;</div><div><strong>앞으로 꺼내기</strong> &mdash; 배경 스티커 클릭 &rarr; 툴바에서 &ldquo;앞으로&rdquo;</div></div>
+      <div class="img-step"><div class="num">&times;</div><div><strong>삭제</strong> &mdash; 개별 삭제 또는 전체 삭제</div></div>
     </div>
   </div>
-
-  <div class="note note-blue" style="margin-top:8px;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <span>PNG 투명 배경 이미지를 쓰면 훨씬 자연스럽게 배치돼요. 스티커 위치는 새로고침하면 초기화되니 마음에 드는 배치가 완성되면 페이지를 닫지 마세요!</span>
-  </div>
-
-  <!-- ═══════════════════════════════
-       파이어베이스 저장 가이드
-  ════════════════════════════════ -->
-  <p class="section-title" style="margin-top:48px;">
-    파이어베이스 연동 — 새로고침해도 스티커 위치 유지하기
-    <span style="font-size:10px;text-transform:none;font-weight:400;letter-spacing:0;color:#9ca3af;">선택 사항 · 약 10분</span>
-  </p>
-
-  <div class="note" style="margin-bottom:16px;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span>기본 코드만 쓰면 새로고침할 때마다 스티커 위치가 초기화돼요. 파이어베이스를 연동하면 스티커 위치·크기 정보가 구글 서버에 저장되어 새로고침해도 그대로 유지됩니다. 완전 무료예요!</span>
-  </div>
-
-  <!-- FB STEP 1 -->
-  <div class="step-card">
-    <div class="step-head">
-      <div class="step-num" style="background:#f97316;">1</div>
-      <div class="step-info">
-        <h3>파이어베이스 프로젝트 만들기</h3>
-        <p>구글 계정으로 파이어베이스에 로그인하고 새 프로젝트를 생성해요</p>
-      </div>
-    </div>
-    <div class="step-body">
-      <div class="img-step">
-        <div class="num">1</div>
-        <div>
-          <a href="https://console.firebase.google.com" target="_blank" style="color:#2563eb;font-weight:600;">console.firebase.google.com</a> 에 접속해서 구글 계정으로 로그인해요
-        </div>
-      </div>
-      <div class="img-step">
-        <div class="num">2</div>
-        <div><strong>프로젝트 추가</strong> 또는 <strong>+ 새 프로젝트</strong> 버튼을 클릭해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">3</div>
-        <div>프로젝트 이름을 입력하고 (예: <code>my-blog-sticker</code>) <strong>계속</strong>을 눌러요. Google 애널리틱스는 꺼도 무관해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">4</div>
-        <div><strong>프로젝트 만들기</strong>를 눌러 완료해요. 잠깐 기다리면 프로젝트 대시보드로 이동해요</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FB STEP 2 -->
-  <div class="step-card">
-    <div class="step-head">
-      <div class="step-num" style="background:#f97316;">2</div>
-      <div class="step-info">
-        <h3>Realtime Database(실시간 데이터베이스) 만들기</h3>
-        <p>스티커 위치 데이터를 저장할 데이터베이스를 생성해요</p>
-      </div>
-    </div>
-    <div class="step-body">
-      <div class="img-step">
-        <div class="num">1</div>
-        <div>왼쪽 메뉴 상단 검색창에 <strong>Realtime Database</strong>를 검색하고 클릭해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">2</div>
-        <div><strong>데이터베이스 만들기</strong> 버튼을 클릭해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">3</div>
-        <div>위치는 기본값 그대로 두고 <strong>다음</strong>을 눌러요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">4</div>
-        <div>보안 규칙에서 <strong>테스트 모드에서 시작</strong>을 선택하고 <strong>실행</strong>을 눌러요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">5</div>
-        <div>
-          데이터베이스가 생성되면 상단 <strong>규칙</strong> 탭을 클릭하고, 기존 내용을 지운 뒤 아래 코드를 붙여넣은 후 <strong>게시</strong>를 눌러요
-        </div>
-      </div>
-      <div class="code-wrap">
-        <div class="code-label">
-          <span>Firebase Rules — 규칙 탭에 붙여넣기</span>
-          <button class="mini-copy-btn" data-text='{\n  "rules": {\n    ".read": true,\n    ".write": true\n  }\n}'>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            복사
-          </button>
-        </div>
-        <pre>{
-  "rules": {
-    ".read": true,
-    ".write": true
-  }
-}</pre>
-      </div>
-      <div class="note" style="margin-top:10px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <span><strong>게시 버튼을 꼭 눌러야 해요!</strong> 누르지 않으면 규칙이 적용되지 않아요.</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- FB STEP 3 -->
-  <div class="step-card">
-    <div class="step-head">
-      <div class="step-num" style="background:#f97316;">3</div>
-      <div class="step-info">
-        <h3>내 앱 등록하고 연결 정보 확인하기</h3>
-        <p>코드에 넣을 나만의 연결 정보(Key)를 발급받아요</p>
-      </div>
-    </div>
-    <div class="step-body">
-      <div class="img-step">
-        <div class="num">1</div>
-        <div>왼쪽 상단 <strong>프로젝트 개요</strong>로 이동해서, 화면 중앙의 <strong>&lt;/&gt;</strong> (웹) 아이콘을 클릭해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">2</div>
-        <div>앱 닉네임을 입력하고 (예: <code>blog</code>) <strong>앱 등록</strong>을 눌러요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">3</div>
-        <div>
-          아래처럼 <code>firebaseConfig</code> 코드가 나타나요. 여기서 이 4가지 값을 복사해 메모장에 저장해두세요
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
-            <span style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;">apiKey</span>
-            <span style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;">authDomain</span>
-            <span style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;">databaseURL</span>
-            <span style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;">projectId</span>
-          </div>
-        </div>
-      </div>
-      <div class="img-step">
-        <div class="num">4</div>
-        <div><code>databaseURL</code>이 안 보이면 왼쪽 메뉴 <strong>Realtime Database</strong> 상단에 있는 <code>https://프로젝트명.firebaseio.com</code> 주소를 직접 복사해서 쓰면 돼요</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FB STEP 4 -->
-  <div class="step-card">
-    <div class="step-head">
-      <div class="step-num" style="background:#f97316;">4</div>
-      <div class="step-info">
-        <h3>파이어베이스 저장 코드 붙여넣기 — 가장 중요!</h3>
-        <p>기존 통합 코드 대신 아래 코드를 사용하고, 내 정보로 수정해요</p>
-      </div>
-    </div>
-    <div class="step-body">
-      <div class="img-step">
-        <div class="num">1</div>
-        <div>아래 <strong>파이어베이스 연동 코드 복사하기</strong> 버튼을 눌러 코드를 복사해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">2</div>
-        <div>코드 맨 위쪽에 <code>본인의_API_KEY</code> 등 4곳을 3단계에서 확인한 값으로 교체해요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">3</div>
-        <div>티스토리 HTML 편집에서 기존에 붙여넣은 통합 코드를 <strong>삭제</strong>하고, 이 코드로 교체해서 붙여넣어요</div>
-      </div>
-      <div class="img-step">
-        <div class="num">4</div>
-        <div><strong>적용</strong>을 눌러 저장해요. 이제 스티커를 배치하면 자동으로 서버에 저장돼요!</div>
-      </div>
-
-      <button class="fb-copy-btn" id="fb-copy-btn" style="width:100%;margin-top:16px;background:#fff7ed;border:1px solid #fed7aa;color:#c2410c;border-radius:10px;padding:11px;font-size:13px;font-family:'Pretendard',sans-serif;font-weight:700;cursor:pointer;transition:background 0.1s;display:flex;align-items:center;justify-content:center;gap:8px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        파이어베이스 연동 코드 복사하기
-      </button>
-
-      <div class="note note-blue" style="margin-top:10px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>스티커 위치(x, y)와 크기만 저장해요. 이미지 파일 자체는 저장되지 않으므로 매번 업로드가 필요해요.</span>
-      </div>
-    </div>
-  </div>
-
 </main>
 
-<footer class="site-footer">
-  티스토리 이미지 스티커 · 무료로 사용하세요
-</footer>
-
-
-<textarea id="unified-code" style="position:absolute;left:-9999px;" readonly></textarea>
+<footer class="site-footer">티스토리 이미지 스티커 &middot; 무료로 사용하세요</footer>
 
 <script>
-/* ══════════════════════════════════════════════════════════
-   티스토리 통합 코드 (</body> 바로 앞에 붙여넣기)
-══════════════════════════════════════════════════════════ */
-const UNIFIED_CODE = `<style>
-#tis-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#tis-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}
-.tis-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}
-.tis-item.tis-top{cursor:grab}.tis-item.tis-top.tis-drag{cursor:grabbing}
-.tis-item.tis-bg{cursor:pointer}.tis-item.tis-pinned{cursor:default!important}
-.tis-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}
-.tis-item.tis-top:not(.tis-pinned) .tis-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}
-.tis-pnbg{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-.tis-pnbg svg{width:11px;height:11px}.tis-item.tis-pinned .tis-pnbg{display:flex}
-.tis-tb{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}
-.tis-item.tis-top .tis-tb{display:flex}
-.tis-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}
-.tis-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}
-.tis-btn:hover{background:#f3f4f6;color:#111827}.tis-btn svg{width:11px;height:11px;flex-shrink:0}
-.tis-btn.tis-sz{color:#7c3aed}.tis-btn.tis-sz:hover{background:#f5f3ff}
-.tis-btn.tis-tbg{color:#2563eb}.tis-btn.tis-tbg:hover{background:#eff6ff}
-.tis-btn.tis-ttop{color:#059669}.tis-btn.tis-ttop:hover{background:#ecfdf5}
-.tis-btn.tis-tpin{color:#d97706}.tis-btn.tis-tpin:hover{background:#fffbeb}
-.tis-btn.tis-tdel{color:#dc2626}.tis-btn.tis-tdel:hover{background:#fef2f2}
-.tis-div{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}
-#tis-float-tb{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}
-#tis-float-tb.tis-vis{display:flex}
-#tis-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}
-#tis-panel.tis-col{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
-#tis-panel.tis-col #tis-ph{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-#tis-panel.tis-col #tis-pt{display:none}
-#tis-panel.tis-col #tis-ptg{width:100%;height:100%;border-radius:50%;margin:0}
-#tis-panel.tis-col #tis-pb{display:none}
-#tis-ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-#tis-pt{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}
-#tis-pt svg{width:14px;height:14px;flex-shrink:0}
-#tis-ptg{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
-#tis-ptg:hover{background:#f3f4f6;color:#374151}#tis-ptg svg{width:12px;height:12px}
-#tis-pb.tis-hid{display:none}
-#tis-uz{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
-#tis-uz:hover,#tis-uz.tis-dov{border-color:#2563eb;background:#eff6ff}
-#tis-uz .tis-ui{margin-bottom:6px;color:#9ca3af}#tis-uz .tis-ui svg{width:24px;height:24px}
-#tis-uz .tis-ut{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}
-#tis-uz .tis-us{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}
-#tis-fi{display:none}
-#tis-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}
-#tis-tl::-webkit-scrollbar{width:3px}#tis-tl::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-#tis-te{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}
-.tis-ti{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}
-.tis-ti:hover{border-color:#2563eb}.tis-ti img{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.tis-td{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.tis-ti:hover .tis-td{display:flex}.tis-td svg{width:8px;height:8px}
-.tis-pdiv{border:none;border-top:1px solid #f3f4f6;margin:12px 0}
-.tis-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}
-.tis-tip .tis-hl{color:#2563eb;font-weight:500}
-#tis-clr{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}
-#tis-clr:hover{background:#fee2e2}#tis-clr svg{width:12px;height:12px}
-</style>
+function decodeB64(b64){var bin=atob(b64);var bytes=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder('utf-8').decode(bytes);}
+var STICKER_CODE = decodeB64('PGRpdiBpZD0idGlzLWxheWVyLWJnIiBzdHlsZT0icG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2luc2V0OjAhaW1wb3J0YW50O3otaW5kZXg6MCFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6bm9uZSFpbXBvcnRhbnQ7b3ZlcmZsb3c6aGlkZGVuIWltcG9ydGFudDsiPjwvZGl2Pgo8ZGl2IGlkPSJ0aXMtbGF5ZXItdG9wIiBzdHlsZT0icG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2luc2V0OjAhaW1wb3J0YW50O3otaW5kZXg6OTk5MCFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6bm9uZSFpbXBvcnRhbnQ7b3ZlcmZsb3c6aGlkZGVuIWltcG9ydGFudDsiPjwvZGl2Pgo8ZGl2IGlkPSJ0aXMtZmxvYXQtdGIiIHN0eWxlPSJwb3NpdGlvbjpmaXhlZCFpbXBvcnRhbnQ7ei1pbmRleDo5OTk5NSFpbXBvcnRhbnQ7ZGlzcGxheTpub25lIWltcG9ydGFudDtmbGV4LWRpcmVjdGlvbjpjb2x1bW4haW1wb3J0YW50O2FsaWduLWl0ZW1zOmNlbnRlciFpbXBvcnRhbnQ7Z2FwOjVweCFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6YWxsIWltcG9ydGFudDt0cmFuc2Zvcm06dHJhbnNsYXRlWCgtNTAlKSFpbXBvcnRhbnQ7d2hpdGUtc3BhY2U6bm93cmFwIWltcG9ydGFudDsiPgogIDxkaXYgY2xhc3M9InRpcy1yb3ciIGlkPSJ0aXMtZnQtcjEiPjwvZGl2PgogIDxkaXYgY2xhc3M9InRpcy1yb3ciIGlkPSJ0aXMtZnQtcjIiPjwvZGl2Pgo8L2Rpdj4KCjwhLS0g7J6g6riIIOuyhO2KvCAtLT4KPGRpdiBpZD0idGlzLWxvY2stYnRuIiBzdHlsZT0icG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2JvdHRvbToyOHB4IWltcG9ydGFudDtyaWdodDoyOHB4IWltcG9ydGFudDt6LWluZGV4Ojk5OTk5IWltcG9ydGFudDt3aWR0aDo0OHB4IWltcG9ydGFudDtoZWlnaHQ6NDhweCFpbXBvcnRhbnQ7Ym9yZGVyLXJhZGl1czo1MCUhaW1wb3J0YW50O2JhY2tncm91bmQ6IzI1NjNlYiFpbXBvcnRhbnQ7Ym9yZGVyOm5vbmUhaW1wb3J0YW50O2N1cnNvcjpwb2ludGVyIWltcG9ydGFudDtkaXNwbGF5OmZsZXghaW1wb3J0YW50O2FsaWduLWl0ZW1zOmNlbnRlciFpbXBvcnRhbnQ7anVzdGlmeS1jb250ZW50OmNlbnRlciFpbXBvcnRhbnQ7Ym94LXNoYWRvdzowIDRweCAxNnB4IHJnYmEoMzcsOTksMjM1LC40KSFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6YWxsIWltcG9ydGFudDsiPgogIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJ3aWR0aDoyMHB4O2hlaWdodDoyMHB4O3BvaW50ZXItZXZlbnRzOm5vbmU7Ij48cmVjdCB4PSIzIiB5PSIxMSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjExIiByeD0iMiIvPjxwYXRoIGQ9Ik03IDExVjdhNSA1IDAgMCAxIDEwIDB2NCIvPjwvc3ZnPgo8L2Rpdj4KCjwhLS0g67mE67CA67KI7Zi4IOyeheugpeywvSAtLT4KPGRpdiBpZD0idGlzLXB3LW1vZGFsIiBzdHlsZT0iZGlzcGxheTpub25lIWltcG9ydGFudDtwb3NpdGlvbjpmaXhlZCFpbXBvcnRhbnQ7Ym90dG9tOjg4cHghaW1wb3J0YW50O3JpZ2h0OjI4cHghaW1wb3J0YW50O3otaW5kZXg6OTk5OTkhaW1wb3J0YW50O2JhY2tncm91bmQ6I2ZmZiFpbXBvcnRhbnQ7Ym9yZGVyLXJhZGl1czoxNHB4IWltcG9ydGFudDtwYWRkaW5nOjE2cHghaW1wb3J0YW50O2JvcmRlcjoxcHggc29saWQgI2U1ZTdlYiFpbXBvcnRhbnQ7Ym94LXNoYWRvdzowIDhweCAzMnB4IHJnYmEoMCwwLDAsLjE1KSFpbXBvcnRhbnQ7d2lkdGg6MjIwcHghaW1wb3J0YW50O3BvaW50ZXItZXZlbnRzOmFsbCFpbXBvcnRhbnQ7Ij4KICA8cCBzdHlsZT0iZm9udC1zaXplOjEycHg7Y29sb3I6IzZiNzI4MDttYXJnaW4tYm90dG9tOjEwcHg7Zm9udC13ZWlnaHQ6NTAwOyI+67mE67CA67KI7Zi466W8IOyeheugpe2VmOyEuOyalDwvcD4KICA8ZGl2IHN0eWxlPSJkaXNwbGF5OmZsZXg7Z2FwOjhweDsiPgogICAgPGlucHV0IGlkPSJ0aXMtcHctaW5wdXQiIHR5cGU9InBhc3N3b3JkIiBwbGFjZWhvbGRlcj0i67mE67CA67KI7Zi4IiBzdHlsZT0iZmxleDoxO2JvcmRlcjoxcHggc29saWQgI2U1ZTdlYjtib3JkZXItcmFkaXVzOjhweDtwYWRkaW5nOjdweCAxMHB4O2ZvbnQtc2l6ZToxMnB4O291dGxpbmU6bm9uZTtib3gtc2l6aW5nOmJvcmRlci1ib3g7bWluLXdpZHRoOjA7Ij4KICAgIDxidXR0b24gaWQ9InRpcy1wdy1zdWJtaXQiIHN0eWxlPSJiYWNrZ3JvdW5kOiMyNTYzZWI7Y29sb3I6I2ZmZjtib3JkZXI6bm9uZTtib3JkZXItcmFkaXVzOjhweDtwYWRkaW5nOjdweCAxMnB4O2ZvbnQtc2l6ZToxMnB4O2N1cnNvcjpwb2ludGVyO3doaXRlLXNwYWNlOm5vd3JhcDtmb250LXdlaWdodDo2MDA7Zm9udC1mYW1pbHk6aW5oZXJpdDsiPu2ZleyduDwvYnV0dG9uPgogIDwvZGl2PgogIDxwIGlkPSJ0aXMtcHctZXJyb3IiIHN0eWxlPSJkaXNwbGF5Om5vbmU7Zm9udC1zaXplOjExcHg7Y29sb3I6I2RjMjYyNjttYXJnaW4tdG9wOjhweDsiPuu5hOuwgOuyiO2YuOqwgCDti4DroLjslrTsmpQ8L3A+CjwvZGl2PgoKPCEtLSDsoJHtnowg7IOB7YOcIOuyhO2KvCAo7Yyo64SQIOuMgOyLoCDrs7TsnoQpIC0tPgo8ZGl2IGlkPSJ0aXMtcGFuZWwtbWluaSIgc3R5bGU9ImRpc3BsYXk6bm9uZSFpbXBvcnRhbnQ7cG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2JvdHRvbToyOHB4IWltcG9ydGFudDtyaWdodDoyOHB4IWltcG9ydGFudDt6LWluZGV4Ojk5OTk5IWltcG9ydGFudDt3aWR0aDo0OHB4IWltcG9ydGFudDtoZWlnaHQ6NDhweCFpbXBvcnRhbnQ7Ym9yZGVyLXJhZGl1czo1MCUhaW1wb3J0YW50O2JhY2tncm91bmQ6I2ZmZiFpbXBvcnRhbnQ7Ym9yZGVyOjFweCBzb2xpZCAjZTVlN2ViIWltcG9ydGFudDtib3gtc2hhZG93OjAgNHB4IDE2cHggcmdiYSgwLDAsMCwuMTIpIWltcG9ydGFudDtjdXJzb3I6cG9pbnRlciFpbXBvcnRhbnQ7YWxpZ24taXRlbXM6Y2VudGVyIWltcG9ydGFudDtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyIWltcG9ydGFudDtwb2ludGVyLWV2ZW50czphbGwhaW1wb3J0YW50OyI+CiAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI1NjNlYiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJ3aWR0aDoyMHB4O2hlaWdodDoyMHB4O3BvaW50ZXItZXZlbnRzOm5vbmU7Ij48cG9seWdvbiBwb2ludHM9IjEyIDIgMiA3IDEyIDEyIDIyIDcgMTIgMiIvPjxwb2x5bGluZSBwb2ludHM9IjIgMTcgMTIgMjIgMjIgMTciLz48cG9seWxpbmUgcG9pbnRzPSIyIDEyIDEyIDE3IDIyIDEyIi8+PC9zdmc+CjwvZGl2PgoKPCEtLSDtjKjrhJAgLS0+CjxkaXYgaWQ9InRpcy1wYW5lbCIgc3R5bGU9ImRpc3BsYXk6bm9uZSFpbXBvcnRhbnQ7cG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2JvdHRvbTo4OHB4IWltcG9ydGFudDtyaWdodDoyOHB4IWltcG9ydGFudDt6LWluZGV4Ojk5OTk5IWltcG9ydGFudDtiYWNrZ3JvdW5kOiNmZmYhaW1wb3J0YW50O2JvcmRlci1yYWRpdXM6MThweCFpbXBvcnRhbnQ7cGFkZGluZzoxOHB4IWltcG9ydGFudDtib3JkZXI6MXB4IHNvbGlkICNlNWU3ZWIhaW1wb3J0YW50O2JveC1zaGFkb3c6MCA4cHggMzJweCByZ2JhKDAsMCwwLC4xMikhaW1wb3J0YW50O3dpZHRoOjI3NnB4IWltcG9ydGFudDtwb2ludGVyLWV2ZW50czphbGwhaW1wb3J0YW50OyI+CiAgPGRpdiBzdHlsZT0iZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2VlbjttYXJnaW4tYm90dG9tOjE0cHg7Ij4KICAgIDxzcGFuIHN0eWxlPSJmb250LXNpemU6MTNweDtmb250LXdlaWdodDo3MDA7Y29sb3I6IzExMTgyNztkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2dhcDo3cHg7d2hpdGUtc3BhY2U6bm93cmFwOyI+CiAgICAgIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MTRweDtoZWlnaHQ6MTRweDtmbGV4LXNocmluazowOyI+PHBvbHlnb24gcG9pbnRzPSIxMiAyIDIgNyAxMiAxMiAyMiA3IDEyIDIiLz48cG9seWxpbmUgcG9pbnRzPSIyIDE3IDEyIDIyIDIyIDE3Ii8+PHBvbHlsaW5lIHBvaW50cz0iMiAxMiAxMiAxNyAyMiAxMiIvPjwvc3ZnPgogICAgICDsiqTti7Dsu6Qg6rSA66asCiAgICA8L3NwYW4+CiAgICA8YnV0dG9uIGlkPSJ0aXMtcHRnIiB0aXRsZT0i7KCR6riwIiBzdHlsZT0iYmFja2dyb3VuZDpub25lO2JvcmRlcjpub25lO2N1cnNvcjpwb2ludGVyO2NvbG9yOiM5Y2EzYWY7d2lkdGg6MjhweDtoZWlnaHQ6MjhweDtib3JkZXItcmFkaXVzOjhweDtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpjZW50ZXI7ZmxleC1zaHJpbms6MDtwYWRkaW5nOjA7Zm9udC1zaXplOjA7Ij4KICAgICAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MTJweDtoZWlnaHQ6MTJweDtwb2ludGVyLWV2ZW50czpub25lOyI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiLz48L3N2Zz4KICAgIDwvYnV0dG9uPgogIDwvZGl2PgogIDxkaXYgaWQ9InRpcy1wYiI+CiAgICA8ZGl2IGlkPSJ0aXMtdXoiIHN0eWxlPSJib3JkZXI6MS41cHggZGFzaGVkICNkMWQ1ZGI7Ym9yZGVyLXJhZGl1czoxMnB4O3BhZGRpbmc6MTZweCAxMHB4O3RleHQtYWxpZ246Y2VudGVyO2N1cnNvcjpwb2ludGVyO21hcmdpbi1ib3R0b206MTJweDsiPgogICAgICA8ZGl2IHN0eWxlPSJtYXJnaW4tYm90dG9tOjZweDtjb2xvcjojOWNhM2FmOyI+CiAgICAgICAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MjRweDtoZWlnaHQ6MjRweDsiPjxwb2x5bGluZSBwb2ludHM9IjE2IDE2IDEyIDEyIDggMTYiLz48bGluZSB4MT0iMTIiIHkxPSIxMiIgeDI9IjEyIiB5Mj0iMjEiLz48cGF0aCBkPSJNMjAuMzkgMTguMzlBNSA1IDAgMCAwIDE4IDloLTEuMjZBOCA4IDAgMSAwIDMgMTYuMyIvPjwvc3ZnPgogICAgICA8L2Rpdj4KICAgICAgPGRpdiBzdHlsZT0iZm9udC1zaXplOjEycHg7Y29sb3I6IzZiNzI4MDtsaW5lLWhlaWdodDoxLjU7Ij7tgbTrpq3tlZjqsbDrgpgg7J2066+47KeA66W8IOuBjOyWtOuLpCDrhpPsnLzshLjsmpQ8L2Rpdj4KICAgICAgPGRpdiBzdHlsZT0iZm9udC1zaXplOjExcHg7Y29sb3I6IzljYTNhZjttYXJnaW4tdG9wOjNweDsiPlBORyDCtyBKUEcgwrcgR0lGIMK3IFdlYlA8L2Rpdj4KICAgIDwvZGl2PgogICAgPGlucHV0IHR5cGU9ImZpbGUiIGlkPSJ0aXMtZmkiIGFjY2VwdD0iaW1hZ2UvcG5nLGltYWdlL2pwZWcsaW1hZ2UvZ2lmLGltYWdlL3dlYnAiIG11bHRpcGxlIHN0eWxlPSJkaXNwbGF5Om5vbmU7Ij4KICAgIDxkaXYgaWQ9InRpcy10bCIgc3R5bGU9ImRpc3BsYXk6Z3JpZDtncmlkLXRlbXBsYXRlLWNvbHVtbnM6cmVwZWF0KDQsMWZyKTtnYXA6NnB4O21hcmdpbi1ib3R0b206MTJweDttaW4taGVpZ2h0OjIwcHg7bWF4LWhlaWdodDoxNTZweDtvdmVyZmxvdy15OmF1dG87Ij4KICAgICAgPGRpdiBpZD0idGlzLXRlIiBzdHlsZT0iZ3JpZC1jb2x1bW46MS8tMTt0ZXh0LWFsaWduOmNlbnRlcjtmb250LXNpemU6MTFweDtjb2xvcjojZDFkNWRiO3BhZGRpbmc6MTBweCAwOyI+7JeF66Gc65Oc7ZWcIOydtOuvuOyngOqwgCDsl6zquLDsl5Ag7ZGc7Iuc65Cp64uI64ukPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxociBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVyLXRvcDoxcHggc29saWQgI2YzZjRmNjttYXJnaW46MTJweCAwOyI+CiAgICA8cCBzdHlsZT0iZm9udC1zaXplOjExcHg7Y29sb3I6IzljYTNhZjtsaW5lLWhlaWdodDoxLjc7bWFyZ2luLWJvdHRvbToxMHB4OyI+CiAgICAgIOyNuOuEpOydvCDtgbTrpq0g4oaSIOugiOydtOyVhOybgyA8c3BhbiBzdHlsZT0iY29sb3I6IzI1NjNlYjtmb250LXdlaWdodDo1MDA7Ij7snIQ8L3NwYW4+7JeQIOy2lOqwgDxicj4KICAgICAgPHNwYW4gc3R5bGU9ImNvbG9yOiMyNTYzZWI7Zm9udC13ZWlnaHQ6NTAwOyI+65Kk66GcPC9zcGFuPiDihpIg67Cw6rK9IOydtOuPmSB8IDxzcGFuIHN0eWxlPSJjb2xvcjojMjU2M2ViO2ZvbnQtd2VpZ2h0OjUwMDsiPuyVnuycvOuhnDwvc3Bhbj4g4oaSIOyghOqyvSDrs7Xqt4A8YnI+CiAgICAgIOuwsOqyvSDsiqTti7Dsu6Qg7YG066atIOKGkiDtjrjsp5Eg7Yi067CUIO2MneyXhQogICAgPC9wPgogICAgPGJ1dHRvbiBpZD0idGlzLWNsciIgc3R5bGU9IndpZHRoOjEwMCU7YmFja2dyb3VuZDojZmVmMmYyO2JvcmRlcjoxcHggc29saWQgI2ZlY2FjYTtjb2xvcjojZGMyNjI2O2JvcmRlci1yYWRpdXM6MTBweDtwYWRkaW5nOjhweDtmb250LXNpemU6MTJweDtmb250LXdlaWdodDo1MDA7Y3Vyc29yOnBvaW50ZXI7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyO2dhcDo2cHg7Zm9udC1mYW1pbHk6aW5oZXJpdDtsaW5lLWhlaWdodDoxO2JveC1zaXppbmc6Ym9yZGVyLWJveDsiPgogICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MTJweDtoZWlnaHQ6MTJweDtmbGV4LXNocmluazowO3BvaW50ZXItZXZlbnRzOm5vbmU7Ij48cG9seWxpbmUgcG9pbnRzPSIzIDYgNSA2IDIxIDYiLz48cGF0aCBkPSJNMTkgNmwtMSAxNEg2TDUgNiIvPjxwYXRoIGQ9Ik05IDZWNGg2djIiLz48L3N2Zz4KICAgICAg67Cw6rK9IOyKpO2LsOy7pCDsoITssrQg7IKt7KCcCiAgICA8L2J1dHRvbj4KICA8L2Rpdj4KPC9kaXY+Cgo8c3R5bGU+CiN0aXMtZmxvYXQtdGIudGlzLXZpc3tkaXNwbGF5OmZsZXghaW1wb3J0YW50fQoudGlzLWl0ZW17cG9zaXRpb246YWJzb2x1dGU7dXNlci1zZWxlY3Q6bm9uZTtwb2ludGVyLWV2ZW50czphbGx9Ci50aXMtaXRlbS50aXMtdG9we2N1cnNvcjpncmFifQoudGlzLWl0ZW0udGlzLWJne2N1cnNvcjpwb2ludGVyfQoudGlzLWltZ3tkaXNwbGF5OmJsb2NrO29iamVjdC1maXQ6Y29udGFpbjtwb2ludGVyLWV2ZW50czpub25lO2JvcmRlci1yYWRpdXM6NHB4fQoudGlzLWl0ZW0udGlzLXRvcCAudGlzLWltZ3tvdXRsaW5lOjJweCBkYXNoZWQgcmdiYSg4MCwxMzAsMjQwLC43KTtvdXRsaW5lLW9mZnNldDo0cHh9Ci50aXMtdGJ7ZGlzcGxheTpub25lO3Bvc2l0aW9uOmFic29sdXRlO3RvcDoxMDAlO2xlZnQ6NTAlO3RyYW5zZm9ybTp0cmFuc2xhdGVYKC01MCUpO2ZsZXgtZGlyZWN0aW9uOmNvbHVtbjthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjVweDttYXJnaW4tdG9wOjhweDt3aGl0ZS1zcGFjZTpub3dyYXA7ei1pbmRleDoyfQoudGlzLWl0ZW0udGlzLXRvcCAudGlzLXRie2Rpc3BsYXk6ZmxleH0KLnRpcy1yb3d7ZGlzcGxheTpmbGV4O2dhcDoycHg7YmFja2dyb3VuZDojZmZmO2JvcmRlci1yYWRpdXM6MjRweDtwYWRkaW5nOjVweCA4cHg7Ym9yZGVyOjFweCBzb2xpZCAjZTVlN2ViO2JveC1zaGFkb3c6MCAycHggMTRweCByZ2JhKDAsMCwwLC4xKX0KLnRpcy1idG57YmFja2dyb3VuZDpub25lO2JvcmRlcjpub25lO2NvbG9yOiMzNzQxNTE7Zm9udC1zaXplOjExcHg7Y3Vyc29yOnBvaW50ZXI7cGFkZGluZzo0cHggOXB4O2JvcmRlci1yYWRpdXM6MTRweDt3aGl0ZS1zcGFjZTpub3dyYXA7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtnYXA6NXB4O2ZvbnQtd2VpZ2h0OjUwMDtsaW5lLWhlaWdodDoxfQoudGlzLWJ0bjpob3ZlcntiYWNrZ3JvdW5kOiNmM2Y0ZjZ9Ci50aXMtYnRuIHN2Z3t3aWR0aDoxMXB4O2hlaWdodDoxMXB4O2ZsZXgtc2hyaW5rOjB9Ci50aXMtYnRuLnRpcy1zentjb2xvcjojN2MzYWVkfS50aXMtYnRuLnRpcy10Ymd7Y29sb3I6IzI1NjNlYn0udGlzLWJ0bi50aXMtdHRvcHtjb2xvcjojMDU5NjY5fS50aXMtYnRuLnRpcy10cGlue2NvbG9yOiNkOTc3MDZ9LnRpcy1idG4udGlzLXRkZWx7Y29sb3I6I2RjMjYyNn0KLnRpcy1kaXZ7d2lkdGg6MXB4O2hlaWdodDoxNnB4O2JhY2tncm91bmQ6I2U1ZTdlYjthbGlnbi1zZWxmOmNlbnRlcjttYXJnaW46MCAycHh9Ci50aXMtdGl7cG9zaXRpb246cmVsYXRpdmU7YXNwZWN0LXJhdGlvOjE7Ym9yZGVyLXJhZGl1czo4cHg7b3ZlcmZsb3c6aGlkZGVuO2N1cnNvcjpwb2ludGVyO2JvcmRlcjoxLjVweCBzb2xpZCAjZjNmNGY2O2JhY2tncm91bmQ6I2Y5ZmFmYn0KLnRpcy10aTpob3Zlcntib3JkZXItY29sb3I6IzI1NjNlYn0KLnRpcy10aSBpbWd7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtvYmplY3QtZml0OmNvdmVyO3BvaW50ZXItZXZlbnRzOm5vbmV9Ci50aXMtdGR7cG9zaXRpb246YWJzb2x1dGU7dG9wOjJweDtyaWdodDoycHg7YmFja2dyb3VuZDpyZ2JhKDI1NSwyNTUsMjU1LC45KTtjb2xvcjojZGMyNjI2O2JvcmRlcjpub25lO2JvcmRlci1yYWRpdXM6NTAlO3dpZHRoOjE2cHg7aGVpZ2h0OjE2cHg7Y3Vyc29yOnBvaW50ZXI7ZGlzcGxheTpub25lO2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyfQoudGlzLXRpOmhvdmVyIC50aXMtdGR7ZGlzcGxheTpmbGV4fQoudGlzLXRkIHN2Z3t3aWR0aDo4cHg7aGVpZ2h0OjhweH0KPC9zdHlsZT4KCjxzY3JpcHQ+CihmdW5jdGlvbigpewoKLyog4piFIOu5hOuwgOuyiO2YuOulvCDsl6zquLDshJwg67CU6r647IS47JqUIOKYhSAqLwp2YXIgVElTX1BBU1NXT1JEID0gJzEyMzQnOwoKdmFyIGxCZz1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLWxheWVyLWJnJyk7CnZhciBsVG9wPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtbGF5ZXItdG9wJyk7CnZhciBmdD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLWZsb2F0LXRiJyk7CnZhciBmcjE9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Rpcy1mdC1yMScpOwp2YXIgZnIyPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtZnQtcjInKTsKdmFyIHBFbD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXBhbmVsJyk7CnZhciBwTWluaT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXBhbmVsLW1pbmknKTsKdmFyIGxvY2tCdG49ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Rpcy1sb2NrLWJ0bicpOwp2YXIgcHdNb2RhbD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXB3LW1vZGFsJyk7CnZhciBwd0lucHV0PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcHctaW5wdXQnKTsKdmFyIHB3U3VibWl0PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcHctc3VibWl0Jyk7CnZhciBwd0Vycm9yPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcHctZXJyb3InKTsKdmFyIHB0PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcHRnJyk7CnZhciBwYj1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXBiJyk7CnZhciB1ej1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXV6Jyk7CnZhciBmaT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLWZpJyk7CnZhciB0bD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXRsJyk7CnZhciB0ZT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLXRlJyk7CnZhciBjYj1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLWNscicpOwoKaWYoIWxCZ3x8IWxUb3B8fCFmdClyZXR1cm47CgovKiBib2R5IOyngeyGjeycvOuhnCDsnbTrj5kgKi8KZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChsQmcpOwpkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGxUb3ApOwpkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGZ0KTsKZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChsb2NrQnRuKTsKZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChwd01vZGFsKTsKZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChwTWluaSk7CmRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQocEVsKTsKCi8qIGNvbnRhaW5lciB6LWluZGV4ICovCihmdW5jdGlvbigpewogIHZhciBjYW5kcz1bJyNjb250YWluZXInLCcjd3JhcCcsJyN3cmFwcGVyJywnI2NvbnRlbnQnLCcjY29udGVudHMnLCcjbGF5b3V0JywnI3R0LWJvZHktcGFnZScsJyN0dC13cmFwJ107CiAgZm9yKHZhciBpPTA7aTxjYW5kcy5sZW5ndGg7aSsrKXsKICAgIHZhciBlbD1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKGNhbmRzW2ldKTsKICAgIGlmKGVsKXsKICAgICAgaWYod2luZG93LmdldENvbXB1dGVkU3R5bGUoZWwpLnBvc2l0aW9uPT09J3N0YXRpYycpZWwuc3R5bGUucG9zaXRpb249J3JlbGF0aXZlJzsKICAgICAgZWwuc3R5bGUuekluZGV4PScxMCc7YnJlYWs7CiAgICB9CiAgfQp9KSgpOwoKLyog7J2066+4IOuhnOq3uOyduOuQnCDqsr3smrAg7Yyo64SQIOuwlOuhnCDtkZzsi5wgKi8KaWYoc2Vzc2lvblN0b3JhZ2UuZ2V0SXRlbSgndGlzLWF1dGgnKT09PScxJyl7CiAgbG9ja0J0bi5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ25vbmUnLCdpbXBvcnRhbnQnKTsKICBwRWwuc3R5bGUuc2V0UHJvcGVydHkoJ2Rpc3BsYXknLCdibG9jaycsJ2ltcG9ydGFudCcpOwp9CgovKiDsnqDquIgg67KE7Yq8IO2BtOumrSAqLwpsb2NrQnRuLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbigpewogIHZhciBkPXB3TW9kYWwuc3R5bGUuZ2V0UHJvcGVydHlWYWx1ZSgnZGlzcGxheScpOwogIGlmKGQ9PT0nbm9uZSd8fGQ9PT0nJyl7CiAgICBwd01vZGFsLnN0eWxlLnNldFByb3BlcnR5KCdkaXNwbGF5JywnYmxvY2snLCdpbXBvcnRhbnQnKTsKICAgIHB3SW5wdXQuZm9jdXMoKTsKICB9IGVsc2UgewogICAgcHdNb2RhbC5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ25vbmUnLCdpbXBvcnRhbnQnKTsKICB9Cn0pOwoKLyog67mE67CA67KI7Zi4IO2ZleyduCAqLwpmdW5jdGlvbiBjaGVja1B3KCl7CiAgaWYocHdJbnB1dC52YWx1ZT09PVRJU19QQVNTV09SRCl7CiAgICBwd01vZGFsLnN0eWxlLnNldFByb3BlcnR5KCdkaXNwbGF5Jywnbm9uZScsJ2ltcG9ydGFudCcpOwogICAgbG9ja0J0bi5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ25vbmUnLCdpbXBvcnRhbnQnKTsKICAgIHBFbC5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ2Jsb2NrJywnaW1wb3J0YW50Jyk7CiAgICBwd0Vycm9yLnN0eWxlLmRpc3BsYXk9J25vbmUnOwogICAgc2Vzc2lvblN0b3JhZ2Uuc2V0SXRlbSgndGlzLWF1dGgnLCcxJyk7CiAgICBwd0lucHV0LnZhbHVlPScnOwogIH0gZWxzZSB7CiAgICBwd0Vycm9yLnN0eWxlLmRpc3BsYXk9J2Jsb2NrJzsKICAgIHB3SW5wdXQudmFsdWU9Jyc7CiAgICBwd0lucHV0LmZvY3VzKCk7CiAgfQp9CnB3U3VibWl0LmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxjaGVja1B3KTsKcHdJbnB1dC5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJyxmdW5jdGlvbihlKXtpZihlLmtleT09PSdFbnRlcicpY2hlY2tQdygpO30pOwoKLyog7Jm467aAIO2BtOumreyLnCDruYTrsojssL0g64ur6riwICovCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbihlKXsKICBpZighbG9ja0J0bi5jb250YWlucyhlLnRhcmdldCkmJiFwd01vZGFsLmNvbnRhaW5zKGUudGFyZ2V0KSl7CiAgICBwd01vZGFsLnN0eWxlLnNldFByb3BlcnR5KCdkaXNwbGF5Jywnbm9uZScsJ2ltcG9ydGFudCcpOwogIH0KfSk7CgovKiDsoJHquLAg67KE7Yq8ICovCmlmKHB0KXsKICBwdC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXsKICAgIHBFbC5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ25vbmUnLCdpbXBvcnRhbnQnKTsKICAgIHBNaW5pLnN0eWxlLnNldFByb3BlcnR5KCdkaXNwbGF5JywnZmxleCcsJ2ltcG9ydGFudCcpOwogIH0pOwp9CgovKiDrr7jri4gg67KE7Yq8IO2BtOumreyLnCDtjrzsuZjquLAgKi8KcE1pbmkuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7CiAgcE1pbmkuc3R5bGUuc2V0UHJvcGVydHkoJ2Rpc3BsYXknLCdub25lJywnaW1wb3J0YW50Jyk7CiAgcEVsLnN0eWxlLnNldFByb3BlcnR5KCdkaXNwbGF5JywnYmxvY2snLCdpbXBvcnRhbnQnKTsKfSk7Cgp2YXIgc3Q9W10saWRjPTAsYWJpZD1udWxsOwoKaWYodXomJmZpKXsKICB1ei5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXtmaS5jbGljaygpO30pOwogIHV6LmFkZEV2ZW50TGlzdGVuZXIoJ2RyYWdvdmVyJyxmdW5jdGlvbihlKXtlLnByZXZlbnREZWZhdWx0KCk7dXouc3R5bGUuYm9yZGVyQ29sb3I9JyMyNTYzZWInO30pOwogIHV6LmFkZEV2ZW50TGlzdGVuZXIoJ2RyYWdsZWF2ZScsZnVuY3Rpb24oKXt1ei5zdHlsZS5ib3JkZXJDb2xvcj0nI2QxZDVkYic7fSk7CiAgdXouYWRkRXZlbnRMaXN0ZW5lcignZHJvcCcsZnVuY3Rpb24oZSl7ZS5wcmV2ZW50RGVmYXVsdCgpO3V6LnN0eWxlLmJvcmRlckNvbG9yPScjZDFkNWRiJztoZihlLmRhdGFUcmFuc2Zlci5maWxlcyk7fSk7CiAgZmkuYWRkRXZlbnRMaXN0ZW5lcignY2hhbmdlJyxmdW5jdGlvbigpe2hmKGZpLmZpbGVzKTtmaS52YWx1ZT0nJzt9KTsKfQoKZnVuY3Rpb24gaGYoZnMpewogIEFycmF5LmZyb20oZnMpLmZvckVhY2goZnVuY3Rpb24oZil7CiAgICBpZighZi50eXBlLnN0YXJ0c1dpdGgoJ2ltYWdlLycpKXJldHVybjsKICAgIHZhciByPW5ldyBGaWxlUmVhZGVyKCk7CiAgICByLm9ubG9hZD1mdW5jdGlvbihldil7YXRwKGV2LnRhcmdldC5yZXN1bHQsZi5uYW1lKTt9OwogICAgci5yZWFkQXNEYXRhVVJMKGYpOwogIH0pOwp9CgpmdW5jdGlvbiBhdHAodXJsLG5hbWUpewogIGlmKHRlJiZ0ZS5wYXJlbnROb2RlKXRlLnJlbW92ZSgpOwogIHZhciBpdD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtpdC5jbGFzc05hbWU9J3Rpcy10aSc7CiAgdmFyIGltPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycpO2ltLnNyYz11cmw7aW0uYWx0PW5hbWV8fCdzJzsKICB2YXIgZGw9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnYnV0dG9uJyk7ZGwuY2xhc3NOYW1lPSd0aXMtdGQnO2RsLmlubmVySFRNTD1JQy54OwogIGRsLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbihlKXtlLnN0b3BQcm9wYWdhdGlvbigpO2l0LnJlbW92ZSgpO30pOwogIGl0LmFwcGVuZENoaWxkKGltKTtpdC5hcHBlbmRDaGlsZChkbCk7CiAgaXQuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7c3AodXJsKTt9KTsKICBpZih0bCl0bC5hcHBlbmRDaGlsZChpdCk7Cn0KCmZ1bmN0aW9uIGhmMigpe2Z0LnN0eWxlLmRpc3BsYXk9J25vbmUnO2ZyMS5pbm5lckhUTUw9Jyc7ZnIyLmlubmVySFRNTD0nJzthYmlkPW51bGw7fQoKdmFyIElDPXsKICBtaW51czonPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPicsCiAgcGx1czonPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48bGluZSB4MT0iMTIiIHkxPSI1IiB4Mj0iMTIiIHkyPSIxOSIvPjxsaW5lIHgxPSI1IiB5MT0iMTIiIHgyPSIxOSIgeTI9IjEyIi8+PC9zdmc+JywKICB0b0JhY2s6Jzxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxsaW5lIHgxPSIxMiIgeTE9IjE3IiB4Mj0iMTIiIHkyPSIzIi8+PHBvbHlsaW5lIHBvaW50cz0iNyAxMiAxMiAxNyAxNyAxMiIvPjxsaW5lIHgxPSI1IiB5MT0iMjEiIHgyPSIxOSIgeTI9IjIxIi8+PC9zdmc+JywKICB0b0Zyb250Oic8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48bGluZSB4MT0iMTIiIHkxPSI3IiB4Mj0iMTIiIHkyPSIyMSIvPjxwb2x5bGluZSBwb2ludHM9IjE3IDEyIDEyIDcgNyAxMiIvPjxsaW5lIHgxPSI1IiB5MT0iMyIgeDI9IjE5IiB5Mj0iMyIvPjwvc3ZnPicsCgogIHRyYXNoOic8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIzIDYgNSA2IDIxIDYiLz48cGF0aCBkPSJNMTkgNmwtMSAxNEg2TDUgNiIvPjxwYXRoIGQ9Ik05IDZWNGg2djIiLz48L3N2Zz4nLAogIHg6Jzxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PGxpbmUgeDE9IjE4IiB5MT0iNiIgeDI9IjYiIHkyPSIxOCIvPjxsaW5lIHgxPSI2IiB5MT0iNiIgeDI9IjE4IiB5Mj0iMTgiLz48L3N2Zz4nCn07CgpmdW5jdGlvbiBzcCh1cmwpewogIHZhciBpZD0rK2lkYyxzej0xMjA7CiAgdmFyIHg9Y2woaW5uZXJXaWR0aC8yLXN6LzIrcm4oLTEyMCwxMjApLDEwLGlubmVyV2lkdGgtc3otMTApOwogIHZhciB5PWNsKGlubmVySGVpZ2h0LzItc3ovMitybigtODAsODApLDEwLGlubmVySGVpZ2h0LXN6LTEwKTsKICB2YXIgdz1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICB3LmNsYXNzTmFtZT0ndGlzLWl0ZW0gdGlzLXRvcCc7CiAgdy5zdHlsZS5sZWZ0PXgrJ3B4Jzt3LnN0eWxlLnRvcD15KydweCc7CgogIHZhciBpbT1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdpbWcnKTtpbS5jbGFzc05hbWU9J3Rpcy1pbWcnO2ltLnNyYz11cmw7aW0uYWx0PSdzJzsKICBpbS5zdHlsZS53aWR0aD1zeisncHgnO2ltLnN0eWxlLmhlaWdodD1zeisncHgnOwogIGltLnN0eWxlLm91dGxpbmU9JzJweCBkYXNoZWQgcmdiYSg4MCwxMzAsMjQwLC43KSc7aW0uc3R5bGUub3V0bGluZU9mZnNldD0nNHB4JzsKICB2YXIgdGI9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7dGIuY2xhc3NOYW1lPSd0aXMtdGInOwogIHZhciBpdD10cnVlOwogIHZhciBkbT1mdW5jdGlvbihlKXtpZihlKWUuc3RvcFByb3BhZ2F0aW9uKCk7c3o9TWF0aC5tYXgoc3otMjAsNDApO2ltLnN0eWxlLndpZHRoPWltLnN0eWxlLmhlaWdodD1zeisncHgnO2lmKGFiaWQ9PT1pZClyZigpO307CiAgdmFyIGRwPWZ1bmN0aW9uKGUpe2lmKGUpZS5zdG9wUHJvcGFnYXRpb24oKTtzej1NYXRoLm1pbihzeisyMCw1MDApO2ltLnN0eWxlLndpZHRoPWltLnN0eWxlLmhlaWdodD1zeisncHgnO2lmKGFiaWQ9PT1pZClyZigpO307CiAgdmFyIGRiPWZ1bmN0aW9uKGUpewogICAgaWYoZSllLnN0b3BQcm9wYWdhdGlvbigpO2lmKCFpdClyZXR1cm47aXQ9ZmFsc2U7CiAgICB2YXIgbD1wYXJzZUludCh3LnN0eWxlLmxlZnQpfHwwLHQ9cGFyc2VJbnQody5zdHlsZS50b3ApfHwwOwogICAgbFRvcC5yZW1vdmVDaGlsZCh3KTt3LmNsYXNzTmFtZT0ndGlzLWl0ZW0gdGlzLWJnJzsKICAgIHcuc3R5bGUubGVmdD1sKydweCc7dy5zdHlsZS50b3A9dCsncHgnOwogICAgaW0uc3R5bGUub3V0bGluZT0nbm9uZSc7bEJnLmFwcGVuZENoaWxkKHcpO2hmMigpOwogIH07CiAgdmFyIGRmPWZ1bmN0aW9uKGUpewogICAgaWYoZSllLnN0b3BQcm9wYWdhdGlvbigpO2lmKGl0KXJldHVybjtpdD10cnVlOwogICAgdmFyIGw9cGFyc2VJbnQody5zdHlsZS5sZWZ0KXx8MCx0PXBhcnNlSW50KHcuc3R5bGUudG9wKXx8MDsKICAgIGxCZy5yZW1vdmVDaGlsZCh3KTt3LmNsYXNzTmFtZT0ndGlzLWl0ZW0gdGlzLXRvcCc7CiAgICB3LnN0eWxlLmxlZnQ9bCsncHgnO3cuc3R5bGUudG9wPXQrJ3B4JzsKICAgIGltLnN0eWxlLm91dGxpbmU9JzJweCBkYXNoZWQgcmdiYSg4MCwxMzAsMjQwLC43KSc7aW0uc3R5bGUub3V0bGluZU9mZnNldD0nNHB4JzsKICAgIGxUb3AuYXBwZW5kQ2hpbGQodyk7aGYyKCk7CiAgfTsKCiAgdmFyIGRkPWZ1bmN0aW9uKGUpe2lmKGUpZS5zdG9wUHJvcGFnYXRpb24oKTt3LnJlbW92ZSgpO3N0PXN0LmZpbHRlcihmdW5jdGlvbihzKXtyZXR1cm4gcy5pZCE9PWlkO30pO2lmKGFiaWQ9PT1pZCloZjIoKTt9OwogIHZhciByMT1tcihbbWIoSUMubWludXMsJ3Rpcy1idG4gdGlzLXN6JyksbWIoSUMucGx1cywndGlzLWJ0biB0aXMtc3onKSxtZCgpLAogICAgICAgICAgICAgbWIoSUMudG9CYWNrKycgXHViNGE0XHViODVjJywndGlzLWJ0biB0aXMtdGJnJyksbWIoSUMudG9Gcm9udCsnIFx1YzU1ZVx1YzczY1x1Yjg1YycsJ3Rpcy1idG4gdGlzLXR0b3AnKV0pOwogIHZhciByMj1tcihbbWIoSUMudHJhc2grJyBcdWMwYWRcdWM4MWMnLCd0aXMtYnRuIHRpcy10ZGVsJyldKTsKICByMS5jaGlsZHJlblswXS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZG0pO3IxLmNoaWxkcmVuWzFdLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxkcCk7CiAgcjEuY2hpbGRyZW5bM10uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRiKTtyMS5jaGlsZHJlbls0XS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZGYpOwogIHIyLmNoaWxkcmVuWzBdLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxkZCk7CiAgdGIuYXBwZW5kQ2hpbGQocjEpO3RiLmFwcGVuZENoaWxkKHIyKTsKICB3LmFwcGVuZENoaWxkKGltKTt3LmFwcGVuZENoaWxkKHRiKTsKICBmdW5jdGlvbiBvZigpewogICAgYWJpZD1pZDtmcjEuaW5uZXJIVE1MPScnO2ZyMi5pbm5lckhUTUw9Jyc7CiAgICB2YXIgYT1tYihJQy5taW51cywndGlzLWJ0biB0aXMtc3onKSxiPW1iKElDLnBsdXMsJ3Rpcy1idG4gdGlzLXN6Jyk7CiAgICB2YXIgYz1tYihJQy50b0Zyb250KycgXHVjNTVlXHVjNzNjXHViODVjJywndGlzLWJ0biB0aXMtdHRvcCcpOwogICAgdmFyIGUyPW1iKElDLnRyYXNoKycgXHVjMGFkXHVjODFjJywndGlzLWJ0biB0aXMtdGRlbCcpOwogICAgYS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZG0pO2IuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRwKTsKICAgIGMuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRmKTtlMi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZGQpOwogICAgZnIxLmFwcGVuZENoaWxkKGEpO2ZyMS5hcHBlbmRDaGlsZChiKTtmcjEuYXBwZW5kQ2hpbGQobWQoKSk7ZnIxLmFwcGVuZENoaWxkKGMpOwogICAgZnIyLmFwcGVuZENoaWxkKGUyKTsKICAgIHJmKCk7ZnQuc3R5bGUuY3NzVGV4dD0ncG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O3otaW5kZXg6OTk5OTUhaW1wb3J0YW50O2Rpc3BsYXk6ZmxleCFpbXBvcnRhbnQ7ZmxleC1kaXJlY3Rpb246Y29sdW1uIWltcG9ydGFudDthbGlnbi1pdGVtczpjZW50ZXIhaW1wb3J0YW50O2dhcDo1cHghaW1wb3J0YW50O3BvaW50ZXItZXZlbnRzOmFsbCFpbXBvcnRhbnQ7dHJhbnNmb3JtOnRyYW5zbGF0ZVgoLTUwJSkhaW1wb3J0YW50O3doaXRlLXNwYWNlOm5vd3JhcCFpbXBvcnRhbnQ7bGVmdDonK2Z0LnN0eWxlLmxlZnQrJzt0b3A6JytmdC5zdHlsZS50b3ArJzsnOwogIH0KICBmdW5jdGlvbiByZigpewogICAgdmFyIHN3PXBhcnNlRmxvYXQoaW0uc3R5bGUud2lkdGgpfHwxMjA7CiAgICBmdC5zdHlsZS5sZWZ0PShwYXJzZUludCh3LnN0eWxlLmxlZnQpK3N3LzIpKydweCc7CiAgICBmdC5zdHlsZS50b3A9TWF0aC5tYXgoMTAscGFyc2VJbnQody5zdHlsZS50b3ApLTk1KSsncHgnOwogIH0KICBmdW5jdGlvbiBnYigpewogICAgdmFyIGx4PXBhcnNlSW50KHcuc3R5bGUubGVmdCl8fDAsbHk9cGFyc2VJbnQody5zdHlsZS50b3ApfHwwOwogICAgdmFyIHN3PXBhcnNlRmxvYXQoaW0uc3R5bGUud2lkdGgpfHwxMjAsc2g9cGFyc2VGbG9hdChpbS5zdHlsZS5oZWlnaHQpfHwxMjA7CiAgICByZXR1cm57bGVmdDpseCx0b3A6bHkscmlnaHQ6bHgrc3csYm90dG9tOmx5K3NofTsKICB9CiAgZHJhZyh3LGZ1bmN0aW9uKCl7cmV0dXJuICFpdDt9KTsKICBsVG9wLmFwcGVuZENoaWxkKHcpOwogIHN0LnB1c2goe2lkOmlkLGVsOncsZ2V0Qm91bmRzOmdiLG9wZW5GbG9hdGluZzpvZixpc1RvcDpmdW5jdGlvbigpe3JldHVybiBpdDt9fSk7CiAgdy5zdHlsZS50cmFuc2Zvcm09J3NjYWxlKDApJzsKICB3LnN0eWxlLnRyYW5zaXRpb249J3RyYW5zZm9ybSAwLjIycyBjdWJpYy1iZXppZXIoLjM0LDEuNTYsLjY0LDEpJzsKICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoZnVuY3Rpb24oKXt3LnN0eWxlLnRyYW5zZm9ybT0nc2NhbGUoMSknO30pOwp9Cgpkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdtb3VzZWRvd24nLGZ1bmN0aW9uKGUpewogIGlmKGZ0LmNvbnRhaW5zKGUudGFyZ2V0KSlyZXR1cm47CiAgaWYocEVsJiZlLnRhcmdldC5jbG9zZXN0JiZlLnRhcmdldC5jbG9zZXN0KCcjdGlzLXBhbmVsJykpcmV0dXJuOwogIGlmKGUudGFyZ2V0LmNsb3Nlc3QmJmUudGFyZ2V0LmNsb3Nlc3QoJyN0aXMtcGFuZWwtbWluaScpKXJldHVybjsKICBpZihsb2NrQnRuLmNvbnRhaW5zKGUudGFyZ2V0KSlyZXR1cm47CiAgaWYocHdNb2RhbC5jb250YWlucyhlLnRhcmdldCkpcmV0dXJuOwogIGlmKGUudGFyZ2V0LmNsb3Nlc3QmJmUudGFyZ2V0LmNsb3Nlc3QoJy50aXMtaXRlbS50aXMtdG9wJykpcmV0dXJuOwogIHZhciBjeD1lLmNsaWVudFgsY3k9ZS5jbGllbnRZOwogIHZhciBibD1zdC5maWx0ZXIoZnVuY3Rpb24ocyl7cmV0dXJuIXMuaXNUb3AoKTt9KTsKICB2YXIgaGl0PW51bGw7CiAgZm9yKHZhciBpPWJsLmxlbmd0aC0xO2k+PTA7aS0tKXsKICAgIHZhciBiPWJsW2ldLmdldEJvdW5kcygpOwogICAgaWYoY3g+PWIubGVmdCYmY3g8PWIucmlnaHQmJmN5Pj1iLnRvcCYmY3k8PWIuYm90dG9tKXtoaXQ9YmxbaV07YnJlYWs7fQogIH0KICBpZihoaXQpe2FiaWQ9PT1oaXQuaWQ/aGYyKCk6aGl0Lm9wZW5GbG9hdGluZygpO31lbHNle2hmMigpO30KfSk7CgpmdW5jdGlvbiBkcmFnKGVsLGxrKXsKICB2YXIgYWM9ZmFsc2Usc3gsc3ksZXgsZXk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcignbW91c2Vkb3duJyxmdW5jdGlvbihlKXsKICAgIGlmKGUudGFyZ2V0LmNsb3Nlc3QmJmUudGFyZ2V0LmNsb3Nlc3QoJy50aXMtYnRuJykpcmV0dXJuOwogICAgZS5wcmV2ZW50RGVmYXVsdCgpO2lmKGxrKCkpcmV0dXJuOwogICAgYWM9dHJ1ZTtzeD1lLmNsaWVudFg7c3k9ZS5jbGllbnRZOwogICAgZXg9cGFyc2VJbnQoZWwuc3R5bGUubGVmdCl8fDA7ZXk9cGFyc2VJbnQoZWwuc3R5bGUudG9wKXx8MDsKICAgIGVsLnN0eWxlLnRyYW5zaXRpb249J25vbmUnOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoJ3RvdWNoc3RhcnQnLGZ1bmN0aW9uKGUpewogICAgaWYoZS50YXJnZXQuY2xvc2VzdCYmZS50YXJnZXQuY2xvc2VzdCgnLnRpcy1idG4nKSlyZXR1cm47CiAgICBpZihsaygpKXJldHVybjsKICAgIGFjPXRydWU7c3g9ZS50b3VjaGVzWzBdLmNsaWVudFg7c3k9ZS50b3VjaGVzWzBdLmNsaWVudFk7CiAgICBleD1wYXJzZUludChlbC5zdHlsZS5sZWZ0KXx8MDtleT1wYXJzZUludChlbC5zdHlsZS50b3ApfHwwOwogICAgZWwuc3R5bGUudHJhbnNpdGlvbj0nbm9uZSc7CiAgfSx7cGFzc2l2ZTp0cnVlfSk7CiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignbW91c2Vtb3ZlJyxmdW5jdGlvbihlKXsKICAgIGlmKCFhYylyZXR1cm47CiAgICBlbC5zdHlsZS5sZWZ0PWNsKGV4K2UuY2xpZW50WC1zeCwwLGlubmVyV2lkdGgtNjApKydweCc7CiAgICBlbC5zdHlsZS50b3A9Y2woZXkrZS5jbGllbnRZLXN5LDAsaW5uZXJIZWlnaHQtNjApKydweCc7CiAgfSk7CiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigndG91Y2htb3ZlJyxmdW5jdGlvbihlKXsKICAgIGlmKCFhYylyZXR1cm47CiAgICBlbC5zdHlsZS5sZWZ0PWNsKGV4K2UudG91Y2hlc1swXS5jbGllbnRYLXN4LDAsaW5uZXJXaWR0aC02MCkrJ3B4JzsKICAgIGVsLnN0eWxlLnRvcD1jbChleStlLnRvdWNoZXNbMF0uY2xpZW50WS1zeSwwLGlubmVySGVpZ2h0LTYwKSsncHgnOwogIH0se3Bhc3NpdmU6dHJ1ZX0pOwogIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNldXAnLGZ1bmN0aW9uKCl7aWYoIWFjKXJldHVybjthYz1mYWxzZTt9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCd0b3VjaGVuZCcsZnVuY3Rpb24oKXtpZighYWMpcmV0dXJuO2FjPWZhbHNlO30pOwp9CgppZihjYiljYi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXtzdC5mb3JFYWNoKGZ1bmN0aW9uKHMpe3MuZWwucmVtb3ZlKCk7fSk7c3Q9W107aGYyKCk7fSk7CmZ1bmN0aW9uIGNsKHYsbW4sbXgpe3JldHVybiBNYXRoLm1heChtbixNYXRoLm1pbihteCx2KSk7fQpmdW5jdGlvbiBybihtbixteCl7cmV0dXJuIG1uK01hdGgucmFuZG9tKCkqKG14LW1uKTt9CmZ1bmN0aW9uIG1iKGh0bWwsY2xzKXt2YXIgYj1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdidXR0b24nKTtiLmNsYXNzTmFtZT1jbHM7Yi5pbm5lckhUTUw9aHRtbDtyZXR1cm4gYjt9CmZ1bmN0aW9uIG1yKGNoKXt2YXIgcj1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtyLmNsYXNzTmFtZT0ndGlzLXJvdyc7Y2guZm9yRWFjaChmdW5jdGlvbihjKXtyLmFwcGVuZENoaWxkKGMpO30pO3JldHVybiByO30KZnVuY3Rpb24gbWQoKXt2YXIgZD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtkLmNsYXNzTmFtZT0ndGlzLWRpdic7cmV0dXJuIGQ7fQp9KSgpOwo8L3NjcmlwdD4K');
+var DEMO_HTML    = decodeB64('PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImtvIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgo8dGl0bGU+7JiI7IucIOu4lOuhnOq3uDwvdGl0bGU+CjxzdHlsZT4KQGZvbnQtZmFjZXtmb250LWZhbWlseTonUHJldGVuZGFyZCc7c3JjOnVybCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3Byb2plY3Rub29ubnUvcHJldGVuZGFyZEAxLjAvUHJldGVuZGFyZC1SZWd1bGFyLndvZmYyJykgZm9ybWF0KCd3b2ZmMicpO2ZvbnQtd2VpZ2h0OjQwMDtmb250LWRpc3BsYXk6c3dhcDt9Cip7bWFyZ2luOjA7cGFkZGluZzowO2JveC1zaXppbmc6Ym9yZGVyLWJveDt9CmJvZHl7Zm9udC1mYW1pbHk6J1ByZXRlbmRhcmQnLHNhbnMtc2VyaWY7YmFja2dyb3VuZDojZWRlOGUwO21pbi1oZWlnaHQ6MTAwdmg7fQojd3JhcHtwb3NpdGlvbjpyZWxhdGl2ZTt6LWluZGV4OjEwO3BvaW50ZXItZXZlbnRzOm5vbmU7fQpoZWFkZXJ7cG9pbnRlci1ldmVudHM6YWxsO2JhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwwLjkyKTtiYWNrZHJvcC1maWx0ZXI6Ymx1cigxMHB4KTtib3JkZXItYm90dG9tOjFweCBzb2xpZCAjZTVlN2ViO3BhZGRpbmc6MCAyOHB4O2hlaWdodDo1NnB4O2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW47fQoubG9nb3tmb250LXdlaWdodDo3MDA7Zm9udC1zaXplOjE2cHg7Y29sb3I6IzExMTgyNzt9Cm5hdiBhe2NvbG9yOiM2YjcyODA7dGV4dC1kZWNvcmF0aW9uOm5vbmU7Zm9udC1zaXplOjEzcHg7bWFyZ2luLWxlZnQ6MTZweDt9Cm1haW57cG9pbnRlci1ldmVudHM6YWxsO21heC13aWR0aDo3MjBweDttYXJnaW46NDBweCBhdXRvO3BhZGRpbmc6MCAyMHB4O30KLmNhcmR7YmFja2dyb3VuZDpyZ2JhKDI1NSwyNTUsMjU1LDAuOTQpO2JvcmRlci1yYWRpdXM6MTRweDtwYWRkaW5nOjI0cHggMjhweDttYXJnaW4tYm90dG9tOjE2cHg7Ym9yZGVyOjFweCBzb2xpZCAjZTVlN2ViO30KLmNhcmQgaDJ7Zm9udC1zaXplOjE3cHg7Y29sb3I6IzExMTgyNzttYXJnaW4tYm90dG9tOjhweDtmb250LXdlaWdodDo3MDA7fQouY2FyZCBwe2ZvbnQtc2l6ZToxM3B4O2NvbG9yOiM2YjcyODA7bGluZS1oZWlnaHQ6MS43NTt9Ci50YWd7ZGlzcGxheTppbmxpbmUtYmxvY2s7YmFja2dyb3VuZDojZmVmM2M3O2NvbG9yOiM5MjQwMGU7Zm9udC1zaXplOjExcHg7cGFkZGluZzoycHggOHB4O2JvcmRlci1yYWRpdXM6MTBweDttYXJnaW46MCA0cHggOHB4IDA7Zm9udC13ZWlnaHQ6NjAwO30KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPGRpdiBpZD0idGlzLWxheWVyLWJnIiBzdHlsZT0icG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2luc2V0OjAhaW1wb3J0YW50O3otaW5kZXg6MCFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6bm9uZSFpbXBvcnRhbnQ7b3ZlcmZsb3c6aGlkZGVuIWltcG9ydGFudDsiPjwvZGl2Pgo8ZGl2IGlkPSJ0aXMtbGF5ZXItdG9wIiBzdHlsZT0icG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2luc2V0OjAhaW1wb3J0YW50O3otaW5kZXg6OTk5MCFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6bm9uZSFpbXBvcnRhbnQ7b3ZlcmZsb3c6aGlkZGVuIWltcG9ydGFudDsiPjwvZGl2Pgo8ZGl2IGlkPSJ0aXMtZmxvYXQtdGIiIHN0eWxlPSJwb3NpdGlvbjpmaXhlZCFpbXBvcnRhbnQ7ei1pbmRleDo5OTk5NSFpbXBvcnRhbnQ7ZGlzcGxheTpub25lIWltcG9ydGFudDtmbGV4LWRpcmVjdGlvbjpjb2x1bW4haW1wb3J0YW50O2FsaWduLWl0ZW1zOmNlbnRlciFpbXBvcnRhbnQ7Z2FwOjVweCFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6YWxsIWltcG9ydGFudDt0cmFuc2Zvcm06dHJhbnNsYXRlWCgtNTAlKSFpbXBvcnRhbnQ7d2hpdGUtc3BhY2U6bm93cmFwIWltcG9ydGFudDsiPgogIDxkaXYgY2xhc3M9InRpcy1yb3ciIGlkPSJ0aXMtZnQtcjEiPjwvZGl2PgogIDxkaXYgY2xhc3M9InRpcy1yb3ciIGlkPSJ0aXMtZnQtcjIiPjwvZGl2Pgo8L2Rpdj4KPGRpdiBpZD0idGlzLXBhbmVsLW1pbmkiIHN0eWxlPSJkaXNwbGF5Om5vbmUhaW1wb3J0YW50O3Bvc2l0aW9uOmZpeGVkIWltcG9ydGFudDtib3R0b206MjhweCFpbXBvcnRhbnQ7cmlnaHQ6MjhweCFpbXBvcnRhbnQ7ei1pbmRleDo5OTk5OSFpbXBvcnRhbnQ7d2lkdGg6NDhweCFpbXBvcnRhbnQ7aGVpZ2h0OjQ4cHghaW1wb3J0YW50O2JvcmRlci1yYWRpdXM6NTAlIWltcG9ydGFudDtiYWNrZ3JvdW5kOiNmZmYhaW1wb3J0YW50O2JvcmRlcjoxcHggc29saWQgI2U1ZTdlYiFpbXBvcnRhbnQ7Ym94LXNoYWRvdzowIDRweCAxNnB4IHJnYmEoMCwwLDAsLjEyKSFpbXBvcnRhbnQ7Y3Vyc29yOnBvaW50ZXIhaW1wb3J0YW50O2FsaWduLWl0ZW1zOmNlbnRlciFpbXBvcnRhbnQ7anVzdGlmeS1jb250ZW50OmNlbnRlciFpbXBvcnRhbnQ7cG9pbnRlci1ldmVudHM6YWxsIWltcG9ydGFudDsiPgogIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MjBweDtoZWlnaHQ6MjBweDtwb2ludGVyLWV2ZW50czpub25lOyI+PHBvbHlnb24gcG9pbnRzPSIxMiAyIDIgNyAxMiAxMiAyMiA3IDEyIDIiLz48cG9seWxpbmUgcG9pbnRzPSIyIDE3IDEyIDIyIDIyIDE3Ii8+PHBvbHlsaW5lIHBvaW50cz0iMiAxMiAxMiAxNyAyMiAxMiIvPjwvc3ZnPgo8L2Rpdj4KPGRpdiBpZD0idGlzLXBhbmVsIiBzdHlsZT0iZGlzcGxheTpibG9jayFpbXBvcnRhbnQ7cG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O2JvdHRvbTo4OHB4IWltcG9ydGFudDtyaWdodDoyOHB4IWltcG9ydGFudDt6LWluZGV4Ojk5OTk5IWltcG9ydGFudDtiYWNrZ3JvdW5kOiNmZmYhaW1wb3J0YW50O2JvcmRlci1yYWRpdXM6MThweCFpbXBvcnRhbnQ7cGFkZGluZzoxOHB4IWltcG9ydGFudDtib3JkZXI6MXB4IHNvbGlkICNlNWU3ZWIhaW1wb3J0YW50O2JveC1zaGFkb3c6MCA4cHggMzJweCByZ2JhKDAsMCwwLC4xMikhaW1wb3J0YW50O3dpZHRoOjI3NnB4IWltcG9ydGFudDtwb2ludGVyLWV2ZW50czphbGwhaW1wb3J0YW50OyI+CiAgPGRpdiBzdHlsZT0iZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2VlbjttYXJnaW4tYm90dG9tOjE0cHg7Ij4KICAgIDxzcGFuIHN0eWxlPSJmb250LXNpemU6MTNweDtmb250LXdlaWdodDo3MDA7Y29sb3I6IzExMTgyNztkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2dhcDo3cHg7d2hpdGUtc3BhY2U6bm93cmFwOyI+CiAgICAgIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MTRweDtoZWlnaHQ6MTRweDtmbGV4LXNocmluazowOyI+PHBvbHlnb24gcG9pbnRzPSIxMiAyIDIgNyAxMiAxMiAyMiA3IDEyIDIiLz48cG9seWxpbmUgcG9pbnRzPSIyIDE3IDEyIDIyIDIyIDE3Ii8+PHBvbHlsaW5lIHBvaW50cz0iMiAxMiAxMiAxNyAyMiAxMiIvPjwvc3ZnPgogICAgICDsiqTti7Dsu6Qg6rSA66asCiAgICA8L3NwYW4+CiAgICA8YnV0dG9uIGlkPSJ0aXMtcHRnIiB0aXRsZT0i7KCR6riwIiBzdHlsZT0iYmFja2dyb3VuZDpub25lO2JvcmRlcjpub25lO2N1cnNvcjpwb2ludGVyO2NvbG9yOiM5Y2EzYWY7d2lkdGg6MjhweDtoZWlnaHQ6MjhweDtib3JkZXItcmFkaXVzOjhweDtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpjZW50ZXI7ZmxleC1zaHJpbms6MDtwYWRkaW5nOjA7Zm9udC1zaXplOjA7Ij4KICAgICAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MTJweDtoZWlnaHQ6MTJweDtwb2ludGVyLWV2ZW50czpub25lOyI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiLz48L3N2Zz4KICAgIDwvYnV0dG9uPgogIDwvZGl2PgogIDxkaXYgaWQ9InRpcy1wYiI+CiAgICA8ZGl2IGlkPSJ0aXMtdXoiIHN0eWxlPSJib3JkZXI6MS41cHggZGFzaGVkICNkMWQ1ZGI7Ym9yZGVyLXJhZGl1czoxMnB4O3BhZGRpbmc6MTZweCAxMHB4O3RleHQtYWxpZ246Y2VudGVyO2N1cnNvcjpwb2ludGVyO21hcmdpbi1ib3R0b206MTJweDsiPgogICAgICA8ZGl2IHN0eWxlPSJtYXJnaW4tYm90dG9tOjZweDtjb2xvcjojOWNhM2FmOyI+PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0id2lkdGg6MjRweDtoZWlnaHQ6MjRweDsiPjxwb2x5bGluZSBwb2ludHM9IjE2IDE2IDEyIDEyIDggMTYiLz48bGluZSB4MT0iMTIiIHkxPSIxMiIgeDI9IjEyIiB5Mj0iMjEiLz48cGF0aCBkPSJNMjAuMzkgMTguMzlBNSA1IDAgMCAwIDE4IDloLTEuMjZBOCA4IDAgMSAwIDMgMTYuMyIvPjwvc3ZnPjwvZGl2PgogICAgICA8ZGl2IHN0eWxlPSJmb250LXNpemU6MTJweDtjb2xvcjojNmI3MjgwO2xpbmUtaGVpZ2h0OjEuNTsiPu2BtOumre2VmOqxsOuCmCDsnbTrr7jsp4Drpbwg64GM7Ja064ukIOuGk+ycvOyEuOyalDwvZGl2PgogICAgICA8ZGl2IHN0eWxlPSJmb250LXNpemU6MTFweDtjb2xvcjojOWNhM2FmO21hcmdpbi10b3A6M3B4OyI+UE5HICYjMTgzOyBKUEcgJiMxODM7IEdJRiAmIzE4MzsgV2ViUDwvZGl2PgogICAgPC9kaXY+CiAgICA8aW5wdXQgdHlwZT0iZmlsZSIgaWQ9InRpcy1maSIgYWNjZXB0PSJpbWFnZS9wbmcsaW1hZ2UvanBlZyxpbWFnZS9naWYsaW1hZ2Uvd2VicCIgbXVsdGlwbGUgc3R5bGU9ImRpc3BsYXk6bm9uZTsiPgogICAgPGRpdiBpZD0idGlzLXRsIiBzdHlsZT0iZGlzcGxheTpncmlkO2dyaWQtdGVtcGxhdGUtY29sdW1uczpyZXBlYXQoNCwxZnIpO2dhcDo2cHg7bWFyZ2luLWJvdHRvbToxMnB4O21pbi1oZWlnaHQ6MjBweDttYXgtaGVpZ2h0OjE1NnB4O292ZXJmbG93LXk6YXV0bzsiPgogICAgICA8ZGl2IGlkPSJ0aXMtdGUiIHN0eWxlPSJncmlkLWNvbHVtbjoxLy0xO3RleHQtYWxpZ246Y2VudGVyO2ZvbnQtc2l6ZToxMXB4O2NvbG9yOiNkMWQ1ZGI7cGFkZGluZzoxMHB4IDA7Ij7sl4XroZzrk5ztlZwg7J2066+47KeA6rCAIOyXrOq4sOyXkCDtkZzsi5zrkKnri4jri6Q8L2Rpdj4KICAgIDwvZGl2PgogICAgPGhyIHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItdG9wOjFweCBzb2xpZCAjZjNmNGY2O21hcmdpbjoxMnB4IDA7Ij4KICAgIDxwIHN0eWxlPSJmb250LXNpemU6MTFweDtjb2xvcjojOWNhM2FmO2xpbmUtaGVpZ2h0OjEuNzttYXJnaW4tYm90dG9tOjEwcHg7Ij4KICAgICAg7I2464Sk7J28IO2BtOumrSAmIzg1OTQ7IOugiOydtOyVhOybgyA8c3BhbiBzdHlsZT0iY29sb3I6IzI1NjNlYjtmb250LXdlaWdodDo1MDA7Ij7snIQ8L3NwYW4+7JeQIOy2lOqwgDxicj4KICAgICAgPHNwYW4gc3R5bGU9ImNvbG9yOiMyNTYzZWI7Zm9udC13ZWlnaHQ6NTAwOyI+65Kk66GcPC9zcGFuPiAmIzg1OTQ7IOuwsOqyvSDsnbTrj5kgJiMxMjQ7IDxzcGFuIHN0eWxlPSJjb2xvcjojMjU2M2ViO2ZvbnQtd2VpZ2h0OjUwMDsiPuyVnuycvOuhnDwvc3Bhbj4gJiM4NTk0OyDsoITqsr0g67O16reAPGJyPgogICAgICDrsLDqsr0g7Iqk7Yuw7LukIO2BtOumrSAmIzg1OTQ7IO2OuOynkSDtiLTrsJQg7Yyd7JeFCiAgICA8L3A+CiAgICA8YnV0dG9uIGlkPSJ0aXMtY2xyIiBzdHlsZT0id2lkdGg6MTAwJTtiYWNrZ3JvdW5kOiNmZWYyZjI7Ym9yZGVyOjFweCBzb2xpZCAjZmVjYWNhO2NvbG9yOiNkYzI2MjY7Ym9yZGVyLXJhZGl1czoxMHB4O3BhZGRpbmc6OHB4O2ZvbnQtc2l6ZToxMnB4O2ZvbnQtd2VpZ2h0OjUwMDtjdXJzb3I6cG9pbnRlcjtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpjZW50ZXI7Z2FwOjZweDtmb250LWZhbWlseTppbmhlcml0O2xpbmUtaGVpZ2h0OjE7Ym94LXNpemluZzpib3JkZXItYm94OyI+CiAgICAgIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJ3aWR0aDoxMnB4O2hlaWdodDoxMnB4O2ZsZXgtc2hyaW5rOjA7cG9pbnRlci1ldmVudHM6bm9uZTsiPjxwb2x5bGluZSBwb2ludHM9IjMgNiA1IDYgMjEgNiIvPjxwYXRoIGQ9Ik0xOSA2bC0xIDE0SDZMNSA2Ii8+PHBhdGggZD0iTTkgNlY0aDZ2MiIvPjwvc3ZnPgogICAgICDrsLDqsr0g7Iqk7Yuw7LukIOyghOyytCDsgq3soJwKICAgIDwvYnV0dG9uPgogIDwvZGl2Pgo8L2Rpdj4KPHN0eWxlPgojdGlzLWZsb2F0LXRiLnRpcy12aXN7ZGlzcGxheTpmbGV4IWltcG9ydGFudH0KLnRpcy1pdGVte3Bvc2l0aW9uOmFic29sdXRlO3VzZXItc2VsZWN0Om5vbmU7cG9pbnRlci1ldmVudHM6YWxsfQoudGlzLWl0ZW0udGlzLXRvcHtjdXJzb3I6Z3JhYn0KLnRpcy1pdGVtLnRpcy1iZ3tjdXJzb3I6cG9pbnRlcn0KLnRpcy1pbWd7ZGlzcGxheTpibG9jaztvYmplY3QtZml0OmNvbnRhaW47cG9pbnRlci1ldmVudHM6bm9uZTtib3JkZXItcmFkaXVzOjRweH0KLnRpcy1pdGVtLnRpcy10b3AgLnRpcy1pbWd7b3V0bGluZToycHggZGFzaGVkIHJnYmEoODAsMTMwLDI0MCwuNyk7b3V0bGluZS1vZmZzZXQ6NHB4fQoudGlzLXRie2Rpc3BsYXk6bm9uZTtwb3NpdGlvbjphYnNvbHV0ZTt0b3A6MTAwJTtsZWZ0OjUwJTt0cmFuc2Zvcm06dHJhbnNsYXRlWCgtNTAlKTtmbGV4LWRpcmVjdGlvbjpjb2x1bW47YWxpZ24taXRlbXM6Y2VudGVyO2dhcDo1cHg7bWFyZ2luLXRvcDo4cHg7d2hpdGUtc3BhY2U6bm93cmFwO3otaW5kZXg6Mn0KLnRpcy1pdGVtLnRpcy10b3AgLnRpcy10YntkaXNwbGF5OmZsZXh9Ci50aXMtcm93e2Rpc3BsYXk6ZmxleDtnYXA6MnB4O2JhY2tncm91bmQ6I2ZmZjtib3JkZXItcmFkaXVzOjI0cHg7cGFkZGluZzo1cHggOHB4O2JvcmRlcjoxcHggc29saWQgI2U1ZTdlYjtib3gtc2hhZG93OjAgMnB4IDE0cHggcmdiYSgwLDAsMCwuMSl9Ci50aXMtYnRue2JhY2tncm91bmQ6bm9uZTtib3JkZXI6bm9uZTtjb2xvcjojMzc0MTUxO2ZvbnQtc2l6ZToxMXB4O2N1cnNvcjpwb2ludGVyO3BhZGRpbmc6NHB4IDlweDtib3JkZXItcmFkaXVzOjE0cHg7d2hpdGUtc3BhY2U6bm93cmFwO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjVweDtmb250LXdlaWdodDo1MDA7bGluZS1oZWlnaHQ6MX0KLnRpcy1idG46aG92ZXJ7YmFja2dyb3VuZDojZjNmNGY2fQoudGlzLWJ0biBzdmd7d2lkdGg6MTFweDtoZWlnaHQ6MTFweDtmbGV4LXNocmluazowfQoudGlzLWJ0bi50aXMtc3p7Y29sb3I6IzdjM2FlZH0udGlzLWJ0bi50aXMtdGJne2NvbG9yOiMyNTYzZWJ9LnRpcy1idG4udGlzLXR0b3B7Y29sb3I6IzA1OTY2OX0udGlzLWJ0bi50aXMtdGRlbHtjb2xvcjojZGMyNjI2fQoudGlzLWRpdnt3aWR0aDoxcHg7aGVpZ2h0OjE2cHg7YmFja2dyb3VuZDojZTVlN2ViO2FsaWduLXNlbGY6Y2VudGVyO21hcmdpbjowIDJweH0KLnRpcy10aXtwb3NpdGlvbjpyZWxhdGl2ZTthc3BlY3QtcmF0aW86MTtib3JkZXItcmFkaXVzOjhweDtvdmVyZmxvdzpoaWRkZW47Y3Vyc29yOnBvaW50ZXI7Ym9yZGVyOjEuNXB4IHNvbGlkICNmM2Y0ZjY7YmFja2dyb3VuZDojZjlmYWZifQoudGlzLXRpOmhvdmVye2JvcmRlci1jb2xvcjojMjU2M2VifQoudGlzLXRpIGltZ3t3aWR0aDoxMDAlO2hlaWdodDoxMDAlO29iamVjdC1maXQ6Y292ZXI7cG9pbnRlci1ldmVudHM6bm9uZX0KLnRpcy10ZHtwb3NpdGlvbjphYnNvbHV0ZTt0b3A6MnB4O3JpZ2h0OjJweDtiYWNrZ3JvdW5kOnJnYmEoMjU1LDI1NSwyNTUsLjkpO2NvbG9yOiNkYzI2MjY7Ym9yZGVyOm5vbmU7Ym9yZGVyLXJhZGl1czo1MCU7d2lkdGg6MTZweDtoZWlnaHQ6MTZweDtjdXJzb3I6cG9pbnRlcjtkaXNwbGF5Om5vbmU7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpjZW50ZXJ9Ci50aXMtdGk6aG92ZXIgLnRpcy10ZHtkaXNwbGF5OmZsZXh9Ci50aXMtdGQgc3Zne3dpZHRoOjhweDtoZWlnaHQ6OHB4fQo8L3N0eWxlPgo8ZGl2IGlkPSJ3cmFwIj4KICA8aGVhZGVyPgogICAgPHNwYW4gY2xhc3M9ImxvZ28iPiYjeDI3MEY7JiN4RkUwRjsg7JiI7IucIOu4lOuhnOq3uDwvc3Bhbj4KICAgIDxuYXY+PGEgaHJlZj0iIyI+7ZmIPC9hPjxhIGhyZWY9IiMiPuy5tO2FjOqzoOumrDwvYT48YSBocmVmPSIjIj7rsKnrqoXroZ08L2E+PC9uYXY+CiAgPC9oZWFkZXI+CiAgPG1haW4+CiAgICA8ZGl2IGNsYXNzPSJjYXJkIj48c3BhbiBjbGFzcz0idGFnIj7snbzsg4E8L3NwYW4+PGgyPuyYpOuKmOydmCDquLDroZ0gJiMxMjc4MDc7PC9oMj48cD7smKTrpbjsqr0g7JWE656YIO2MqOuEkOyXkOyEnCDsnbTrr7jsp4Drpbwg7JeF66Gc65Oc7ZW067O07IS47JqULiDsjbjrhKTsnbzsnYQg7YG066at7ZWY66m0IOugiOydtOyVhOybgyDsnITsl5Ag7Iqk7Yuw7Luk6rCAIOy2lOqwgOuPvOyalC4g65Oc656Y6re466GcIOydtOuPme2VmOqzoCwg7YGs6riw66W8IOyhsOygiO2VnCDrkqQg65Kk66GcIOuztOuCtOq4sOulvCDriITrpbTrqbQg67Cw6rK97JeQIOqzoOygleuQqeuLiOuLpC48L3A+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJjYXJkIj48c3BhbiBjbGFzcz0idGFnIj7sl6ztlok8L3NwYW4+PGgyPuyngOuCnCDso7zrp5Ag6riw66GdPC9oMj48cD7rgqDslKjqsIAg7KKL7JWE7IScIOyYpOuenOunjOyXkCDrgpjrk6TsnbTrpbwg64uk64WA7JmU7Ja07JqULiDrsLDqsr3sl5Ag6rOg7KCV7ZWcIOyKpO2LsOy7pOuKlCDrsKnrrLjsnpDsl5Dqsozrj4Qg67O07Jes7JqUITwvcD48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImNhcmQiPjxzcGFuIGNsYXNzPSJ0YWciPuq/gO2MgTwvc3Bhbj48aDI+67Cw6rK9IOyKpO2LsOy7pCDsgqzsmqkg7YyBICYjMTI4MTYxOzwvaDI+PHA+UE5HIO2IrOuqhSDrsLDqsr0g7J2066+47KeA66W8IOyTsOuptCDtm6jslKwg7J6Q7Jew7Iqk65+s7JuM7JqULiDrsLDqsr0g7Iqk7Yuw7Luk66W8IO2BtOumre2VmOuptCDtjrjsp5Eg7Yi067CU6rCAIOychOuhnCDrlqDsmKTrpoXri4jri6QuPC9wPjwvZGl2PgogIDwvbWFpbj4KPC9kaXY+CjxzY3JpcHQ+CihmdW5jdGlvbigpewp2YXIgSUM9ewptaW51czonPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPicsCnBsdXM6Jzxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PGxpbmUgeDE9IjEyIiB5MT0iNSIgeDI9IjEyIiB5Mj0iMTkiLz48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPicsCnRvQmFjazonPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjEyIiB5MT0iMTciIHgyPSIxMiIgeTI9IjMiLz48cG9seWxpbmUgcG9pbnRzPSI3IDEyIDEyIDE3IDE3IDEyIi8+PGxpbmUgeDE9IjUiIHkxPSIyMSIgeDI9IjE5IiB5Mj0iMjEiLz48L3N2Zz4nLAp0b0Zyb250Oic8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48bGluZSB4MT0iMTIiIHkxPSI3IiB4Mj0iMTIiIHkyPSIyMSIvPjxwb2x5bGluZSBwb2ludHM9IjE3IDEyIDEyIDcgNyAxMiIvPjxsaW5lIHgxPSI1IiB5MT0iMyIgeDI9IjE5IiB5Mj0iMyIvPjwvc3ZnPicsCnRyYXNoOic8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIzIDYgNSA2IDIxIDYiLz48cGF0aCBkPSJNMTkgNmwtMSAxNEg2TDUgNiIvPjxwYXRoIGQ9Ik05IDZWNGg2djIiLz48L3N2Zz4nLAp4Oic8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxsaW5lIHgxPSIxOCIgeTE9IjYiIHgyPSI2IiB5Mj0iMTgiLz48bGluZSB4MT0iNiIgeTE9IjYiIHgyPSIxOCIgeTI9IjE4Ii8+PC9zdmc+Jwp9Owp2YXIgbEJnPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtbGF5ZXItYmcnKTsKdmFyIGxUb3A9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Rpcy1sYXllci10b3AnKTsKdmFyIGZ0PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtZmxvYXQtdGInKTsKdmFyIGZyMT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGlzLWZ0LXIxJyk7CnZhciBmcjI9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Rpcy1mdC1yMicpOwp2YXIgcEVsPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcGFuZWwnKTsKdmFyIHBNaW5pPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcGFuZWwtbWluaScpOwp2YXIgcHQ9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Rpcy1wdGcnKTsKdmFyIHBiPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtcGInKTsKdmFyIHV6PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtdXonKTsKdmFyIGZpPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtZmknKTsKdmFyIHRsPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtdGwnKTsKdmFyIHRlPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtdGUnKTsKdmFyIGNiPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0aXMtY2xyJyk7CmlmKCFsQmd8fCFsVG9wfHwhZnQpcmV0dXJuOwpkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGxCZyk7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChsVG9wKTtkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGZ0KTsKZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChwTWluaSk7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChwRWwpOwp2YXIgd3JhcD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnd3JhcCcpOwppZih3cmFwKXtpZih3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZSh3cmFwKS5wb3NpdGlvbj09PSdzdGF0aWMnKXdyYXAuc3R5bGUucG9zaXRpb249J3JlbGF0aXZlJzt3cmFwLnN0eWxlLnpJbmRleD0nMTAnO30KdmFyIHN0PVtdLGlkYz0wLGFiaWQ9bnVsbDsKaWYocHQpe3B0LmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbigpe3BFbC5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ25vbmUnLCdpbXBvcnRhbnQnKTtwTWluaS5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ2ZsZXgnLCdpbXBvcnRhbnQnKTt9KTt9CnBNaW5pLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbigpe3BNaW5pLnN0eWxlLnNldFByb3BlcnR5KCdkaXNwbGF5Jywnbm9uZScsJ2ltcG9ydGFudCcpO3BFbC5zdHlsZS5zZXRQcm9wZXJ0eSgnZGlzcGxheScsJ2Jsb2NrJywnaW1wb3J0YW50Jyk7fSk7CmlmKHV6JiZmaSl7CiAgdXouYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7ZmkuY2xpY2soKTt9KTsKICB1ei5hZGRFdmVudExpc3RlbmVyKCdkcmFnb3ZlcicsZnVuY3Rpb24oZSl7ZS5wcmV2ZW50RGVmYXVsdCgpO3V6LnN0eWxlLmJvcmRlckNvbG9yPScjMjU2M2ViJzt9KTsKICB1ei5hZGRFdmVudExpc3RlbmVyKCdkcmFnbGVhdmUnLGZ1bmN0aW9uKCl7dXouc3R5bGUuYm9yZGVyQ29sb3I9JyNkMWQ1ZGInO30pOwogIHV6LmFkZEV2ZW50TGlzdGVuZXIoJ2Ryb3AnLGZ1bmN0aW9uKGUpe2UucHJldmVudERlZmF1bHQoKTt1ei5zdHlsZS5ib3JkZXJDb2xvcj0nI2QxZDVkYic7aGYoZS5kYXRhVHJhbnNmZXIuZmlsZXMpO30pOwogIGZpLmFkZEV2ZW50TGlzdGVuZXIoJ2NoYW5nZScsZnVuY3Rpb24oKXtoZihmaS5maWxlcyk7ZmkudmFsdWU9Jyc7fSk7Cn0KZnVuY3Rpb24gaGYoZnMpe0FycmF5LmZyb20oZnMpLmZvckVhY2goZnVuY3Rpb24oZil7aWYoIWYudHlwZS5zdGFydHNXaXRoKCdpbWFnZS8nKSlyZXR1cm47dmFyIHI9bmV3IEZpbGVSZWFkZXIoKTtyLm9ubG9hZD1mdW5jdGlvbihldil7YXRwKGV2LnRhcmdldC5yZXN1bHQsZi5uYW1lKTt9O3IucmVhZEFzRGF0YVVSTChmKTt9KTt9CmZ1bmN0aW9uIGF0cCh1cmwsbmFtZSl7CiAgaWYodGUmJnRlLnBhcmVudE5vZGUpdGUucmVtb3ZlKCk7CiAgdmFyIGl0PWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO2l0LmNsYXNzTmFtZT0ndGlzLXRpJzsKICB2YXIgaW09ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJyk7aW0uc3JjPXVybDtpbS5hbHQ9bmFtZXx8J3MnOwogIHZhciBkbD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdidXR0b24nKTtkbC5jbGFzc05hbWU9J3Rpcy10ZCc7ZGwuaW5uZXJIVE1MPUlDLng7CiAgZGwuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKGUpe2Uuc3RvcFByb3BhZ2F0aW9uKCk7aXQucmVtb3ZlKCk7fSk7CiAgaXQuYXBwZW5kQ2hpbGQoaW0pO2l0LmFwcGVuZENoaWxkKGRsKTsKICBpdC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXtzcCh1cmwpO30pOwogIGlmKHRsKXRsLmFwcGVuZENoaWxkKGl0KTsKfQpmdW5jdGlvbiBoZjIoKXtmdC5zdHlsZS5kaXNwbGF5PSdub25lJztmcjEuaW5uZXJIVE1MPScnO2ZyMi5pbm5lckhUTUw9Jyc7YWJpZD1udWxsO30KZnVuY3Rpb24gc3AodXJsKXsKICB2YXIgaWQ9KytpZGMsc3o9MTIwOwogIHZhciB4PWNsKGlubmVyV2lkdGgvMi1zei8yK3JuKC0xMjAsMTIwKSwxMCxpbm5lcldpZHRoLXN6LTEwKTsKICB2YXIgeT1jbChpbm5lckhlaWdodC8yLXN6LzIrcm4oLTgwLDgwKSwxMCxpbm5lckhlaWdodC1zei0xMCk7CiAgdmFyIHc9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7dy5jbGFzc05hbWU9J3Rpcy1pdGVtIHRpcy10b3AnO3cuc3R5bGUubGVmdD14KydweCc7dy5zdHlsZS50b3A9eSsncHgnOwogIHZhciBpbT1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdpbWcnKTtpbS5jbGFzc05hbWU9J3Rpcy1pbWcnO2ltLnNyYz11cmw7aW0uYWx0PSdzJzsKICBpbS5zdHlsZS53aWR0aD1zeisncHgnO2ltLnN0eWxlLmhlaWdodD1zeisncHgnOwogIGltLnN0eWxlLm91dGxpbmU9JzJweCBkYXNoZWQgcmdiYSg4MCwxMzAsMjQwLC43KSc7aW0uc3R5bGUub3V0bGluZU9mZnNldD0nNHB4JzsKICB2YXIgdGI9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7dGIuY2xhc3NOYW1lPSd0aXMtdGInOwogIHZhciBpdD10cnVlOwogIHZhciBkbT1mdW5jdGlvbihlKXtpZihlKWUuc3RvcFByb3BhZ2F0aW9uKCk7c3o9TWF0aC5tYXgoc3otMjAsNDApO2ltLnN0eWxlLndpZHRoPWltLnN0eWxlLmhlaWdodD1zeisncHgnO2lmKGFiaWQ9PT1pZClyZigpO307CiAgdmFyIGRwPWZ1bmN0aW9uKGUpe2lmKGUpZS5zdG9wUHJvcGFnYXRpb24oKTtzej1NYXRoLm1pbihzeisyMCw1MDApO2ltLnN0eWxlLndpZHRoPWltLnN0eWxlLmhlaWdodD1zeisncHgnO2lmKGFiaWQ9PT1pZClyZigpO307CiAgdmFyIGRiPWZ1bmN0aW9uKGUpewogICAgaWYoZSllLnN0b3BQcm9wYWdhdGlvbigpO2lmKCFpdClyZXR1cm47aXQ9ZmFsc2U7CiAgICB2YXIgbD1wYXJzZUludCh3LnN0eWxlLmxlZnQpfHwwLHQ9cGFyc2VJbnQody5zdHlsZS50b3ApfHwwOwogICAgbFRvcC5yZW1vdmVDaGlsZCh3KTt3LmNsYXNzTmFtZT0ndGlzLWl0ZW0gdGlzLWJnJzt3LnN0eWxlLmxlZnQ9bCsncHgnO3cuc3R5bGUudG9wPXQrJ3B4JzsKICAgIGltLnN0eWxlLm91dGxpbmU9J25vbmUnO2xCZy5hcHBlbmRDaGlsZCh3KTtoZjIoKTsKICB9OwogIHZhciBkZj1mdW5jdGlvbihlKXsKICAgIGlmKGUpZS5zdG9wUHJvcGFnYXRpb24oKTtpZihpdClyZXR1cm47aXQ9dHJ1ZTsKICAgIHZhciBsPXBhcnNlSW50KHcuc3R5bGUubGVmdCl8fDAsdD1wYXJzZUludCh3LnN0eWxlLnRvcCl8fDA7CiAgICBsQmcucmVtb3ZlQ2hpbGQodyk7dy5jbGFzc05hbWU9J3Rpcy1pdGVtIHRpcy10b3AnO3cuc3R5bGUubGVmdD1sKydweCc7dy5zdHlsZS50b3A9dCsncHgnOwogICAgaW0uc3R5bGUub3V0bGluZT0nMnB4IGRhc2hlZCByZ2JhKDgwLDEzMCwyNDAsLjcpJztpbS5zdHlsZS5vdXRsaW5lT2Zmc2V0PSc0cHgnOwogICAgbFRvcC5hcHBlbmRDaGlsZCh3KTtoZjIoKTsKICB9OwogIHZhciBkZD1mdW5jdGlvbihlKXtpZihlKWUuc3RvcFByb3BhZ2F0aW9uKCk7dy5yZW1vdmUoKTtzdD1zdC5maWx0ZXIoZnVuY3Rpb24ocyl7cmV0dXJuIHMuaWQhPT1pZDt9KTtpZihhYmlkPT09aWQpaGYyKCk7fTsKICB2YXIgcjE9bXIoW21iKElDLm1pbnVzLCd0aXMtYnRuIHRpcy1zeicpLG1iKElDLnBsdXMsJ3Rpcy1idG4gdGlzLXN6JyksbWQoKSxtYihJQy50b0JhY2srJyDrkqTroZwnLCd0aXMtYnRuIHRpcy10YmcnKSxtYihJQy50b0Zyb250Kycg7JWe7Jy866GcJywndGlzLWJ0biB0aXMtdHRvcCcpXSk7CiAgdmFyIHIyPW1yKFttYihJQy50cmFzaCsnIOyCreygnCcsJ3Rpcy1idG4gdGlzLXRkZWwnKV0pOwogIHIxLmNoaWxkcmVuWzBdLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxkbSk7cjEuY2hpbGRyZW5bMV0uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRwKTsKICByMS5jaGlsZHJlblszXS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZGIpO3IxLmNoaWxkcmVuWzRdLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxkZik7CiAgcjIuY2hpbGRyZW5bMF0uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRkKTsKICB0Yi5hcHBlbmRDaGlsZChyMSk7dGIuYXBwZW5kQ2hpbGQocjIpO3cuYXBwZW5kQ2hpbGQoaW0pO3cuYXBwZW5kQ2hpbGQodGIpOwogIGZ1bmN0aW9uIG9mKCl7CiAgICBhYmlkPWlkO2ZyMS5pbm5lckhUTUw9Jyc7ZnIyLmlubmVySFRNTD0nJzsKICAgIHZhciBhPW1iKElDLm1pbnVzLCd0aXMtYnRuIHRpcy1zeicpLGI9bWIoSUMucGx1cywndGlzLWJ0biB0aXMtc3onKTsKICAgIHZhciBjPW1iKElDLnRvRnJvbnQrJyDslZ7snLzroZwnLCd0aXMtYnRuIHRpcy10dG9wJyk7CiAgICB2YXIgZTI9bWIoSUMudHJhc2grJyDsgq3soJwnLCd0aXMtYnRuIHRpcy10ZGVsJyk7CiAgICBhLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxkbSk7Yi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZHApO2MuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRmKTtlMi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZGQpOwogICAgZnIxLmFwcGVuZENoaWxkKGEpO2ZyMS5hcHBlbmRDaGlsZChiKTtmcjEuYXBwZW5kQ2hpbGQobWQoKSk7ZnIxLmFwcGVuZENoaWxkKGMpOwogICAgZnIyLmFwcGVuZENoaWxkKGUyKTsKICAgIHJmKCk7ZnQuc3R5bGUuY3NzVGV4dD0ncG9zaXRpb246Zml4ZWQhaW1wb3J0YW50O3otaW5kZXg6OTk5OTUhaW1wb3J0YW50O2Rpc3BsYXk6ZmxleCFpbXBvcnRhbnQ7ZmxleC1kaXJlY3Rpb246Y29sdW1uIWltcG9ydGFudDthbGlnbi1pdGVtczpjZW50ZXIhaW1wb3J0YW50O2dhcDo1cHghaW1wb3J0YW50O3BvaW50ZXItZXZlbnRzOmFsbCFpbXBvcnRhbnQ7dHJhbnNmb3JtOnRyYW5zbGF0ZVgoLTUwJSkhaW1wb3J0YW50O3doaXRlLXNwYWNlOm5vd3JhcCFpbXBvcnRhbnQ7bGVmdDonK2Z0LnN0eWxlLmxlZnQrJzt0b3A6JytmdC5zdHlsZS50b3ArJzsnOwogIH0KICBmdW5jdGlvbiByZigpe3ZhciBzdz1wYXJzZUZsb2F0KGltLnN0eWxlLndpZHRoKXx8MTIwO2Z0LnN0eWxlLmxlZnQ9KHBhcnNlSW50KHcuc3R5bGUubGVmdCkrc3cvMikrJ3B4JztmdC5zdHlsZS50b3A9TWF0aC5tYXgoMTAscGFyc2VJbnQody5zdHlsZS50b3ApLTk1KSsncHgnO30KICBmdW5jdGlvbiBnYigpe3ZhciBseD1wYXJzZUludCh3LnN0eWxlLmxlZnQpfHwwLGx5PXBhcnNlSW50KHcuc3R5bGUudG9wKXx8MDt2YXIgc3c9cGFyc2VGbG9hdChpbS5zdHlsZS53aWR0aCl8fDEyMCxzaD1wYXJzZUZsb2F0KGltLnN0eWxlLmhlaWdodCl8fDEyMDtyZXR1cm57bGVmdDpseCx0b3A6bHkscmlnaHQ6bHgrc3csYm90dG9tOmx5K3NofTt9CiAgZHJhZyh3LGZ1bmN0aW9uKCl7cmV0dXJuICFpdDt9KTsKICBsVG9wLmFwcGVuZENoaWxkKHcpOwogIHN0LnB1c2goe2lkOmlkLGVsOncsZ2V0Qm91bmRzOmdiLG9wZW5GbG9hdGluZzpvZixpc1RvcDpmdW5jdGlvbigpe3JldHVybiBpdDt9fSk7CiAgdy5zdHlsZS50cmFuc2Zvcm09J3NjYWxlKDApJzt3LnN0eWxlLnRyYW5zaXRpb249J3RyYW5zZm9ybSAwLjIycyBjdWJpYy1iZXppZXIoLjM0LDEuNTYsLjY0LDEpJzsKICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoZnVuY3Rpb24oKXt3LnN0eWxlLnRyYW5zZm9ybT0nc2NhbGUoMSknO30pOwp9CmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlZG93bicsZnVuY3Rpb24oZSl7CiAgaWYoZnQuY29udGFpbnMoZS50YXJnZXQpKXJldHVybjsKICBpZihwRWwmJmUudGFyZ2V0LmNsb3Nlc3QmJmUudGFyZ2V0LmNsb3Nlc3QoJyN0aXMtcGFuZWwnKSlyZXR1cm47CiAgaWYoZS50YXJnZXQuY2xvc2VzdCYmZS50YXJnZXQuY2xvc2VzdCgnI3Rpcy1wYW5lbC1taW5pJykpcmV0dXJuOwogIGlmKGUudGFyZ2V0LmNsb3Nlc3QmJmUudGFyZ2V0LmNsb3Nlc3QoJy50aXMtaXRlbS50aXMtdG9wJykpcmV0dXJuOwogIHZhciBjeD1lLmNsaWVudFgsY3k9ZS5jbGllbnRZOwogIHZhciBibD1zdC5maWx0ZXIoZnVuY3Rpb24ocyl7cmV0dXJuIXMuaXNUb3AoKTt9KTt2YXIgaGl0PW51bGw7CiAgZm9yKHZhciBpPWJsLmxlbmd0aC0xO2k+PTA7aS0tKXt2YXIgYj1ibFtpXS5nZXRCb3VuZHMoKTtpZihjeD49Yi5sZWZ0JiZjeDw9Yi5yaWdodCYmY3k+PWIudG9wJiZjeTw9Yi5ib3R0b20pe2hpdD1ibFtpXTticmVhazt9fQogIGlmKGhpdCl7YWJpZD09PWhpdC5pZD9oZjIoKTpoaXQub3BlbkZsb2F0aW5nKCk7fWVsc2V7aGYyKCk7fQp9KTsKZnVuY3Rpb24gZHJhZyhlbCxsayl7CiAgdmFyIGFjPWZhbHNlLHN4LHN5LGV4LGV5OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlZG93bicsZnVuY3Rpb24oZSl7aWYoZS50YXJnZXQuY2xvc2VzdCYmZS50YXJnZXQuY2xvc2VzdCgnLnRpcy1idG4nKSlyZXR1cm47ZS5wcmV2ZW50RGVmYXVsdCgpO2lmKGxrKCkpcmV0dXJuO2FjPXRydWU7c3g9ZS5jbGllbnRYO3N5PWUuY2xpZW50WTtleD1wYXJzZUludChlbC5zdHlsZS5sZWZ0KXx8MDtleT1wYXJzZUludChlbC5zdHlsZS50b3ApfHwwO2VsLnN0eWxlLnRyYW5zaXRpb249J25vbmUnO30pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoJ3RvdWNoc3RhcnQnLGZ1bmN0aW9uKGUpe2lmKGUudGFyZ2V0LmNsb3Nlc3QmJmUudGFyZ2V0LmNsb3Nlc3QoJy50aXMtYnRuJykpcmV0dXJuO2lmKGxrKCkpcmV0dXJuO2FjPXRydWU7c3g9ZS50b3VjaGVzWzBdLmNsaWVudFg7c3k9ZS50b3VjaGVzWzBdLmNsaWVudFk7ZXg9cGFyc2VJbnQoZWwuc3R5bGUubGVmdCl8fDA7ZXk9cGFyc2VJbnQoZWwuc3R5bGUudG9wKXx8MDtlbC5zdHlsZS50cmFuc2l0aW9uPSdub25lJzt9LHtwYXNzaXZlOnRydWV9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdtb3VzZW1vdmUnLGZ1bmN0aW9uKGUpe2lmKCFhYylyZXR1cm47ZWwuc3R5bGUubGVmdD1jbChleCtlLmNsaWVudFgtc3gsMCxpbm5lcldpZHRoLTYwKSsncHgnO2VsLnN0eWxlLnRvcD1jbChleStlLmNsaWVudFktc3ksMCxpbm5lckhlaWdodC02MCkrJ3B4Jzt9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCd0b3VjaG1vdmUnLGZ1bmN0aW9uKGUpe2lmKCFhYylyZXR1cm47ZWwuc3R5bGUubGVmdD1jbChleCtlLnRvdWNoZXNbMF0uY2xpZW50WC1zeCwwLGlubmVyV2lkdGgtNjApKydweCc7ZWwuc3R5bGUudG9wPWNsKGV5K2UudG91Y2hlc1swXS5jbGllbnRZLXN5LDAsaW5uZXJIZWlnaHQtNjApKydweCc7fSx7cGFzc2l2ZTp0cnVlfSk7CiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignbW91c2V1cCcsZnVuY3Rpb24oKXtpZighYWMpcmV0dXJuO2FjPWZhbHNlO30pOwogIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ3RvdWNoZW5kJyxmdW5jdGlvbigpe2lmKCFhYylyZXR1cm47YWM9ZmFsc2U7fSk7Cn0KaWYoY2IpY2IuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7c3QuZm9yRWFjaChmdW5jdGlvbihzKXtzLmVsLnJlbW92ZSgpO30pO3N0PVtdO2hmMigpO30pOwpmdW5jdGlvbiBjbCh2LG1uLG14KXtyZXR1cm4gTWF0aC5tYXgobW4sTWF0aC5taW4obXgsdikpO30KZnVuY3Rpb24gcm4obW4sbXgpe3JldHVybiBtbitNYXRoLnJhbmRvbSgpKihteC1tbik7fQpmdW5jdGlvbiBtYihodG1sLGNscyl7dmFyIGI9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnYnV0dG9uJyk7Yi5jbGFzc05hbWU9Y2xzO2IuaW5uZXJIVE1MPWh0bWw7cmV0dXJuIGI7fQpmdW5jdGlvbiBtcihjaCl7dmFyIHI9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7ci5jbGFzc05hbWU9J3Rpcy1yb3cnO2NoLmZvckVhY2goZnVuY3Rpb24oYyl7ci5hcHBlbmRDaGlsZChjKTt9KTtyZXR1cm4gcjt9CmZ1bmN0aW9uIG1kKCl7dmFyIGQ9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7ZC5jbGFzc05hbWU9J3Rpcy1kaXYnO3JldHVybiBkO30KfSkoKTsKPC9zY3JpcHQ+CjwvYm9keT48L2h0bWw+');
 
-<div id="tis-layer-bg"></div>
-<div id="tis-layer-top"></div>
-<div id="tis-float-tb">
-  <div class="tis-row" id="tis-ft-r1"></div>
-  <div class="tis-row" id="tis-ft-r2"></div>
-</div>
-
-<s_if_var_by name="by" val="owner">
-<div id="tis-panel">
-  <div id="tis-ph">
-    <span id="tis-pt">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      스티커 관리
-    </span>
-    <button id="tis-ptg" title="접기">
-      <svg id="tis-tgi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-  </div>
-  <div id="tis-pb">
-    <div id="tis-uz">
-      <div class="tis-ui">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-      </div>
-      <div class="tis-ut">클릭하거나 이미지를 끌어다 놓으세요</div>
-      <div class="tis-us">PNG · JPG · GIF · WebP</div>
-    </div>
-    <input type="file" id="tis-fi" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
-    <div id="tis-tl"><div id="tis-te">업로드한 이미지가 여기에 표시됩니다</div></div>
-    <hr class="tis-pdiv">
-    <p class="tis-tip">
-      썸네일 클릭 → 레이아웃 <span class="tis-hl">위</span>에 추가<br>
-      <span class="tis-hl">뒤로</span> → 배경 이동 | <span class="tis-hl">앞으로</span> → 전경 복귀<br>
-      배경 스티커 클릭 → 편집 툴바 팝업
-    </p>
-    <button id="tis-clr">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
-      배경 스티커 전체 삭제
-    </button>
-  </div>
-</div>
-</s_if_var_by>
-
-<script>
-(function(){
-/* ── 핵심: 티스토리 레이아웃 wrapper에 z-index 자동 적용 ─────────────
-   스킨마다 wrapper ID가 달라서 수동으로 찾는 대신,
-   JS가 직접 주요 wrapper 후보를 찾아 z-index를 주입합니다. */
-(function fixWrapZIndex(){
-  var candidates=['#wrap','#wrapper','#container','#content','#contents',
-                  '#layout','#tt-body-page','#tt-wrap','#kakaoContent'];
-  for(var i=0;i<candidates.length;i++){
-    var el=document.querySelector(candidates[i]);
-    if(el){
-      var cs=window.getComputedStyle(el);
-      /* position이 없으면 relative로, z-index가 auto면 10으로 */
-      if(cs.position==='static') el.style.position='relative';
-      if(cs.zIndex==='auto'||parseInt(cs.zIndex)<10) el.style.zIndex='10';
-      break;
-    }
-  }
-  /* 위 후보 중 없으면 body 바로 아래 첫 번째 div에 적용 */
-  if(!document.querySelector(candidates.join(','))){
-    var first=document.body.querySelector(':scope > div');
-    if(first){
-      if(window.getComputedStyle(first).position==='static') first.style.position='relative';
-      first.style.zIndex='10';
-    }
-  }
-})();
-
-const IC={minus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,plus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,toBack:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><polyline points="7 12 12 17 17 12"/><line x1="5" y1="21" x2="19" y2="21"/></svg>\`,toFront:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="7" x2="12" y2="21"/><polyline points="17 12 12 7 7 12"/><line x1="5" y1="3" x2="19" y2="3"/></svg>\`,pin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>\`,unpin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/><path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12"/><path d="M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47"/></svg>\`,trash:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>\`,x:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>\`};
-
-/* null-safe 요소 참조 */
-const lBg=document.getElementById('tis-layer-bg');
-const lTop=document.getElementById('tis-layer-top');
-const ft=document.getElementById('tis-float-tb');
-const fr1=document.getElementById('tis-ft-r1');
-const fr2=document.getElementById('tis-ft-r2');
-const pEl=document.getElementById('tis-panel');
-const pt=document.getElementById('tis-ptg');
-const ti=document.getElementById('tis-tgi');
-const pb=document.getElementById('tis-pb');
-const uz=document.getElementById('tis-uz');
-const fi=document.getElementById('tis-fi');
-const tl=document.getElementById('tis-tl');
-const te=document.getElementById('tis-te');
-const cb=document.getElementById('tis-clr');
-
-/* 레이어 없으면 중단 */
-if(!lBg||!lTop||!ft){return;}
-
-let st=[],idc=0,po=true,abid=null;
-
-/* 패널 접기 (패널이 없으면=방문자 모드, 스킵) */
-if(pt&&pEl&&pb&&ti){
-  pt.addEventListener('click',function(){
-    po=!po;
-    pEl.classList.toggle('tis-col',!po);
-    ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');
-    pt.title=po?'접기':'펼치기';
-  });
-}
-
-/* 업로드 (패널 있을 때만) */
-if(uz&&fi){
-  uz.addEventListener('click',function(){fi.click();});
-  uz.addEventListener('dragover',function(e){e.preventDefault();uz.classList.add('tis-dov');});
-  uz.addEventListener('dragleave',function(){uz.classList.remove('tis-dov');});
-  uz.addEventListener('drop',function(e){e.preventDefault();uz.classList.remove('tis-dov');hf(e.dataTransfer.files);});
-  fi.addEventListener('change',function(){hf(fi.files);fi.value='';});
-}
-function hf(fs){Array.from(fs).forEach(function(f){if(!f.type.startsWith('image/'))return;var r=new FileReader();r.onload=function(e){atp(e.target.result,f.name);};r.readAsDataURL(f);});}
-function atp(url,name){
-  if(te&&te.parentNode)te.remove();
-  var it=document.createElement('div');it.className='tis-ti';
-  var im=document.createElement('img');im.src=url;im.alt=name||'s';
-  var dl=document.createElement('button');dl.className='tis-td';dl.innerHTML=IC.x;
-  dl.addEventListener('click',function(e){e.stopPropagation();it.remove();});
-  it.append(im,dl);
-  it.addEventListener('click',function(){sp(url);});
-  if(tl)tl.appendChild(it);
-}
-function hf2(){ft.classList.remove('tis-vis');fr1.innerHTML='';fr2.innerHTML='';abid=null;}
-
-function sp(url){
-  var id=++idc;
-  var x=cl(innerWidth/2-60+rn(-120,120),20,innerWidth-160);
-  var y=cl(innerHeight/2-60+rn(-80,80),80,innerHeight-220);
-  var w=document.createElement('div');w.className='tis-item tis-top';
-  w.style.left=x+'px';w.style.top=y+'px';
-  var bg=document.createElement('div');bg.className='tis-pnbg';
-  bg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
-  var im=document.createElement('img');im.className='tis-img';im.src=url;im.alt='s';
-  var tb=document.createElement('div');tb.className='tis-tb';
-  var pn=false,sz=120,it=true;
-  var dm=function(e){if(e)e.stopPropagation();sz=Math.max(sz-20,40);im.style.width=im.style.height=sz+'px';if(abid===id)rf();};
-  var dp=function(e){if(e)e.stopPropagation();sz=Math.min(sz+20,500);im.style.width=im.style.height=sz+'px';if(abid===id)rf();};
-  var db=function(e){if(e)e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.remove('tis-top');w.classList.add('tis-bg');lBg.appendChild(w);hf2();};
-  var df=function(e){if(e)e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.remove('tis-bg');w.classList.add('tis-top');lTop.appendChild(w);hf2();};
-  var dpin=function(e){if(e)e.stopPropagation();pn=!pn;w.classList.toggle('tis-pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정');if(abid===id)of();};
-  var dd=function(e){if(e)e.stopPropagation();w.remove();st=st.filter(function(s){return s.id!==id;});if(abid===id)hf2();};
-  var ipb=mb(IC.pin+' 고정','tis-btn tis-tpin');
-  var r1=mr([mb(IC.minus,'tis-btn tis-sz'),mb(IC.plus,'tis-btn tis-sz'),md(),mb(IC.toBack+' 뒤로','tis-btn tis-tbg'),mb(IC.toFront+' 앞으로','tis-btn tis-ttop')]);
-  var r2=mr([ipb,mb(IC.trash+' 삭제','tis-btn tis-tdel')]);
-  r1.children[0].addEventListener('click',dm);r1.children[1].addEventListener('click',dp);
-  r1.children[3].addEventListener('click',db);r1.children[4].addEventListener('click',df);
-  ipb.addEventListener('click',dpin);r2.children[1].addEventListener('click',dd);
-  tb.append(r1,r2);w.append(bg,im,tb);
-  function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';
-    var a=mb(IC.minus,'tis-btn tis-sz'),b=mb(IC.plus,'tis-btn tis-sz'),
-        c=mb(IC.toFront+' 앞으로','tis-btn tis-ttop'),
-        d2=mb((pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정'),'tis-btn tis-tpin'),
-        e2=mb(IC.trash+' 삭제','tis-btn tis-tdel');
-    a.addEventListener('click',dm);b.addEventListener('click',dp);
-    c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);
-    [a,b,md(),c].forEach(function(n){fr1.appendChild(n);});
-    [d2,e2].forEach(function(n){fr2.appendChild(n);});
-    rf();ft.classList.add('tis-vis');}
-  function rf(){var sw=parseFloat(im.style.width)||120;ft.style.left=(parseInt(w.style.left)+sw/2)+'px';ft.style.top=Math.max(10,parseInt(w.style.top)-95)+'px';}
-  function gb(){var lx=parseInt(w.style.left)||0,ly=parseInt(w.style.top)||0,sw=parseFloat(im.style.width)||120,sh=parseFloat(im.style.height)||120;return{left:lx,top:ly,right:lx+sw,bottom:ly+sh};}
-  drag(w,function(){return pn||!it;});
-  lTop.appendChild(w);
-  st.push({id:id,el:w,getBounds:gb,openFloating:of,isTop:function(){return it;}});
-  w.style.transform='scale(0)';w.style.transition='transform 0.22s cubic-bezier(.34,1.56,.64,1)';
-  requestAnimationFrame(function(){w.style.transform='scale(1)';});
-}
-
-document.addEventListener('mousedown',function(e){
-  if(ft.contains(e.target))return;
-  if(pEl&&e.target.closest&&e.target.closest('#tis-panel'))return;
-  if(e.target.closest&&e.target.closest('.tis-item.tis-top'))return;
-  var cx=e.clientX,cy=e.clientY;
-  var bl=st.filter(function(s){return!s.isTop();});
-  var hit=null;
-  for(var i=bl.length-1;i>=0;i--){var b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}
-  if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}
-});
-
-function drag(el,lk){
-  var ac=false,sx,sy,ex,ey;
-  var s2=function(cx,cy){if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('tis-drag');el.style.transition='none';};
-  var mv=function(cx,cy){if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};
-  var sp2=function(){if(!ac)return;ac=false;el.classList.remove('tis-drag');};
-  el.addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.tis-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});
-  el.addEventListener('touchstart',function(e){if(e.target.closest&&e.target.closest('.tis-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-  document.addEventListener('mousemove',function(e){mv(e.clientX,e.clientY);});
-  document.addEventListener('touchmove',function(e){mv(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-  document.addEventListener('mouseup',sp2);
-  document.addEventListener('touchend',sp2);
-}
-
-if(cb)cb.addEventListener('click',function(){st.forEach(function(s){s.el.remove();});st=[];hf2();});
-
-function cl(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
-function rn(mn,mx){return mn+Math.random()*(mx-mn);}
-function mb(html,cls){var b=document.createElement('button');b.className=cls;b.innerHTML=html;return b;}
-function mr(ch){var r=document.createElement('div');r.className='tis-row';ch.forEach(function(c){r.appendChild(c);});return r;}
-function md(){var d=document.createElement('div');d.className='tis-div';return d;}
-})();
-<\/script>`;
-
-/* ══ 예시 페이지 HTML (새 탭에서 Blob URL로 열림) ══ */
-const DEMO_PAGE = "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>\uc608\uc2dc \ube14\ub85c\uadf8</title>\n<style>\n@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');font-weight:400;font-display:swap;}\n@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');font-weight:700;font-display:swap;}\n*{margin:0;padding:0;box-sizing:border-box;}\nbody{font-family:'Pretendard',sans-serif;background:#ede8e0;min-height:100vh;}\n#wrap{position:relative;z-index:10;pointer-events:none;}\nheader{pointer-events:all;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid #e5e7eb;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;}\n.logo{font-weight:700;font-size:16px;color:#111827;}\nnav a{color:#6b7280;text-decoration:none;font-size:13px;margin-left:16px;}\nmain{pointer-events:all;max-width:720px;margin:40px auto;padding:0 20px;}\n.card{background:rgba(255,255,255,0.94);border-radius:14px;padding:24px 28px;margin-bottom:16px;border:1px solid #e5e7eb;}\n.card h2{font-size:17px;color:#111827;margin-bottom:8px;font-weight:700;}\n.card p{font-size:13px;color:#6b7280;line-height:1.75;}\n.tag{display:inline-block;background:#fef3c7;color:#92400e;font-size:11px;padding:2px 8px;border-radius:10px;margin:0 4px 8px 0;font-weight:600;}\n#tis-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}\n#tis-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}\n.tis-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}\n.tis-item.tis-top{cursor:grab}.tis-item.tis-top.tis-drag{cursor:grabbing}\n.tis-item.tis-bg{cursor:pointer}.tis-item.tis-pinned{cursor:default!important}\n.tis-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}\n.tis-item.tis-top:not(.tis-pinned) .tis-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}\n.tis-pnbg{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}\n.tis-pnbg svg{width:11px;height:11px}.tis-item.tis-pinned .tis-pnbg{display:flex}\n.tis-tb{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}\n.tis-item.tis-top .tis-tb{display:flex}\n.tis-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}\n.tis-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}\n.tis-btn:hover{background:#f3f4f6;color:#111827}.tis-btn svg{width:11px;height:11px;flex-shrink:0}\n.tis-btn.tis-sz{color:#7c3aed}.tis-btn.tis-sz:hover{background:#f5f3ff}\n.tis-btn.tis-tbg{color:#2563eb}.tis-btn.tis-tbg:hover{background:#eff6ff}\n.tis-btn.tis-ttop{color:#059669}.tis-btn.tis-ttop:hover{background:#ecfdf5}\n.tis-btn.tis-tpin{color:#d97706}.tis-btn.tis-tpin:hover{background:#fffbeb}\n.tis-btn.tis-tdel{color:#dc2626}.tis-btn.tis-tdel:hover{background:#fef2f2}\n.tis-div{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}\n#tis-float-tb{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}\n#tis-float-tb.tis-vis{display:flex}\n#tis-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}\n#tis-panel.tis-col{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}\n#tis-panel.tis-col #tis-ph{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}\n#tis-panel.tis-col #tis-pt{display:none}\n#tis-panel.tis-col #tis-ptg{width:100%;height:100%;border-radius:50%;margin:0}\n#tis-panel.tis-col #tis-pb{display:none}\n#tis-ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}\n#tis-pt{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}\n#tis-pt svg{width:14px;height:14px;flex-shrink:0}\n#tis-ptg{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}\n#tis-ptg:hover{background:#f3f4f6;color:#374151}#tis-ptg svg{width:12px;height:12px}\n#tis-pb.tis-hid{display:none}\n#tis-uz{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}\n#tis-uz:hover,#tis-uz.tis-dov{border-color:#2563eb;background:#eff6ff}\n#tis-uz .tis-ui{margin-bottom:6px;color:#9ca3af}#tis-uz .tis-ui svg{width:24px;height:24px}\n#tis-uz .tis-ut{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}\n#tis-uz .tis-us{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}\n#tis-fi{display:none}\n#tis-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}\n#tis-tl::-webkit-scrollbar{width:3px}#tis-tl::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}\n#tis-te{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}\n.tis-ti{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}\n.tis-ti:hover{border-color:#2563eb}.tis-ti img{width:100%;height:100%;object-fit:cover;pointer-events:none}\n.tis-td{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}\n.tis-ti:hover .tis-td{display:flex}.tis-td svg{width:8px;height:8px}\n.tis-pdiv{border:none;border-top:1px solid #f3f4f6;margin:12px 0}\n.tis-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}\n.tis-tip .tis-hl{color:#2563eb;font-weight:500}\n#tis-clr{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}\n#tis-clr:hover{background:#fee2e2}#tis-clr svg{width:12px;height:12px}\n</style>\n</head>\n<body>\n<div id=\"tis-layer-bg\"></div>\n<div id=\"tis-layer-top\"></div>\n<div id=\"tis-float-tb\"><div class=\"tis-row\" id=\"tis-ft-r1\"></div><div class=\"tis-row\" id=\"tis-ft-r2\"></div></div>\n<div id=\"wrap\">\n  <header>\n    <span class=\"logo\">&#x270F;&#xFE0F; \uc608\uc2dc \ube14\ub85c\uadf8</span>\n    <nav><a href=\"#\">\ud648</a><a href=\"#\">\uce74\ud14c\uace0\ub9ac</a><a href=\"#\">\ubc29\uba85\ub85d</a></nav>\n  </header>\n  <main>\n    <div class=\"card\">\n      <span class=\"tag\">\uc77c\uc0c1</span>\n      <h2>\uc624\ub298\uc758 \uae30\ub85d &#127807;</h2>\n      <p>\uc624\ub978\ucabd \uc544\ub798 \ud328\ub110\uc5d0\uc11c \uc774\ubbf8\uc9c0\ub97c \uc5c5\ub85c\ub4dc\ud574\ubcf4\uc138\uc694! \uc378\ub124\uc77c\uc744 \ud074\ub9ad\ud558\uba74 \uc774 \ub808\uc774\uc544\uc6c3 \uc704\uc5d0 \uc2a4\ud2f0\ucee4\uac00 \ucd94\uac00\ub3fc\uc694. \ub4dc\ub798\uadf8\ub85c \uc774\ub3d9\ud558\uace0, \ud06c\uae30\ub97c \uc870\uc808\ud55c \ub4a4 \ub4a4\ub85c \ubcf4\ub0b4\uae30\ub97c \ub204\ub974\uba74 \ubc30\uacbd\uc5d0 \uace0\uc815\ub429\ub2c8\ub2e4.</p>\n    </div>\n    <div class=\"card\">\n      <span class=\"tag\">\uc5ec\ud589</span>\n      <h2>\uc9c0\ub09c \uc8fc\ub9d0 \uae30\ub85d</h2>\n      <p>\ub0a0\uc528\uac00 \uc88b\uc544\uc11c \uc624\ub79c\ub9cc\uc5d0 \ub098\ub4e4\uc774\ub97c \ub2e4\ub140\uc654\uc5b4\uc694. \uc0ac\uc9c4\ub3c4 \ub9ce\uc774 \ucc0d\uace0, \ub9db\uc788\ub294 \uac83\ub3c4 \ub9ce\uc774 \uba39\uc5c8\ub2f5\ub2c8\ub2e4. \ubc30\uacbd\uc5d0 \uace0\uc815\ud55c \uc2a4\ud2f0\ucee4\ub294 \ubc29\ubb38\uc790\uc5d0\uac8c\ub3c4 \ubcf4\uc5ec\uc694!</p>\n    </div>\n    <div class=\"card\">\n      <span class=\"tag\">\uafc0\ud301</span>\n      <h2>\ubc30\uacbd \uc2a4\ud2f0\ucee4 \uc0ac\uc6a9 \ud301 &#128161;</h2>\n      <p>PNG \ud22c\uba85 \ubc30\uacbd \uc774\ubbf8\uc9c0\ub97c \uc4f0\uba74 \ud6e8\uc52c \uc790\uc5f0\uc2a4\ub7ec\uc6cc\uc694. \ubc30\uacbd \uc2a4\ud2f0\ucee4\ub97c \ud074\ub9ad\ud558\uba74 \ud3b8\uc9d1 \ud234\ubc14\uac00 \uc704\ub85c \ub5a0\uc624\ub985\ub2c8\ub2e4. \uace0\uc815 \ubc84\ud2bc\uc73c\ub85c \uc704\uce58\ub97c \uc7a0\uae00 \uc218\ub3c4 \uc788\uc5b4\uc694.</p>\n    </div>\n  </main>\n</div>\n<div id=\"tis-panel\">\n  <div id=\"tis-ph\">\n    <span id=\"tis-pt\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#2563eb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"width:14px;height:14px;flex-shrink:0\"><polygon points=\"12 2 2 7 12 12 22 7 12 2\"/><polyline points=\"2 17 12 22 22 17\"/><polyline points=\"2 12 12 17 22 12\"/></svg>\n      \uc2a4\ud2f0\ucee4 \uad00\ub9ac\n    </span>\n    <button id=\"tis-ptg\" title=\"\uc811\uae30\">\n      <svg id=\"tis-tgi\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 12 15 18 9\"/></svg>\n    </button>\n  </div>\n  <div id=\"tis-pb\">\n    <div id=\"tis-uz\">\n      <div class=\"tis-ui\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"16 16 12 12 8 16\"/><line x1=\"12\" y1=\"12\" x2=\"12\" y2=\"21\"/><path d=\"M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3\"/></svg></div>\n      <div class=\"tis-ut\">\ud074\ub9ad\ud558\uac70\ub098 \uc774\ubbf8\uc9c0\ub97c \ub04c\uc5b4\ub2e4 \ub193\uc73c\uc138\uc694</div>\n      <div class=\"tis-us\">PNG \u00b7 JPG \u00b7 GIF \u00b7 WebP</div>\n    </div>\n    <input type=\"file\" id=\"tis-fi\" accept=\"image/png,image/jpeg,image/gif,image/webp\" multiple>\n    <div id=\"tis-tl\"><div id=\"tis-te\">\uc5c5\ub85c\ub4dc\ud55c \uc774\ubbf8\uc9c0\uac00 \uc5ec\uae30\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4</div></div>\n    <hr class=\"tis-pdiv\">\n    <p class=\"tis-tip\">\uc378\ub124\uc77c \ud074\ub9ad \u2192 \ub808\uc774\uc544\uc6c3 <span class=\"tis-hl\">\uc704</span>\uc5d0 \ucd94\uac00<br><span class=\"tis-hl\">\ub4a4\ub85c</span> \u2192 \ubc30\uacbd \uc774\ub3d9 | <span class=\"tis-hl\">\uc55e\uc73c\ub85c</span> \u2192 \uc804\uacbd \ubcf5\uadc0<br>\ubc30\uacbd \uc2a4\ud2f0\ucee4 \ud074\ub9ad \u2192 \ud3b8\uc9d1 \ud234\ubc14 \ud31d\uc5c5</p>\n    <button id=\"tis-clr\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6l-1 14H6L5 6\"/><path d=\"M9 6V4h6v2\"/></svg>\n      \ubc30\uacbd \uc2a4\ud2f0\ucee4 \uc804\uccb4 \uc0ad\uc81c\n    </button>\n  </div>\n</div>\n<script>\n(function(){\n/* \u2500\u2500 \ud575\uc2ec: \ud2f0\uc2a4\ud1a0\ub9ac \ub808\uc774\uc544\uc6c3 wrapper\uc5d0 z-index \uc790\ub3d9 \uc801\uc6a9 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n   \uc2a4\ud0a8\ub9c8\ub2e4 wrapper ID\uac00 \ub2ec\ub77c\uc11c \uc218\ub3d9\uc73c\ub85c \ucc3e\ub294 \ub300\uc2e0,\n   JS\uac00 \uc9c1\uc811 \uc8fc\uc694 wrapper \ud6c4\ubcf4\ub97c \ucc3e\uc544 z-index\ub97c \uc8fc\uc785\ud569\ub2c8\ub2e4. */\n(function fixWrapZIndex(){\n  var candidates=['#wrap','#wrapper','#container','#content','#contents',\n                  '#layout','#tt-body-page','#tt-wrap','#kakaoContent'];\n  for(var i=0;i<candidates.length;i++){\n    var el=document.querySelector(candidates[i]);\n    if(el){\n      var cs=window.getComputedStyle(el);\n      /* position\uc774 \uc5c6\uc73c\uba74 relative\ub85c, z-index\uac00 auto\uba74 10\uc73c\ub85c */\n      if(cs.position==='static') el.style.position='relative';\n      if(cs.zIndex==='auto'||parseInt(cs.zIndex)<10) el.style.zIndex='10';\n      break;\n    }\n  }\n  /* \uc704 \ud6c4\ubcf4 \uc911 \uc5c6\uc73c\uba74 body \ubc14\ub85c \uc544\ub798 \uccab \ubc88\uc9f8 div\uc5d0 \uc801\uc6a9 */\n  if(!document.querySelector(candidates.join(','))){\n    var first=document.body.querySelector(':scope > div');\n    if(first){\n      if(window.getComputedStyle(first).position==='static') first.style.position='relative';\n      first.style.zIndex='10';\n    }\n  }\n})();\n\nconst IC={minus:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg>`,plus:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg>`,toBack:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"3\"/><polyline points=\"7 12 12 17 17 12\"/><line x1=\"5\" y1=\"21\" x2=\"19\" y2=\"21\"/></svg>`,toFront:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"7\" x2=\"12\" y2=\"21\"/><polyline points=\"17 12 12 7 7 12\"/><line x1=\"5\" y1=\"3\" x2=\"19\" y2=\"3\"/></svg>`,pin:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"22\"/><path d=\"M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z\"/></svg>`,unpin:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"2\" y1=\"2\" x2=\"22\" y2=\"22\"/><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"22\"/><path d=\"M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12\"/><path d=\"M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47\"/></svg>`,trash:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6l-1 14H6L5 6\"/><path d=\"M9 6V4h6v2\"/></svg>`,x:`<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/></svg>`};\n\n/* null-safe \uc694\uc18c \ucc38\uc870 */\nconst lBg=document.getElementById('tis-layer-bg');\nconst lTop=document.getElementById('tis-layer-top');\nconst ft=document.getElementById('tis-float-tb');\nconst fr1=document.getElementById('tis-ft-r1');\nconst fr2=document.getElementById('tis-ft-r2');\nconst pEl=document.getElementById('tis-panel');\nconst pt=document.getElementById('tis-ptg');\nconst ti=document.getElementById('tis-tgi');\nconst pb=document.getElementById('tis-pb');\nconst uz=document.getElementById('tis-uz');\nconst fi=document.getElementById('tis-fi');\nconst tl=document.getElementById('tis-tl');\nconst te=document.getElementById('tis-te');\nconst cb=document.getElementById('tis-clr');\n\n/* \ub808\uc774\uc5b4 \uc5c6\uc73c\uba74 \uc911\ub2e8 */\nif(!lBg||!lTop||!ft){return;}\n\nlet st=[],idc=0,po=true,abid=null;\n\n/* \ud328\ub110 \uc811\uae30 (\ud328\ub110\uc774 \uc5c6\uc73c\uba74=\ubc29\ubb38\uc790 \ubaa8\ub4dc, \uc2a4\ud0b5) */\nif(pt&&pEl&&pb&&ti){\n  pt.addEventListener('click',function(){\n    po=!po;\n    pEl.classList.toggle('tis-col',!po);\n    ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');\n    pt.title=po?'\uc811\uae30':'\ud3bc\uce58\uae30';\n  });\n}\n\n/* \uc5c5\ub85c\ub4dc (\ud328\ub110 \uc788\uc744 \ub54c\ub9cc) */\nif(uz&&fi){\n  uz.addEventListener('click',function(){fi.click();});\n  uz.addEventListener('dragover',function(e){e.preventDefault();uz.classList.add('tis-dov');});\n  uz.addEventListener('dragleave',function(){uz.classList.remove('tis-dov');});\n  uz.addEventListener('drop',function(e){e.preventDefault();uz.classList.remove('tis-dov');hf(e.dataTransfer.files);});\n  fi.addEventListener('change',function(){hf(fi.files);fi.value='';});\n}\nfunction hf(fs){Array.from(fs).forEach(function(f){if(!f.type.startsWith('image/'))return;var r=new FileReader();r.onload=function(e){atp(e.target.result,f.name);};r.readAsDataURL(f);});}\nfunction atp(url,name){\n  if(te&&te.parentNode)te.remove();\n  var it=document.createElement('div');it.className='tis-ti';\n  var im=document.createElement('img');im.src=url;im.alt=name||'s';\n  var dl=document.createElement('button');dl.className='tis-td';dl.innerHTML=IC.x;\n  dl.addEventListener('click',function(e){e.stopPropagation();it.remove();});\n  it.append(im,dl);\n  it.addEventListener('click',function(){sp(url);});\n  if(tl)tl.appendChild(it);\n}\nfunction hf2(){ft.classList.remove('tis-vis');fr1.innerHTML='';fr2.innerHTML='';abid=null;}\n\nfunction sp(url){\n  var id=++idc;\n  var x=cl(innerWidth/2-60+rn(-120,120),20,innerWidth-160);\n  var y=cl(innerHeight/2-60+rn(-80,80),80,innerHeight-220);\n  var w=document.createElement('div');w.className='tis-item tis-top';\n  w.style.left=x+'px';w.style.top=y+'px';\n  var bg=document.createElement('div');bg.className='tis-pnbg';\n  bg.innerHTML='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"22\"/><path d=\"M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z\"/></svg>';\n  var im=document.createElement('img');im.className='tis-img';im.src=url;im.alt='s';\n  var tb=document.createElement('div');tb.className='tis-tb';\n  var pn=false,sz=120,it=true;\n  var dm=function(e){if(e)e.stopPropagation();sz=Math.max(sz-20,40);im.style.width=im.style.height=sz+'px';if(abid===id)rf();};\n  var dp=function(e){if(e)e.stopPropagation();sz=Math.min(sz+20,500);im.style.width=im.style.height=sz+'px';if(abid===id)rf();};\n  var db=function(e){if(e)e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.remove('tis-top');w.classList.add('tis-bg');lBg.appendChild(w);hf2();};\n  var df=function(e){if(e)e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.remove('tis-bg');w.classList.add('tis-top');lTop.appendChild(w);hf2();};\n  var dpin=function(e){if(e)e.stopPropagation();pn=!pn;w.classList.toggle('tis-pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' \ud574\uc81c':' \uace0\uc815');if(abid===id)of();};\n  var dd=function(e){if(e)e.stopPropagation();w.remove();st=st.filter(function(s){return s.id!==id;});if(abid===id)hf2();};\n  var ipb=mb(IC.pin+' \uace0\uc815','tis-btn tis-tpin');\n  var r1=mr([mb(IC.minus,'tis-btn tis-sz'),mb(IC.plus,'tis-btn tis-sz'),md(),mb(IC.toBack+' \ub4a4\ub85c','tis-btn tis-tbg'),mb(IC.toFront+' \uc55e\uc73c\ub85c','tis-btn tis-ttop')]);\n  var r2=mr([ipb,mb(IC.trash+' \uc0ad\uc81c','tis-btn tis-tdel')]);\n  r1.children[0].addEventListener('click',dm);r1.children[1].addEventListener('click',dp);\n  r1.children[3].addEventListener('click',db);r1.children[4].addEventListener('click',df);\n  ipb.addEventListener('click',dpin);r2.children[1].addEventListener('click',dd);\n  tb.append(r1,r2);w.append(bg,im,tb);\n  function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';\n    var a=mb(IC.minus,'tis-btn tis-sz'),b=mb(IC.plus,'tis-btn tis-sz'),\n        c=mb(IC.toFront+' \uc55e\uc73c\ub85c','tis-btn tis-ttop'),\n        d2=mb((pn?IC.unpin:IC.pin)+(pn?' \ud574\uc81c':' \uace0\uc815'),'tis-btn tis-tpin'),\n        e2=mb(IC.trash+' \uc0ad\uc81c','tis-btn tis-tdel');\n    a.addEventListener('click',dm);b.addEventListener('click',dp);\n    c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);\n    [a,b,md(),c].forEach(function(n){fr1.appendChild(n);});\n    [d2,e2].forEach(function(n){fr2.appendChild(n);});\n    rf();ft.classList.add('tis-vis');}\n  function rf(){var sw=parseFloat(im.style.width)||120;ft.style.left=(parseInt(w.style.left)+sw/2)+'px';ft.style.top=Math.max(10,parseInt(w.style.top)-95)+'px';}\n  function gb(){var lx=parseInt(w.style.left)||0,ly=parseInt(w.style.top)||0,sw=parseFloat(im.style.width)||120,sh=parseFloat(im.style.height)||120;return{left:lx,top:ly,right:lx+sw,bottom:ly+sh};}\n  drag(w,function(){return pn||!it;});\n  lTop.appendChild(w);\n  st.push({id:id,el:w,getBounds:gb,openFloating:of,isTop:function(){return it;}});\n  w.style.transform='scale(0)';w.style.transition='transform 0.22s cubic-bezier(.34,1.56,.64,1)';\n  requestAnimationFrame(function(){w.style.transform='scale(1)';});\n}\n\ndocument.addEventListener('mousedown',function(e){\n  if(ft.contains(e.target))return;\n  if(pEl&&e.target.closest&&e.target.closest('#tis-panel'))return;\n  if(e.target.closest&&e.target.closest('.tis-item.tis-top'))return;\n  var cx=e.clientX,cy=e.clientY;\n  var bl=st.filter(function(s){return!s.isTop();});\n  var hit=null;\n  for(var i=bl.length-1;i>=0;i--){var b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}\n  if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}\n});\n\nfunction drag(el,lk){\n  var ac=false,sx,sy,ex,ey;\n  var s2=function(cx,cy){if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('tis-drag');el.style.transition='none';};\n  var mv=function(cx,cy){if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};\n  var sp2=function(){if(!ac)return;ac=false;el.classList.remove('tis-drag');};\n  el.addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.tis-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});\n  el.addEventListener('touchstart',function(e){if(e.target.closest&&e.target.closest('.tis-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});\n  document.addEventListener('mousemove',function(e){mv(e.clientX,e.clientY);});\n  document.addEventListener('touchmove',function(e){mv(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});\n  document.addEventListener('mouseup',sp2);\n  document.addEventListener('touchend',sp2);\n}\n\nif(cb)cb.addEventListener('click',function(){st.forEach(function(s){s.el.remove();});st=[];hf2();});\n\nfunction cl(v,mn,mx){return Math.max(mn,Math.min(mx,v));}\nfunction rn(mn,mx){return mn+Math.random()*(mx-mn);}\nfunction mb(html,cls){var b=document.createElement('button');b.className=cls;b.innerHTML=html;return b;}\nfunction mr(ch){var r=document.createElement('div');r.className='tis-row';ch.forEach(function(c){r.appendChild(c);});return r;}\nfunction md(){var d=document.createElement('div');d.className='tis-div';return d;}\n})();\n</script>\n</body></html>";
-
-/* ══════════════════════════════════════════════════════════
-   파이어베이스 연동 통합 코드
-   ※ 본인의 Firebase 정보로 4곳을 교체하세요
-══════════════════════════════════════════════════════════ */
-const FB_CODE = `<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"><\/script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"><\/script>
-
-<style>
-#tis-layer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#tis-layer-top{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden}
-.tis-item{position:absolute;user-select:none;pointer-events:all;display:flex;flex-direction:column;align-items:center}
-.tis-item.tis-top{cursor:grab}.tis-item.tis-top.tis-drag{cursor:grabbing}
-.tis-item.tis-bg{cursor:pointer}.tis-item.pinned{cursor:default!important}
-.tis-img{display:block;width:120px;height:120px;object-fit:contain;pointer-events:none;border-radius:4px}
-.tis-item.tis-top:not(.tis-pinned) .tis-img{outline:2px dashed rgba(80,130,240,.7);outline-offset:4px}
-.tis-pnbg{display:none;position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:#f59e0b;border-radius:50%;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-.tis-pnbg svg{width:11px;height:11px}.tis-item.pinned .tis-pnbg{display:flex}
-.tis-tb{display:none;flex-direction:column;align-items:center;gap:5px;margin-top:8px}
-.tis-item.tis-top .tis-tb{display:flex}
-.tis-row{display:flex;gap:2px;background:#fff;border-radius:24px;padding:5px 8px;border:1px solid #e5e7eb;box-shadow:0 2px 14px rgba(0,0,0,.1)}
-.tis-btn{background:none;border:none;color:#374151;font-size:11px;cursor:pointer;padding:4px 9px;border-radius:14px;white-space:nowrap;transition:background .12s,color .12s;display:flex;align-items:center;gap:5px;font-weight:500;line-height:1}
-.tis-btn:hover{background:#f3f4f6;color:#111827}.tis-btn svg{width:11px;height:11px;flex-shrink:0}
-.tis-btn.tis-sz{color:#7c3aed}.tis-btn.tis-sz:hover{background:#f5f3ff}
-.tis-btn.tis-tbg{color:#2563eb}.tis-btn.tis-tbg:hover{background:#eff6ff}
-.tis-btn.tis-ttop{color:#059669}.tis-btn.tis-ttop:hover{background:#ecfdf5}
-.tis-btn.tis-tpin{color:#d97706}.tis-btn.tis-tpin:hover{background:#fffbeb}
-.tis-btn.tis-tdel{color:#dc2626}.tis-btn.tis-tdel:hover{background:#fef2f2}
-.tis-div{width:1px;height:16px;background:#e5e7eb;align-self:center;margin:0 2px;flex-shrink:0}
-#tis-float-tb{position:fixed;z-index:99995;display:none;flex-direction:column;align-items:center;gap:5px;pointer-events:all;transform:translateX(-50%)}
-#tis-float-tb.tis-vis{display:flex}
-#tis-panel{position:fixed;bottom:28px;right:28px;z-index:99999;background:#fff;border-radius:18px;padding:18px;border:1px solid #e5e7eb;box-shadow:0 8px 32px rgba(0,0,0,.12);width:276px;transition:width .25s,border-radius .25s,padding .25s}
-#tis-panel.tis-col{width:48px;height:48px;padding:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
-#tis-panel.tis-col #tis-ph{margin:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-#tis-panel.tis-col #tis-pt{display:none}
-#tis-panel.tis-col #tis-ptg{width:100%;height:100%;border-radius:50%;margin:0}
-#tis-panel.tis-col #tis-pb{display:none}
-#tis-ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-#tis-pt{font-size:13px;font-weight:700;color:#111827;display:flex;align-items:center;gap:7px;white-space:nowrap}
-#tis-pt svg{width:14px;height:14px;flex-shrink:0}
-#tis-ptg{background:none;border:none;cursor:pointer;color:#9ca3af;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
-#tis-ptg:hover{background:#f3f4f6;color:#374151}#tis-ptg svg{width:12px;height:12px}
-#tis-pb.tis-hid{display:none}
-#tis-uz{border:1.5px dashed #d1d5db;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
-#tis-uz:hover,#tis-uz.tis-dov{border-color:#2563eb;background:#eff6ff}
-#tis-uz .tis-ui{margin-bottom:6px;color:#9ca3af}#tis-uz .tis-ui svg{width:24px;height:24px}
-#tis-uz .tis-ut{font-size:12px;color:#6b7280;line-height:1.5;font-weight:400}
-#tis-uz .tis-us{font-size:11px;color:#9ca3af;margin-top:3px;font-weight:300}
-#tis-fi{display:none}
-#tis-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;min-height:20px;max-height:156px;overflow-y:auto}
-#tis-tl::-webkit-scrollbar{width:3px}#tis-tl::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-#tis-te{grid-column:1/-1;text-align:center;font-size:11px;color:#d1d5db;padding:10px 0;font-weight:300}
-.tis-ti{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:1.5px solid #f3f4f6;background:#f9fafb;transition:border-color .15s}
-.tis-ti:hover{border-color:#2563eb}.tis-ti img{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.tis-td{position:absolute;top:2px;right:2px;background:rgba(255,255,255,.9);color:#dc2626;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.tis-ti:hover .tis-td{display:flex}.tis-td svg{width:8px;height:8px}
-.tis-pdiv{border:none;border-top:1px solid #f3f4f6;margin:12px 0}
-.tis-tip{font-size:11px;color:#9ca3af;line-height:1.7;margin-bottom:10px;font-weight:300}
-.tis-tip .tis-hl{color:#2563eb;font-weight:500}
-#tis-clr{width:100%;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:10px;padding:8px;font-size:12px;font-weight:500;cursor:pointer;transition:background .1s;display:flex;align-items:center;justify-content:center;gap:6px}
-#tis-clr:hover{background:#fee2e2}#tis-clr svg{width:12px;height:12px}
-</style>
-
-<div id="tis-layer-bg"></div>
-<div id="tis-layer-top"></div>
-<div id="tis-float-tb">
-  <div class="tis-row" id="tis-ft-r1"></div>
-  <div class="tis-row" id="tis-ft-r2"></div>
-</div>
-
-<s_if_var_by name="by" val="owner">
-<div id="tis-panel">
-  <div id="tis-ph">
-    <span id="tis-pt">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      스티커 관리
-    </span>
-    <button id="tis-ptg" title="접기">
-      <svg id="tis-tgi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-  </div>
-  <div id="tis-pb">
-    <div id="tis-uz">
-      <div class="tis-ui">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-      </div>
-      <div class="tis-ut">클릭하거나 이미지를 끌어다 놓으세요</div>
-      <div class="tis-us">PNG · JPG · GIF · WebP</div>
-    </div>
-    <input type="file" id="tis-fi" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
-    <div id="tis-tl"><div id="tis-te">업로드한 이미지가 여기에 표시됩니다</div></div>
-    <hr class="tis-pdiv">
-    <p class="tis-tip">
-      썸네일 클릭 → 레이아웃 <span class="tis-hl">위</span>에 추가<br>
-      <span class="tis-hl">뒤로</span> → 배경 이동 | <span class="tis-hl">앞으로</span> → 전경 복귀<br>
-      배경 스티커 클릭 → 편집 툴바 팝업
-    </p>
-    <button id="tis-clr">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
-      배경 스티커 전체 삭제
-    </button>
-  </div>
-</div>
-</s_if_var_by>
-
-<script>
-(function(){
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ★ 여기를 본인의 Firebase 정보로 수정하세요 ★
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const FB_CONFIG = {
-  apiKey:      "본인의_API_KEY",
-  authDomain:  "본인의_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://본인의_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId:   "본인의_PROJECT_ID"
-};
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-firebase.initializeApp(FB_CONFIG);
-const db = firebase.database();
-const STICKER_REF = db.ref('stickers');
-
-const IC={minus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,plus:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>\`,toBack:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><polyline points="7 12 12 17 17 12"/><line x1="5" y1="21" x2="19" y2="21"/></svg>\`,toFront:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="7" x2="12" y2="21"/><polyline points="17 12 12 7 7 12"/><line x1="5" y1="3" x2="19" y2="3"/></svg>\`,pin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>\`,unpin:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/><path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h12"/><path d="M15 9.34V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0-1.34.47"/></svg>\`,trash:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>\`,x:\`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>\`};
-const lBg=document.getElementById('tis-layer-bg'),lTop=document.getElementById('tis-layer-top'),uz=document.getElementById('tis-uz'),fi=document.getElementById('tis-fi'),tl=document.getElementById('tis-tl'),te=document.getElementById('tis-te'),pEl=document.getElementById('tis-panel'),pt=document.getElementById('tis-ptg'),ti=document.getElementById('tis-tgi'),cb=document.getElementById('tis-clr'),ft=document.getElementById('tis-float-tb'),fr1=document.getElementById('tis-ft-r1'),fr2=document.getElementById('tis-ft-r2');
-let st=[],idc=0,po=true,abid=null;
-
-/* 파이어베이스에서 저장된 스티커 위치 불러오기 */
-function saveToFB(id,data){ STICKER_REF.child(id).set(data); }
-function removeFromFB(id){ STICKER_REF.child(id).remove(); }
-function clearAllFB(){ STICKER_REF.remove(); }
-
-if(pt)pt.addEventListener('click',()=>{po=!po;pEl.classList.toggle('tis-col',!po);ti.setAttribute('points',po?'6 9 12 15 18 9':'6 12 12 6 18 12');pt.title=po?'접기':'펼치기';});
-if(uz){uz.addEventListener('click',()=>fi.click());uz.addEventListener('tis-dov',e=>{e.preventDefault();uz.classList.add('tis-dov');});uz.addEventListener('dragleave',()=>uz.classList.remove('tis-dov'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('tis-dov');hf(e.dataTransfer.files);});}
-if(fi)fi.addEventListener('change',()=>{hf(fi.files);fi.value='';});
-function hf(fs){Array.from(fs).forEach(f=>{if(!f.type.startsWith('image/'))return;const r=new FileReader();r.onload=e=>atp(e.target.result,f.name);r.readAsDataURL(f);});}
-function atp(url,name){if(te&&te.parentNode)te.remove();const it=document.createElement('div');it.className='tis-ti';const im=document.createElement('img');im.src=url;im.alt=name||'s';const dl=document.createElement('button');dl.className='tis-td';dl.innerHTML=IC.x;dl.addEventListener('click',e=>{e.stopPropagation();it.remove();});it.append(im,dl);it.addEventListener('click',()=>sp(url,null,null));tl.appendChild(it);}
-function hf2(){ft.classList.remove('tis-vis');fr1.innerHTML='';fr2.innerHTML='';abid=null;}
-
-function sp(url,fbKey,savedData){
-  const id=++idc;
-  const x=savedData?savedData.x:cl(innerWidth/2-60+rn(-120,120),20,innerWidth-160);
-  const y=savedData?savedData.y:cl(innerHeight/2-60+rn(-80,80),80,innerHeight-220);
-  const initSize=savedData?savedData.size:120;
-  const initTop=savedData?savedData.isTop:true;
-  const key=fbKey||STICKER_REF.push().key;
-
-  const w=document.createElement('div');
-  w.className='tis-item '+(initTop?'tis-top':'tis-bg');
-  w.style.left=x+'px';w.style.top=y+'px';
-  const bg=document.createElement('div');bg.className='tis-pnbg';bg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
-  const im=document.createElement('img');im.className='tis-img';im.src=url;im.alt='s';
-  im.style.width=initSize+'px';im.style.height=initSize+'px';
-  const tb=document.createElement('div');tb.className='tis-tb';
-  let pn=false,sz=initSize,it=initTop;
-
-  function save(){saveToFB(key,{x:parseInt(w.style.left),y:parseInt(w.style.top),size:sz,isTop:it,url:url});}
-
-  const dm=e=>{e&&e.stopPropagation();sz=Math.max(sz-20,40);im.style.width=im.style.height=sz+'px';save();if(abid===id)rf();};
-  const dp=e=>{e&&e.stopPropagation();sz=Math.min(sz+20,500);im.style.width=im.style.height=sz+'px';save();if(abid===id)rf();};
-  const db2=e=>{e&&e.stopPropagation();if(!it)return;it=false;lTop.removeChild(w);w.classList.replace('tis-top','tis-bg');lBg.appendChild(w);save();hf2();};
-  const df=e=>{e&&e.stopPropagation();if(it)return;it=true;lBg.removeChild(w);w.classList.replace('tis-bg','tis-top');lTop.appendChild(w);save();hf2();};
-  const dpin=e=>{e&&e.stopPropagation();pn=!pn;w.classList.toggle('tis-pinned',pn);ipb.innerHTML=(pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정');if(abid===id)of();};
-  const dd=e=>{e&&e.stopPropagation();w.remove();st=st.filter(s=>s.id!==id);removeFromFB(key);if(abid===id)hf2();};
-
-  const ipb=mb(IC.pin+' 고정','tis-tpin');
-  const r1=mr([mb(IC.minus,'tis-sz'),mb(IC.plus,'tis-sz'),md(),mb(IC.toBack+' 뒤로','tis-tbg'),mb(IC.toFront+' 앞으로','tis-ttop')]);
-  const r2=mr([ipb,mb(IC.trash+' 삭제','tis-tdel')]);
-  r1.children[0].addEventListener('click',dm);r1.children[1].addEventListener('click',dp);r1.children[3].addEventListener('click',db2);r1.children[4].addEventListener('click',df);ipb.addEventListener('click',dpin);r2.children[1].addEventListener('click',dd);
-  tb.append(r1,r2);w.append(bg,im,tb);
-
-  function of(){abid=id;fr1.innerHTML='';fr2.innerHTML='';const a=mb(IC.minus,'tis-sz'),b=mb(IC.plus,'tis-sz'),c=mb(IC.toFront+' 앞으로','tis-ttop'),d2=mb((pn?IC.unpin:IC.pin)+(pn?' 해제':' 고정'),'tis-tpin'),e2=mb(IC.trash+' 삭제','tis-tdel');a.addEventListener('click',dm);b.addEventListener('click',dp);c.addEventListener('click',df);d2.addEventListener('click',dpin);e2.addEventListener('click',dd);[a,b,md(),c].forEach(n=>fr1.appendChild(n));[d2,e2].forEach(n=>fr2.appendChild(n));rf();ft.classList.add('tis-vis');}
-  function rf(){const sw=parseFloat(im.style.width)||120;ft.style.left=(parseInt(w.style.left)+sw/2)+'px';ft.style.top=Math.max(10,parseInt(w.style.top)-95)+'px';}
-  function gb(){const lx=parseInt(w.style.left)||0,ly=parseInt(w.style.top)||0,sw=parseFloat(im.style.width)||120,sh=parseFloat(im.style.height)||120;return{left:lx,top:ly,right:lx+sw,bottom:ly+sh};}
-
-  drag(w,()=>pn||!it,save);
-  (it?lTop:lBg).appendChild(w);
-  st.push({id,el:w,getBounds:gb,openFloating:of,isTop:()=>it});
-
-  if(!savedData){
-    save();
-    w.style.transform='scale(0)';w.style.transition='transform 0.22s cubic-bezier(.34,1.56,.64,1)';requestAnimationFrame(()=>{w.style.transform='scale(1)';});
-  }
-}
-
-/* 페이지 로드 시 Firebase에서 데이터 불러오기 */
-STICKER_REF.once('value',snap=>{
-  snap.forEach(child=>{
-    const d=child.val();
-    if(d&&d.url) sp(d.url,child.key,d);
-  });
-});
-
-document.addEventListener('mousedown',e=>{if(ft.contains(e.target))return;if(e.target.closest('#tis-panel'))return;if(e.target.closest('.tis-item.tis-top'))return;const cx=e.clientX,cy=e.clientY;const bl=st.filter(s=>!s.isTop());let hit=null;for(let i=bl.length-1;i>=0;i--){const b=bl[i].getBounds();if(cx>=b.left&&cx<=b.right&&cy>=b.top&&cy<=b.bottom){hit=bl[i];break;}}if(hit){abid===hit.id?hf2():hit.openFloating();}else{hf2();}});
-
-function drag(el,lk,onEnd){let ac=false,sx,sy,ex,ey;const s2=(cx,cy)=>{if(lk())return;ac=true;sx=cx;sy=cy;ex=parseInt(el.style.left)||0;ey=parseInt(el.style.top)||0;el.classList.add('tis-drag');el.style.transition='none';};const mv=(cx,cy)=>{if(!ac)return;el.style.left=cl(ex+cx-sx,0,innerWidth-60)+'px';el.style.top=cl(ey+cy-sy,0,innerHeight-60)+'px';};const sp2=()=>{if(!ac)return;ac=false;el.classList.remove('tis-drag');onEnd();};el.addEventListener('mousedown',e=>{if(e.target.closest('.tis-btn'))return;e.preventDefault();s2(e.clientX,e.clientY);});el.addEventListener('touchstart',e=>{if(e.target.closest('.tis-btn'))return;s2(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});document.addEventListener('mousemove',e=>mv(e.clientX,e.clientY));document.addEventListener('touchmove',e=>mv(e.touches[0].clientX,e.touches[0].clientY),{passive:true});document.addEventListener('mouseup',sp2);document.addEventListener('touchend',sp2);}
-
-if(cb)cb.addEventListener('click',()=>{st.forEach(s=>s.el.remove());st=[];clearAllFB();hf2();});
-function cl(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
-function rn(mn,mx){return mn+Math.random()*(mx-mn);}
-function mb(html,cls){const b=document.createElement('button');b.className='tis-btn '+cls;b.innerHTML=html;return b;}
-function mr(ch){const r=document.createElement('div');r.className='tis-row';ch.forEach(c=>r.appendChild(c));return r;}
-function md(){const d=document.createElement('div');d.className='tis-div';return d;}
-})();
-<\/script>`;
-
-/* ══ textarea에 통합 코드 저장 ══ */
-document.getElementById('unified-code').value = UNIFIED_CODE;
-
-/* ══ 복사 공통 함수 ══ */
-function copyText(text, btn, defaultHTML) {
-  navigator.clipboard.writeText(text).then(() => {
+function copyText(text,btn){
+  var orig=btn.innerHTML;
+  navigator.clipboard.writeText(text).then(function(){
     btn.classList.add('copied');
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> 복사됐어요!`;
-    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = defaultHTML; }, 2500);
+    btn.innerHTML='복사됐어요!';
+    setTimeout(function(){btn.classList.remove('copied');btn.innerHTML=orig;},2500);
   });
 }
-
-/* ══ 통합 코드 복사 버튼 ══ */
-const mainCopyBtn = document.getElementById('main-copy-btn');
-const mainDefault = mainCopyBtn.innerHTML;
-mainCopyBtn.addEventListener('click', () => copyText(UNIFIED_CODE, mainCopyBtn, mainDefault));
-
-/* ══ 파이어베이스 코드 복사 버튼 ══ */
-const fbCopyBtn = document.getElementById('fb-copy-btn');
-if (fbCopyBtn) {
-  const fbDefault = fbCopyBtn.innerHTML;
-  fbCopyBtn.addEventListener('click', () => copyText(FB_CODE, fbCopyBtn, fbDefault));
+document.getElementById('main-copy-btn').addEventListener('click',function(){copyText(FB_CODE,this);});
+function openDemo(){
+  var blob=new Blob([DEMO_HTML],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var tab=window.open(url,'_blank');
+  if(tab)setTimeout(function(){URL.revokeObjectURL(url);},15000);
 }
-
-/* ══ 미니 복사 버튼 ══ */
-document.querySelectorAll('.mini-copy-btn').forEach(btn => {
-  const dh = btn.innerHTML;
-  btn.addEventListener('click', () => copyText(btn.dataset.text.replace(/&#10;/g,'\n'), btn, dh));
-});
-
-/* ══ 예시 페이지 — Blob URL 새 탭 방식 ══
-   srcdoc iframe은 파일 업로드가 보안상 차단되므로
-   Blob URL을 만들어 새 탭에서 여는 방식을 사용해요 */
-function openDemo() {
-  const blob = new Blob([DEMO_PAGE], { type: 'text/html;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const tab  = window.open(url, '_blank');
-  if (tab) setTimeout(() => URL.revokeObjectURL(url), 10000);
-}
-
-document.getElementById('hero-demo-btn').addEventListener('click', openDemo);
-document.getElementById('header-demo-btn').addEventListener('click', openDemo);
-
+document.getElementById('hero-demo-btn').addEventListener('click',openDemo);
+document.getElementById('header-demo-btn').addEventListener('click',openDemo);
+var fbBtn = document.getElementById('fb-copy-btn');
+if(fbBtn) fbBtn.addEventListener('click',function(){copyText(FB_CODE,this);});
 </script>
 </body>
 </html>
